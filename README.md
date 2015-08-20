@@ -1,2 +1,4 @@
-# liushoukai.github.io
-write blog with github pages
+# GitHub Pages & Jekyll Blog
+
+write blog with github pages and Jekyll.
+
