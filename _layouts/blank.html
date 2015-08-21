@@ -1,57 +1,61 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>{% if page.title %} {{ page.title }} › {% endif %}{{ site.title }}</title>
+
+    <title>{{ page.title }}</title>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="{{ page.author }}">
-    <meta name="keywords" content="jekyll,blog">
-    <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+    <meta name="author" content="{{ site.author }}">
+    <meta name="keywords" content="{{ site.keywords }}">
+    <meta name="description" content="{{ site.description }}">
     
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="canonical" href="{{ page.url | prepend: site.baseurl | prepend: site.url}}">
-    <link href="{{ "/main.css" | prepend: site.baseurl }}" rel="stylesheet" type="text/css">
+    <link rel="canonical" href="{{ page.url | prepend: site.baseurl }}">
+    <!-- <link href="{{ "/main.css" | prepend: site.baseurl }}" rel="stylesheet" type="text/css"> -->
     <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,200italic,300italic,400italic,600italic,700italic' rel='stylesheet' type='text/css'>
     <link href='//fonts.googleapis.com/css?family=Gentium+Basic:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="alternate" type="application/rss+xml" title="{{ site.title }} &raquo; Feed" href="{{ "/feed.xml" | prepend: site.baseurl }}">
     
-    {% if site.comments.disqus and page.comments %}
-    <script type="text/javascript" async="true" src="//{{ site.comments.disqus}}.disqus.com/embed.js" ></script>
-    {% endif %}
-    {% if site.comments.isso and page.comments %}
-    <script data-isso="http://{{ site.comments.isso }}" src="//{{ site.comments.isso }}/js/embed.min.js"></script>
-    {% endif %}
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" async="true" src="//{{ site.comments.disqus }}.disqus.com/embed.js" ></script>
 
   </head>
+
   <body>
-    <header>
-      {% unless site.style.headline %}<h1><a href="{{ site.baseurl }}/">{{ site.title }}</a></h1>{% endunless %}
-      <nav>
-        <ul>
-          <li><a href="{{ site.baseurl }}/">Home</a></li>
-          {% for node in site.pages %}
-          {% if node.title %}
-          <li><a href="{{ node.url | prepend: site.baseurl }}"{% if page.url == node.url %} id="selected"{% endif %}>{{ node.title }}</a></li>
-          {% endif %}
+    <div class="container">
+
+      <div class="page-header row">
+        <div class="col-md-10">
+          <h1>{{ site.title }}</h1>
+        </div>
+        <div class="col-md-2">
+          <ul class="nav navbar-nav">
+            <li {% if page.url == "/index.html" %}class="active"{% endif %}><a href="{{ "/index.html" | prepend: site.baseurl }}">Home</a></li>
+            <li {% if page.url == "/archive.html" %}class="active"{% endif %}><a href="{{ "/archive.html" | prepend: site.baseurl }}">Archive</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      {{ content }}
+
+      <div class="row center-block">
+        <span>
+          &copy;Copyright {{ site.author }} {{ site.time | date: "%Y" }}
+          {% for link_hash in site.links %}
+            {% for link in link_hash %}
+              <a href="{{ link[1] }}"><i class="fa fa-{{ link[0] }}-square"></i></a>
+            {% endfor %}
           {% endfor %}
-        </ul>
-      </nav>
-    </header>
-    {% if site.style.headline %}<div><h1><a href="{{ site.baseurl }}/">{{ site.title }}</a></h1></div>{% endif %}
-    {% if site.subheading %}<div>{{ site.subheading }}</div>{% endif %}
-    {{ content }}
-    <footer>
-      <span><a href="{{ site.url }}">{% if page.author %}{{ page.author }}{% else %}{{site.author}}{% endif %}</a></span>
-      <span>
-      {% for link_hash in site.links %}
-      {% for link in link_hash %}
-      <a href="{{ link[1] }}"><i class="fa fa-{{ link[0] }}-square"></i></a>
-      {% endfor %}
-      {% endfor %}
-      </span>
-      <span>&copy; {{ site.time | date: "%Y" }}</span>
-    </footer>
+        </span>
+      </div>
+    </div>
   </body>
 </html>

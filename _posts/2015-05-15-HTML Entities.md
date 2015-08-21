@@ -1,7 +1,6 @@
 ---
 title:  "HTML Entities"
 date:   2015-05-15 17:04:27
-author: "Kay"
 categories: html
 ---
 

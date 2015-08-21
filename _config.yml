@@ -1,32 +1,53 @@
+##Site
 title: "Know thyself"
-author: "ScottKay"
-description: ""
+author: "liushoukai"
+keywords: "博客，Jekyll"
+description: "个人博客"
+baseurl: ""
+
 #subheading: "Really cool blog about ... something"
 more: "read more"
 url: ""
-baseurl: "" # comment out if in root directory
 
+##Disqus Account
 comments:
-    disqus: "liushoukai"
-#    isso: "comments.mysite.org"
+  disqus: "liushoukai"
 
 style:
-#    body: "whitesmoke"
-    padding: 33%
-    anchor: "#46f"
-    serif-heading: true
-    nav: "#181818"
-#    headline: "#06f"
-    description: "white"
-    article:
-        odd: "#ffffff"
-        even: "#222222"
+# body: "whitesmoke"
+  padding: 33%
+  anchor: "#46f"
+  serif-heading: true
+  nav: "#181818"
+  description: "white"
+  article:
+      odd: "#ffffff"
+      even: "#222222"
 
 links:
-  - github: "https://github.com/KayOnline/"
+  - github: "https://github.com/liushoukai/"
 #  - twitter: "https://twitter.com/me/"
 #  - google-plus: "https://plus.google.com/+me"
 #  - youtube: "https://www.youtube.com/user/me"
 
 excerpt_separator: "\n\n\n"
-defaults: [{scope: {path: ""}, values: {layout: "default"}}, {scope: {path: "", type: "posts"}, values: {comments: true}}]
+
+
+##Defaults
+defaults:
+  -
+    scope:
+      path: "" # an empty string here means all files in the project
+    values:
+      layout: "default"
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      title: "暂无标题"
+      author: "liushoukai"
+      comments: true
+      description: "NNNN"
+
+
