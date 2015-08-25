@@ -1,4 +1,4 @@
 # GitHub Pages & Jekyll Blog
 
-write blog with github pages and Jekyll.
+a blog with Jekyll and Github Pages.
 
