@@ -1,14 +1,17 @@
 ---
-title:  "HTML Entities"
+title:  "html字符实体"
 date:   2015-05-15 17:04:27
 categories: html
 ---
 
-> **HTML Entities**
+###HTML Entities
 
-- 各浏览器厂商依照W3C标准针对特殊字符以及HTML预留关键字的一套编码
-- 用于HTML语法的预留关键字
-- 用于表示无法通过键盘输入的特殊字符
+在HTML中下述两类字符必须使用字符实体表示：<br/>
+
+1. 预留字符，如>、<、&等；
+2. 特殊字符，如©、♥、®等；【注：特殊字符即无法通过键盘输入的字符】
+
+各浏览器厂商依照W3C标准针对预留字符与特殊字符制定的一套编码，即为字符实体；
 
 <table class="table table-striped table-bordered table-hover">
 	<thead>
