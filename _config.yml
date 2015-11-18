@@ -26,12 +26,14 @@ style:
 
 links:
   - github: "https://github.com/liushoukai/"
-#  - twitter: "https://twitter.com/me/"
-#  - google-plus: "https://plus.google.com/+me"
 #  - youtube: "https://www.youtube.com/user/me"
 
 excerpt_separator: "\n\n\n"
 
+analytics:
+  provider: google
+  google: 
+    tracking_id: 'UA-70311570-1' 
 
 ##Defaults
 defaults:
