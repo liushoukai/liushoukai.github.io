@@ -1,3 +1,5 @@
+permalink: /:year-:month-:day/:title/
+
 ##Site
 title: "Know thyself"
 author: "liushoukai"
@@ -5,28 +7,9 @@ keywords: "博客，Jekyll"
 description: "个人博客"
 baseurl: ""
 
-#subheading: "Really cool blog about ... something"
-more: "read more"
-url: ""
-
-##Disqus Account
-comments:
-  disqus: "liushoukai"
-
-style:
-# body: "whitesmoke"
-  padding: 33%
-  anchor: "#46f"
-  serif-heading: true
-  nav: "#181818"
-  description: "white"
-  article:
-      odd: "#ffffff"
-      even: "#222222"
 
 links:
   - github: "https://github.com/liushoukai/"
-#  - youtube: "https://www.youtube.com/user/me"
 
 excerpt_separator: "\n\n\n"
 
@@ -35,21 +18,19 @@ analytics:
   google: 
     tracking_id: 'UA-70311570-1' 
 
-##Defaults
 defaults:
-  -
-    scope:
-      path: "" # an empty string here means all files in the project
+  - scope:
+      path: ""
     values:
-      layout: "default"
+      layout: default
   -
     scope:
       path: ""
       type: "posts"
     values:
-      title: "暂无标题"
-      author: "liushoukai"
-      comments: true
-      description: "NNNN"
+      layout: post
 
 
+gems: [jekyll-paginate]
+paginate: 3
+paginate_path: ":num"

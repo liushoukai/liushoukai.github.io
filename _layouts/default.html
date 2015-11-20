@@ -1,22 +1,130 @@
----
-layout: blank
----
-<article>
-  <header>
-    <h2><a href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a></h2>
-    <span class="label label-primary">{{ page.date | date: '%Y-%m-%d' }}</span>
-    <span class="label label-success">{{ page.author }}</span>
-    {% for category in page.categories %}
-      <span class="label label-info">{{ category }}</span>
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="author" content="{{ site.author }}">
+    <meta name="keywords" content="{{ site.keywords }}">
+    <meta name="description" content="{{ site.description }}">
+    
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" media="screen">
+    <link rel="canonical" href="{{ page.url | prepend: site.baseurl }}">
+    <link rel="alternate" hreflang="zh" href="https://www.liushoukai.com" />
+    <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | prepend: site.baseurl | prepend: site.url }}"  />
+
+    <link href='//fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    
+    <link rel="stylesheet" type="text/css" href="{{ '/static/bootstrap/3.3.5/css/bootstrap.min.css' | prepend: site.baseurl }}">
+    <link rel="stylesheet" type="text/css" href="{{ '/static/octicons/3.3.0/octicons.css' | prepend: site.baseurl }}">
+    
+    <link rel="stylesheet" type="text/css" href="{{ '/static/css/style.css' | prepend: site.baseurl }}" />
+    <link rel="stylesheet" type="text/css" href="{{ '/static/css/highlight.css' | prepend: site.baseurl }}" />
+    {% for style in page.styles %}
+    <link rel="stylesheet" type="text/css" href="{{ '/static/css/' | append: style | prepend: site.baseurl }}" />
     {% endfor %}
-  </header>
 
-  <p>
-  {{ content }}
-  </p>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  {% if page.comments %}
-  <div id="disqus_thread"></div>
-  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-  {% endif %}
-</article>
+      ga('create', 'UA-70311570-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+
+    <title>{{ page.title }}</title>
+
+  </head>
+  <body>
+    <div class="main">
+        
+    {% if page.url == "/index.html" %}
+    <a href="{{ site.baseurl | prepend: site.url }}">
+      <div class="banner">
+        <h1>Rainy Alley</h1>
+        <h3>AA&nbsp;BB</h3>
+      </div>
+    </a>
+    {% endif %}
+    {% if page.isNavItem %}
+    <a href="{{ site.baseurl | prepend: site.url }}">
+      <div class="banner">
+        <h1>Rainy <img src="{{ '/static/favicon.ico' | prepend: site.baseurl | prepend: site.url}}"/> Alley</h1>
+        <h3>{{page.title}}</h3>
+      </div>
+    </a>  
+    {% endif %}
+
+    <header>
+      <nav class="navbar navbar-tiffany rectangle" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ site.baseurl | prepend: site.url }}/">{{ site.title }}</a>
+                <p class="navbar-text">{{ site.description }}</p>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    {% if page.url == "/index.html" %}
+                    <li class="active">{% else %}
+                    <li>{% endif %}
+                    <a href="{{ site.baseurl | prepend: site.url }}/" class="word-keep"><span class="octicon octicon-book"></span></span>&nbsp;&nbsp;Blog</a>
+                    </li>
+                    {% for p in site.pages %}{% if p.isNavItem %}
+                    {% if p.url == page.url %}
+                    <li class="active">{% else %}
+                    <li>{% endif %}
+                        <a href="{{ p.url | prepend: site.baseurl | prepend: site.url }}" class="word-keep"><span class="octicon {{ p.icon }}"></span>&nbsp;&nbsp;{{ p.title }}</a>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                    <li><a href="#stq=" class="search-button"><span class="octicon octicon-search"></span></a></li>
+                </ul>
+            </div>
+        </div>
+      </nav>
+    </header> 
+
+    <div class="container">
+      {{ content }}
+    </div>
+
+    <div class="page-scrollTop" data-toggle="tooltip" data-placement="top" title="Top">
+      <a href="javascript:void(0);">
+        <div class="arrow"></div>
+        <div class="stick"></div>
+      </a>
+    </div>
+  </div>
+
+    <footer class="footnote footnote-tiffany">
+      <div class="container">
+        <a class="foot-item" href="mailto:{{ site.email }}" target="_blank"><span class="octicon octicon-mail"></span></a>
+        <a class="foot-item" href="https://github.com/{{ site.github_username }}" target="_blank"><span class="octicon octicon-mark-github"></span></a>
+        <a class="foot-item" href="{{ '/feed.xml' | prepend: site.baseurl }}" target="_blank"><span class="octicon octicon-rss"></span></a>
+        <a class="foot-item" href="{{ '/link/' | prepend: site.baseurl }}"><span class="octicon octicon-link-external"></span></a>
+        <a href="https://www.liushoukai.com/"><span class="word-keep">&copy;liushoukai</span></a>
+      </div>
+    </footer>
+    
+    <div class="scriptHub"> 
+      <script type="text/javascript" src="{{ '/static/jquery/3.0.0-alpha1/jquery.min.js' | prepend: site.baseurl }}"></script>
+      <script type="text/javascript" src="{{ '/static/bootstrap/3.3.5/js/bootstrap.min.js' | prepend: site.baseurl }}"></script>
+      <script type="text/javascript" src="{{ '/static/js/script.js' | prepend: site.baseurl }}"></script>
+      <script type="text/javascript" src="//liushoukai.disqus.com/embed.js"></script>
+
+      {% for script in page.scripts %}
+      <script type="text/javascript" src="{{ '/static/js/' | append: script | prepend: site.baseurl }}"></script>
+      {% endfor %}
+    </div>
+
+  </body>
+</html>
