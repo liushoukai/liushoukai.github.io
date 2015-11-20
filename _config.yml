@@ -29,8 +29,9 @@ defaults:
       type: "posts"
     values:
       layout: post
+      author: Kay
 
 
 gems: [jekyll-paginate]
-paginate: 3
+paginate: 8
 paginate_path: ":num"
