@@ -1,5 +1,25 @@
 permalink: /:year-:month-:day/:title/
 
+highlighter: pygments
+markdown: redcarpet
+redcarpet:
+  extensions: [
+    "no_intra_emphasis",
+    "fenced_code_blocks",
+    "autolink",
+    "tables",
+    "strikethrough",
+    "superscript",
+    "with_toc_data",
+    "footnotes",
+    "highlight",
+    "underline",
+    "quote",
+    "lax_spacing",
+    "prettify"
+#   ,"html_toc"
+  ]
+
 ##Site
 title: "Know thyself"
 author: "liushoukai"
@@ -31,7 +51,6 @@ defaults:
       layout: post
       author: Kay
 
-
 gems: [jekyll-paginate]
-paginate: 8
+paginate: 10
 paginate_path: ":num"
