@@ -1,7 +1,8 @@
 ---
-title:  "面试问题"
-date:   2015-05-15
+layout: post
+title: 面试问题
 categories: java
+tags: java interview
 ---
 
 
@@ -26,7 +27,7 @@ categories: java
 				long end = System.currentTimeMillis();
 				System.out.println((end - start)/1000);
 			}
-			
+
 			static class Task implements Runnable {
 				@Override
 				public void run() {

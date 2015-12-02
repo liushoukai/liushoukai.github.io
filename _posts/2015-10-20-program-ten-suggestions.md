@@ -1,4 +1,5 @@
 ---
+layout: post
 title: 编程10建议
 categories: java
 tags: java php

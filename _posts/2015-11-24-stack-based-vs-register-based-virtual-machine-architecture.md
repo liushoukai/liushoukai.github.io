@@ -2,7 +2,7 @@
 layout: post
 title:  Stack-based vs Register-based VM
 categories: VM
-tags: Stack-based Register-based VM 
+tags: Stack-based Register-based VM
 ---
 
 # Stack based vs Register based Virtual Machine Architecture

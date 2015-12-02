@@ -1,7 +1,8 @@
 ---
-title:  "修改Hosts无法立即生效"
-date:   2015-04-23 03:04:27
+layout: post
+title:  修改Hosts无法立即生效
 categories: hosts
+tags: hosts
 ---
 
 ###修改Hosts不生效的原因

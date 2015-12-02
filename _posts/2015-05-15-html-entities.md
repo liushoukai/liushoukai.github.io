@@ -1,7 +1,8 @@
 ---
-title:  "html字符实体"
-date:   2015-05-15 17:04:27
+layout: post
+title: HTML字符实体
 categories: html
+tags: html-entities
 ---
 
 ###HTML Entities
