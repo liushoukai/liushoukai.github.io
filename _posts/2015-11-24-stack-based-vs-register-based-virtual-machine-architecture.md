@@ -1,32 +1,26 @@
 ---
 layout: post
-title:  Stack-based vs Register-based VM
-categories: VM
+title: 基于栈与基于寄存器的虚拟机架构
+categories: virtual-machine
 tags: Stack-based Register-based VM
 ---
 
-# Stack based vs Register based Virtual Machine Architecture
-
 ## 虚拟机的通用实现是什么？
 虚拟机模拟物理CPU执行的操作，因此，虚拟机应该包含如下的概念：
+
 1. 将程序源码编译为符合虚拟机规范的字节码
 2. 用于存储指令和操作数的一个数据结构
 3. 用于函数调用操作的一个调用栈结构
 4. 一个指令指针，其指向下一条将要执行指令的指针
-5. 一个虚拟的CPU，负责如下的指令调度：
-
-  - 取得下一条指令（通过指令指针获得）
-  - 解码操作数
-  - 执行指令
-
-## VM实现的两种方式
-- 基于堆栈 (eg. Java VM .Net CLR)
-- 基于寄存器 (eg. Lua VM Dalvik VM)
-
-** Note: 区别于存储和检索操作数和操作结果的机制**
+5. 一个虚拟的CPU，负责如下的指令调度：取指令、解码操作数、执行指令
 
 
-## Stack Based Virtual Machines
+## 虚拟机实现的两种方式
+- `基于堆栈的虚拟机架构(eg. Java VM .Net CLR)`
+
+- `基于寄存器的虚拟机架构(eg. Lua VM Dalvik VM)`
+
+### 基于堆栈的虚拟机架构(Stack Based Virtual Machines)
 
 基于堆栈的虚拟机实现了一个虚拟机的通用特性，但是存储数据的内存结构是一个栈结构，
 依照栈FIFO的操作方式，数据出栈执行操作后，操作结果又入栈。在基于栈的虚拟机中，
@@ -42,7 +36,7 @@ tags: Stack-based Register-based VM
 这意味着虚拟机不需要知道操作数的具体地址，只需要调用栈指执行POP操作就可以获取下一个操作数
 在基于栈的虚拟机架构中，所有的算术和逻辑运算都通过出栈、入栈的方式来完成的，并且计算结果最后存储在栈中。
 
-## Register Based Virtual Machines
+### 基于寄存器的虚拟机架构(Register Based Virtual Machines)
 在基于寄存器的实现中，操作数存储的数据结构是基于CPU寄存器的。这里不存在入栈出栈的操作，
 但是指令中需要包含存储操作数的寄存器的地址，因此，指令包含了其所需的操作数的具体地址，不同于
 基于栈的虚拟机模型拥有一个栈指针指向下一个操作数。例如，在基于寄存器的虚拟机架构中执行一次加法运算，
