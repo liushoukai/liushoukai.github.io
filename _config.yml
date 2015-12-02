@@ -2,7 +2,7 @@ permalink: /:year-:month-:day/:title/
 
 highlighter: pygments
 
-gems: [jekyll-paginate, redcarpet]
+gems: [jekyll-paginate]
 
 markdown: redcarpet
 redcarpet:
@@ -19,9 +19,10 @@ redcarpet:
     "underline",
     "quote",
     "lax_spacing",
-    "prettify"
-#   ,"html_toc"
+    "prettify",
+    "html_toc"
   ]
+
 
 ##Site
 title: "Know thyself"
