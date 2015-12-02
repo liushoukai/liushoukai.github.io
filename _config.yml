@@ -1,6 +1,9 @@
 permalink: /:year-:month-:day/:title/
 
 highlighter: pygments
+
+gems: [jekyll-paginate, redcarpet]
+
 markdown: redcarpet
 redcarpet:
   extensions: [
@@ -51,6 +54,5 @@ defaults:
       layout: post
       author: Kay
 
-gems: [jekyll-paginate]
 paginate: 10
 paginate_path: ":num"
