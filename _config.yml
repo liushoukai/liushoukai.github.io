@@ -2,8 +2,6 @@ permalink: /:year-:month-:day/:title/
 
 highlighter: pygments
 
-gems: [jekyll-paginate]
-
 markdown: redcarpet
 redcarpet:
   extensions: [
