@@ -4,19 +4,20 @@ layout: null
 
 .navbar-tiffany,
 .banner{
-    background: -webkit-linear-gradient(45deg, rgba(0 , 0, 0, 0) 48%, rgba(0 , 0, 0, 0.1) 50%, rgba(0 , 0, 0, 0) 52%),
-    -webkit-linear-gradient(135deg, rgba(0 , 0, 0, 0) 48%, rgba(0 , 0, 0, 0.1) 50%, rgba(0 , 0, 0, 0) 52%);
-    background: linear-gradient(45deg, rgba(0 , 0, 0, 0) 48%, rgba(0 , 0, 0, 0.1) 50%, rgba(0 , 0, 0, 0) 52%),
-    linear-gradient(-45deg, rgba(0 , 0, 0, 0) 48%, rgba(0 , 0, 0, 0.1) 50%, rgba(0 , 0, 0, 0) 52%);
-    -webkit-background-size: 1em 1em;
-    background-size: 1em 1em;
+    !background: -webkit-linear-gradient(45deg, rgba(0 , 0, 0, 0) 48%, rgba(0 , 0, 0, 0.1) 50%, rgba(0 , 0, 0, 0) 52%),
+    !-webkit-linear-gradient(135deg, rgba(0 , 0, 0, 0) 48%, rgba(0 , 0, 0, 0.1) 50%, rgba(0 , 0, 0, 0) 52%);
+    !background: linear-gradient(45deg, rgba(0 , 0, 0, 0) 48%, rgba(0 , 0, 0, 0.1) 50%, rgba(0 , 0, 0, 0) 52%),
+    !linear-gradient(-45deg, rgba(0 , 0, 0, 0) 48%, rgba(0 , 0, 0, 0.1) 50%, rgba(0 , 0, 0, 0) 52%);
+    !-webkit-background-size: 1em 1em;
+    !background-size: 1em 1em;
 }
 
 .navbar-tiffany{
-    background-color: #2ca6cb;
-    border-top: 1px solid rgba(255,255,255,0.2);
-    border-bottom: 1px solid rgba(0,0,0,0.1);
-    box-shadow: 2px 4px 5px rgba(3,3,3,0.2);
+  margin: 20px;
+    !background-color: #2ca6cb;
+    !border-top: 1px solid rgba(255,255,255,0.2);
+    !border-bottom: 1px solid rgba(0,0,0,0.1);
+    !box-shadow: 2px 4px 5px rgba(3,3,3,0.2);
 }
 
 .footnote-tiffany{
@@ -28,7 +29,7 @@ layout: null
     background-size: 1em 1em;
 }
 .footnote-tiffany{
-    background-color: #333333;
+    background-color: rgba(0,0,0,0.5);
     border-color: #2ca6cb;
     box-shadow: 2px -4px 5px rgba(3,-3,3,0.2);
 }
@@ -37,7 +38,7 @@ layout: null
 .navbar-tiffany .navbar-brand,
 .navbar-tiffany .navbar-text,
 .navbar-tiffany .nav>li>a{
-    color: #fff;
+    color: #9c6;
 }
 
 
@@ -65,7 +66,8 @@ layout: null
 
 }
 .footnote .foot-item{
-    display: inline-block;
+    !display: inline-block;
+    display: none;
     width: 28px;
     height: 28px;
     line-height: 28px;
@@ -89,6 +91,12 @@ layout: null
     transition: background .4s ease-in-out;
 }
 
+.copyright {
+  font-size: 12px;
+  font-family: Arial;
+  text-align: center;
+}
+
 /* footer */
 .footnote{
     min-height: 50px;
@@ -103,19 +111,19 @@ html{
     margin: 0px 0px 0px 0px;
 }
 body {
-    background-image: url({{ "/static/bg.jpg" | prepend: site.baseurl | prepend: site.url }});
+    background-image: url({{ "/static/img/bg.jpg" | prepend: site.baseurl | prepend: site.url }});
     height: 100%;
     padding: 0px 0px 0px 0px;
     margin: 0px 0px 0px 0px;
 }
 
 body,code,pre{
-    font-family:  "Menlo", "Monaco", "Consolas", "Courier New", "monospace", "Helvetica", "Tahoma", "Arial",
+    font-family: 'PingHei', 'PingFang SC', "Menlo", "Monaco", "Consolas", "Courier New", "monospace", "Helvetica", "Tahoma", "Arial",
     "WenQuanYi Micro Hei", "文泉驿微米黑", "STXihei", "华文细黑", "Microsoft YaHei", "微软雅黑", "SimSun", "宋体", "Heiti", "黑体", sans-serif;
 }
 
 body,.sheet,pre,code{
-    font-size: 17px;
+    font-size: 18px;
 }
 
 
@@ -198,6 +206,12 @@ a:active {text-decoration: none}	/* 选定的链接 */
 .word-keep{
     display: inline-block;
     word-break: keep-all;
+    font-family: 'ArchitectsDaughter';
+    font-size: 12px;
+}
+.navbar-brand {
+  font-family: 'ArchitectsDaughter';
+  font-size: 36px;
 }
 
 .rectangle{
@@ -266,4 +280,22 @@ a:active {text-decoration: none}	/* 选定的链接 */
 .octicon {
     width: 16px;
     text-align: center;
+}
+
+@font-face {
+  font-family: 'PingHei';
+  src: url("https://www.liushoukai.com/static/fonts/PingHei-light.woff");
+  /* font-weight, font-style ==> default to normal */
+}
+
+@font-face {
+  font-family: 'PingFang-SC';
+  src: url("https://www.liushoukai.com/static/fonts/PingFang-SC-Medium.ttf");
+  /* font-weight, font-style ==> default to normal */
+}
+
+@font-face {
+  font-family: 'ArchitectsDaughter';
+  src: url("https://www.liushoukai.com/static/fonts/ArchitectsDaughter.ttf");
+  /* font-weight, font-style ==> default to normal */
 }

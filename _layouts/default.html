@@ -15,7 +15,6 @@
     <link rel="alternate" hreflang="zh" href="https://www.liushoukai.com" />
     <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | prepend: site.baseurl }}"  />
 
-    <link href='//fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
     
     <link rel="stylesheet" type="text/css" href="{{ '/static/bootstrap/3.3.5/css/bootstrap.min.css' | prepend: site.baseurl }}">
     <link rel="stylesheet" type="text/css" href="{{ '/static/octicons/3.3.0/octicons.css' | prepend: site.baseurl }}">
@@ -57,7 +56,7 @@
                     <span class="icon-bar"></span>
                   </button>
                   <a class="navbar-brand" href="{{ site.baseurl }}/">{{ site.title }}</a>
-                  <p class="navbar-text">{{ site.description }}</p>
+                  <!--<p class="navbar-text">{{ site.description }}</p>-->
               </div>
               <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -99,11 +98,10 @@
         <a class="foot-item" href="https://github.com/{{ site.github_username }}" target="_blank"><span class="octicon octicon-mark-github"></span></a>
         <a class="foot-item" href="{{ '/feed.xml' | prepend: site.baseurl }}" target="_blank"><span class="octicon octicon-rss"></span></a>
         <a class="foot-item" href="{{ '/link/' | prepend: site.baseurl }}"><span class="octicon octicon-link-external"></span></a>
-        <a href="https://www.liushoukai.com/"><span class="word-keep">&copy;liushoukai</span></a>
+        <a class="copyright">&copy;2015 - KAY编程人生 - 粤ICP备15110494号-1</a>
       </div>
     </footer>
     
-    <div class="scriptHub"> 
       <script type="text/javascript" src="{{ '/static/jquery/3.0.0-alpha1/jquery.min.js' | prepend: site.baseurl }}"></script>
       <script type="text/javascript" src="{{ '/static/bootstrap/3.3.5/js/bootstrap.min.js' | prepend: site.baseurl }}"></script>
       <script type="text/javascript" src="{{ '/static/js/script.js' | prepend: site.baseurl }}"></script>
@@ -111,6 +109,5 @@
       {% for script in page.scripts %}
       <script type="text/javascript" src="{{ '/static/js/' | append: script | prepend: site.baseurl }}"></script>
       {% endfor %}
-    </div>
   </body>
 </html>
