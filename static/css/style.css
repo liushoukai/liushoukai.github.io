@@ -285,9 +285,22 @@ a:active {text-decoration: none}	/* 选定的链接 */
 @font-face {
   font-family: 'PingHei';
   src: url("https://www.liushoukai.com/static/fonts/PingHei-light.woff");
-  /* font-weight, font-style ==> default to normal */
+  font-weight: normal;
+  font-style: normal;
 }
-
+/*
+@font-face {
+    font-family: 'PingHei';
+    src: url('/static/fonts/pinghei/pinghei-light-webfont.eot');
+    src: url('/static/fonts/pinghei/pinghei-light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/static/fonts/pinghei/pinghei-light-webfont.woff2') format('woff2'),
+         url('/static/fonts/pinghei/pinghei-light-webfont.woff') format('woff'),
+         url('/static/fonts/pinghei/pinghei-light-webfont.ttf') format('truetype'),
+         url('/static/fonts/pinghei/pinghei-light-webfont.svg#webfontregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+*/
 @font-face {
   font-family: 'PingFang-SC';
   src: url("https://www.liushoukai.com/static/fonts/PingFang-SC-Medium.ttf");
