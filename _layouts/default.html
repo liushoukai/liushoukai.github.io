@@ -1,10 +1,13 @@
+---
+layout: null
+---
 <!DOCTYPE html>
 <html>
   <head>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <meta name="author" content="{{ site.author }}">
     <meta name="keywords" content="{{ site.keywords }}">
@@ -35,10 +38,45 @@
       ga('send', 'pageview');
     </script>
 
-    <title>{{ page.title }}</title>
+    <title>{% if page.title.size %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
 
   </head>
   <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-inverse headroom headroom--top" role="banner" style="top: 0px;">
+      <div class="container">
+        <div class="navbar-header">
+           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+    		<span class="sr-only">Toggle navigation</span>
+    		<span class="icon-bar"></span>
+    		<span class="icon-bar"></span>
+    		<span class="icon-bar"></span>
+	   </button>
+	  <a class="navbar-brand" href="https://www.liushoukai.com" title="Know Thyself">Know Thyself</a>
+          </div>
+	  <div role="navigation" class="collapse navbar-collapse bs-navbar-collapse">
+	    <p class="navbar-text pull-right">Know thyself, Nothing in excess</p>
+	    <ul class="nav navbar-nav">
+		  {% if page.url == "/index.html" %}
+                  <li class="active">{% else %}
+                  <li>{% endif %}
+                  <a href="{{ site.baseurl }}/" class="word-keep"><span class="octicon octicon-book"></span></span>&nbsp;&nbsp;Blog</a>
+                  </li>
+                  {% for p in site.pages %}{% if p.isNavItem %}
+                  {% if p.url == page.url %}
+                  <li class="active">{% else %}
+                  <li>{% endif %}
+                      <a href="{{ p.url | prepend: site.baseurl }}" class="word-keep"><span class="octicon {{ p.icon }}"></span>&nbsp;&nbsp;{{ p.title }}</a>
+                  </li>
+                  {% endif %}
+                  {% endfor %}
+		  <!--
+                  <li><a href="#stq=" class="search-button"><span class="octicon octicon-search"></span></a></li>
+		  -->
+            </ul>
+	  </div>
+	</div>
+      </div>
+    </nav>
     <div class="main">
       <a href="{{ site.baseurl }}">
         <div class="banner">
@@ -47,6 +85,7 @@
         </div>
       </a>
       <header>
+	<!--
         <nav class="navbar navbar-tiffany rectangle" role="navigation">
           <div class="container">
               <div class="navbar-header">
@@ -56,7 +95,6 @@
                     <span class="icon-bar"></span>
                   </button>
                   <a class="navbar-brand" href="{{ site.baseurl }}/">{{ site.title }}</a>
-                  <!--<p class="navbar-text">{{ site.description }}</p>-->
               </div>
               <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -78,6 +116,7 @@
               </div>
           </div>
         </nav>
+	-->
       </header> 
 
       <div class="container">
@@ -102,12 +141,15 @@
       </div>
     </footer>
     
-      <script type="text/javascript" src="{{ '/static/jquery/3.0.0-alpha1/jquery.min.js' | prepend: site.baseurl }}"></script>
-      <script type="text/javascript" src="{{ '/static/bootstrap/3.3.5/js/bootstrap.min.js' | prepend: site.baseurl }}"></script>
-      <script type="text/javascript" src="{{ '/static/js/script.js' | prepend: site.baseurl }}"></script>
-      <script type="text/javascript" src="//liushoukai.disqus.com/embed.js"></script>
-      {% for script in page.scripts %}
-      <script type="text/javascript" src="{{ '/static/js/' | append: script | prepend: site.baseurl }}"></script>
-      {% endfor %}
-  </body>
+    <script type="text/javascript" src="{{ '/static/jquery/3.0.0-alpha1/jquery.min.js' | prepend: site.baseurl }}"></script>
+    <script type="text/javascript" src="{{ '/static/jquery/jquery.backstretch.min.js' | prepend: site.baseurl }}"></script>
+    <script type="text/javascript" src="{{ '/static/bootstrap/3.3.5/js/bootstrap.min.js' | prepend: site.baseurl }}"></script>
+    <script type="text/javascript" src="/static/js/toc.js" ></script>
+    <script type="text/javascript" src="{{ '/static/js/script.js' | prepend: site.baseurl }}"></script>
+    <script type="text/javascript" src="//liushoukai.disqus.com/embed.js"></script>
+    {% for script in page.scripts %}
+    <input type="hidden" value="{{ script }}">
+    <script type="text/javascript" src="{{ '/static/js/' | append: script | prepend: site.baseurl }}"></script>
+    {% endfor %}
+    </body>
 </html>

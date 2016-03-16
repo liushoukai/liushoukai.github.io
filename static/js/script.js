@@ -1,13 +1,24 @@
 ---
-    layout: null
+layout: null
 ---
 
 /**
  * 页面ready方法
  */
-$(document).ready(function() {
-    backToTop();
-    search();
+$(function() {
+
+    $.backstretch([
+        "https://www.liushoukai.com/static/img/wallpaper/Abraham-Lincoln-Vampire-Hunter_1920x1080.jpg"
+    ], {duration: 3000, fade: 750});
+
+    $('#toc').toc({
+        "title": '',
+        "minimumHeaders": 1
+    });
+       
+    
+    //backToTop();
+    //search();
 });
 
 /**

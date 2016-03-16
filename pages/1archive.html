@@ -10,7 +10,10 @@ isNavItem: true
 {% for post in site.posts  %}
     <div class="cd-timeline-block" id="{{ post.date | date: '%Y-%m-%d' }}">
         <div class="cd-timeline-img cd-picture">
+            <!--
             <img src="{{ '/static/img/icon-picture.svg' | prepend: site.baseurl }}" alt="Picture">
+            -->
+            <img src="{{ '/static/favicon.ico' | prepend: site.baseurl }}" alt="Picture" class="img-circle" >
         </div>
 
         <div class="cd-timeline-content">

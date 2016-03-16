@@ -5,7 +5,7 @@ categories: design-patterns
 tags: design-patterns
 ---
 
-###设计模式6原则
+### 设计模式6原则
 
 单一职责原则
 定义：不要存在多于一个导致类变更的原因

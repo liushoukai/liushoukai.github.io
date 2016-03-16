@@ -2,6 +2,11 @@
 layout: null
 ---
 
+nav {
+  opacity: 0.8;
+  text-shadow: -1px 0px 0px rgba(0,0,0,0.75);
+}
+
 .navbar-tiffany,
 .banner{
     !background: -webkit-linear-gradient(45deg, rgba(0 , 0, 0, 0) 48%, rgba(0 , 0, 0, 0.1) 50%, rgba(0 , 0, 0, 0) 52%),
@@ -29,7 +34,7 @@ layout: null
     background-size: 1em 1em;
 }
 .footnote-tiffany{
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0,0,0,0.8);
     border-color: #2ca6cb;
     box-shadow: 2px -4px 5px rgba(3,-3,3,0.2);
 }
@@ -105,31 +110,39 @@ layout: null
     text-align: center;
 }
 
-html{
+html {
     height: 100%;
     padding: 0px 0px 0px 0px;
     margin: 0px 0px 0px 0px;
 }
+
 body {
-    background-image: url({{ "/static/img/bg.jpg" | prepend: site.baseurl | prepend: site.url }});
+    !background-image: url({{ "/static/img/bg.jpg" | prepend: site.baseurl | prepend: site.url }});
     height: 100%;
     padding: 0px 0px 0px 0px;
     margin: 0px 0px 0px 0px;
 }
 
-body,code,pre{
-    font-family: 'PingHei', 'PingFang SC', "Menlo", "Monaco", "Consolas", "Courier New", "monospace", "Helvetica", "Tahoma", "Arial",
-    "WenQuanYi Micro Hei", "文泉驿微米黑", "STXihei", "华文细黑", "Microsoft YaHei", "微软雅黑", "SimSun", "宋体", "Heiti", "黑体", sans-serif;
+body,code,pre {
+    font-family: "JosefinSans-Regular", "KaiTi", "Microsoft YaHei", "微软雅黑", "SimSun", "宋体", sans-serif, "Arial";
 }
 
-body,.sheet,pre,code{
-    font-size: 18px;
+@media (min-width: 600px) {
+    body,.sheet,pre,code{
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 600px) {
+    body,.sheet,pre,code{
+        font-size: 14px;
+    }
 }
 
 
 a:link {text-decoration: none}		/* 未访问的链接 */
 a:visited {text-decoration: none}	/* 已访问的链接 */
-a:hover {text-decoration: none}	/* 鼠标移动到链接上 */
+a:hover {text-decoration: none}		/* 鼠标移动到链接上 */
 a:active {text-decoration: none}	/* 选定的链接 */
 
 .main{
@@ -143,16 +156,23 @@ a:active {text-decoration: none}	/* 选定的链接 */
 }
 
 .sheet{
+
+    opacity: 0.9;
     word-break: break-all;
 	background-color:#f8f8fd;
 	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.4),0 0 30px rgba(10,10,0,0.1) inset;
-	-moz-box-shadow: 0 1px 2px rgba(0,0,0,0.4),0 0 30px rgba(10,10,0,0.1) inset;
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.4),0 0 30px rgba(10,10,0,0.1) inset;
 	-o-box-shadow: 0 1px 2px rgba(0,0,0,0.4),0 0 30px rgba(10,10,0,0.1) inset;
 	box-shadow: 0 1px 2px rgba(0,0,0,0.4),0 0 30px rgba(10,10,0,0.1) inset;
 }
 
 .sheet{
     padding:10px 30px;
+    border-radius: 6px;
+}
+
+.row-set {
+    padding-top: 70px;
 }
 
 @media screen and (max-width: 767px) {
@@ -197,6 +217,10 @@ a:active {text-decoration: none}	/* 选定的链接 */
 
 .shadow-bottom-center{
 	background-color:#f8f8fd;
+    opacity: 0.9;
+    border-radius: 6px;
+    padding: 10px 15px;
+    margin-bottom: 15px;
 	-webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.4),0 0 20px rgba(0,0,0,0.1) inset;
 	-moz-box-shadow: 0 1px 5px rgba(0,0,0,0.4),0 0 20px rgba(0,0,0,0.1) inset;
 	-o-box-shadow: 0 1px 5px rgba(0,0,0,0.4),0 0 20px rgba(0,0,0,0.1) inset;
@@ -211,7 +235,11 @@ a:active {text-decoration: none}	/* 选定的链接 */
 }
 .navbar-brand {
   font-family: 'ArchitectsDaughter';
-  font-size: 36px;
+  font-size: 18px;
+}
+
+.navbar-text {
+  font-size: 15px;
 }
 
 .rectangle{
@@ -283,6 +311,20 @@ a:active {text-decoration: none}	/* 选定的链接 */
 }
 
 @font-face {
+  font-family: 'JosefinSans-Regular';
+  src: url("https://www.liushoukai.com/static/fonts/JosefinSans-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MinionPro';
+  src: url("https://www.liushoukai.com/static/fonts/Minion-Pro.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
   font-family: 'PingHei';
   src: url("https://www.liushoukai.com/static/fonts/PingHei-light.woff");
   font-weight: normal;
@@ -301,14 +343,17 @@ a:active {text-decoration: none}	/* 选定的链接 */
     font-style: normal;
 }
 */
+
 @font-face {
   font-family: 'PingFang-SC';
   src: url("https://www.liushoukai.com/static/fonts/PingFang-SC-Medium.ttf");
-  /* font-weight, font-style ==> default to normal */
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
   font-family: 'ArchitectsDaughter';
   src: url("https://www.liushoukai.com/static/fonts/ArchitectsDaughter.ttf");
-  /* font-weight, font-style ==> default to normal */
+  font-weight: normal;
+  font-style: normal;
 }
