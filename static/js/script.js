@@ -13,6 +13,7 @@ $(function() {
 
     $('#toc').toc({
         "title": '',
+        headers: 'h1, h2, h3',
         "minimumHeaders": 1
     });
        
