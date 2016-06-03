@@ -3,6 +3,8 @@ permalink: /:year-:month-:day/:title/
 highlighter: pygments
 
 markdown: kramdown
+highlighter: rouge
+
 redcarpet:
   extensions: [
     "no_intra_emphasis",
