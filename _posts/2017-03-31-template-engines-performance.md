@@ -1,3 +1,10 @@
+---
+layout: post
+title:  Java模板引擎性能对比
+categories: Java
+tags: java template
+---
+
 # 模板引擎性能对比
 
 从Github上翻到对JSP、Thymeleaf 3、Velocity 1.7、Freemarker 2.3.23几款主流模板的性能对比，总体上看，Freemarker、Velocity、JSP在性能上差别不大，而
