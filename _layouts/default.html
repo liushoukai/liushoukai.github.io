@@ -12,22 +12,22 @@ layout: null
     <meta name="author" content="{{ site.author }}">
     <meta name="keywords" content="{{ site.keywords }}">
     <meta name="description" content="{{ site.description }}">
-    
+
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" media="screen">
     <link rel="canonical" href="{{ page.url | prepend: site.baseurl }}">
     <link rel="alternate" hreflang="zh" href="https://www.liushoukai.com" />
     <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | prepend: site.baseurl }}"  />
 
-    
+
     <link rel="stylesheet" type="text/css" href="{{ '/static/bootstrap/3.3.5/css/bootstrap.min.css' | prepend: site.baseurl }}">
     <link rel="stylesheet" type="text/css" href="{{ '/static/octicons/3.3.0/octicons.css' | prepend: site.baseurl }}">
-    
+
     <link rel="stylesheet" type="text/css" href="{{ '/static/css/style.css' | prepend: site.baseurl }}" />
     <link rel="stylesheet" type="text/css" href="{{ '/static/css/highlight.css' | prepend: site.baseurl }}" />
     {% for style in page.styles %}
     <link rel="stylesheet" type="text/css" href="{{ '/static/css/' | append: style | prepend: site.baseurl }}" />
     {% endfor %}
-    
+
     <!-- s Google statistics -->
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -46,7 +46,7 @@ layout: null
         (function() {
         var hm = document.createElement("script");
         hm.src = "//hm.baidu.com/hm.js?53cda191086a64464e81a4d912ed5ce1";
-        var s = document.getElementsByTagName("script")[0]; 
+        var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s);
         })();
     </script>
@@ -131,7 +131,7 @@ layout: null
           </div>
         </nav>
 	-->
-      </header> 
+      </header>
 
       <div class="container">
         {{ content }}
@@ -151,10 +151,10 @@ layout: null
         <a class="foot-item" href="https://github.com/{{ site.github_username }}" target="_blank"><span class="octicon octicon-mark-github"></span></a>
         <a class="foot-item" href="{{ '/feed.xml' | prepend: site.baseurl }}" target="_blank"><span class="octicon octicon-rss"></span></a>
         <a class="foot-item" href="{{ '/link/' | prepend: site.baseurl }}"><span class="octicon octicon-link-external"></span></a>
-        <a class="copyright">&copy;2015 - KAY编程人生 - 粤ICP备15110494号-1</a>
+        <a class="copyright">&copy;2015 - KAY编程人生 - <a href="http://www.miitbeian.gov.cn">粤ICP备15110494号-1</a></a>
       </div>
     </footer>
-    
+
     <script type="text/javascript" src="{{ '/static/jquery/3.0.0-alpha1/jquery.min.js' | prepend: site.baseurl }}"></script>
     <script type="text/javascript" src="{{ '/static/jquery/jquery.backstretch.min.js' | prepend: site.baseurl }}"></script>
     <script type="text/javascript" src="{{ '/static/bootstrap/3.3.5/js/bootstrap.min.js' | prepend: site.baseurl }}"></script>
