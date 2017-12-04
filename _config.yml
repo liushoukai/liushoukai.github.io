@@ -1,9 +1,12 @@
-permalink: /:year-:month-:day/:title/
+permalink: /:year/:month/:day/:title/
 
 highlighter: pygments
 
 markdown: kramdown
 highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
 
 redcarpet:
   extensions: [
