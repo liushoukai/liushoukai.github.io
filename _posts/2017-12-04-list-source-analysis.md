@@ -1,4 +1,9 @@
-
+---
+layout: post
+title:  List源码分析
+categories: java
+tags: java
+---
 
 AbstractList的核心属性modCount，初始值为
 
