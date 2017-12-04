@@ -1,4 +1,4 @@
-# GitHub Pages & Jekyll Blog
+# Kayen Blog
 
 a blog with Jekyll and Github Pages.
 
