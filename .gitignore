@@ -4,4 +4,3 @@ _site/
 *.pid
 _posts/*.html
 node_modules
-static/js/bundle.js
