@@ -1,6 +1,7 @@
 .sass-cache/
 _site/
 .jekyll-metadata
-Gemfile.lock
 *.pid
 _posts/*.html
+node_modules
+static/js/bundle.js
