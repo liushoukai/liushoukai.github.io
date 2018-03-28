@@ -1,8 +1,17 @@
-# Kayen Blog
+# Kay's Blog
 
-a blog with Jekyll and Github Pages.
+The blog build with Jekyll and Github Pages.
 
-## start
+## Install Jekyll with RubyGems
+
+```shell
+gem install jekyll
 ```
-$ bundle install; jekyll s
+
+## Run Jekyll on local Server
+
+```shell
+$> bundle install
+$> jekyll s
 ```
+
