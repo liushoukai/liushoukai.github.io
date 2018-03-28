@@ -8,7 +8,7 @@ layout: null
 $(function() {
 
     $.backstretch([
-        "https://liushoukai.github.io/static/img/wallpaper/Abraham-Lincoln-Vampire-Hunter_1920x1080.jpg"
+        "https://liushoukai.github.io/assets/img/wallpaper/Abraham-Lincoln-Vampire-Hunter_1920x1080.jpg"
     ], {duration: 3000, fade: 750});
 
     $('#toc').toc({
