@@ -117,7 +117,7 @@ html {
 }
 
 body {
-    !background-image: url({{ "/static/img/bg.jpg" | prepend: site.baseurl | prepend: site.url }});
+    !background-image: url({{ "/assets/img/bg.jpg" | prepend: site.baseurl | prepend: site.url }});
     height: 100%;
     padding: 0px 0px 0px 0px;
     margin: 0px 0px 0px 0px;
@@ -312,33 +312,33 @@ a:active {text-decoration: none}	/* 选定的链接 */
 
 @font-face {
   font-family: 'JosefinSans-Regular';
-  src: url("https://liushoukai.github.io/static/fonts/JosefinSans-Regular.ttf");
+  src: url("https://liushoukai.github.io/assets/fonts/JosefinSans-Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'MinionPro';
-  src: url("https://liushoukai.github.io/static/fonts/Minion-Pro.ttf");
+  src: url("https://liushoukai.github.io/assets/fonts/Minion-Pro.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'PingHei';
-  src: url("https://liushoukai.github.io/static/fonts/PingHei-light.woff");
+  src: url("https://liushoukai.github.io/assets/fonts/PingHei-light.woff");
   font-weight: normal;
   font-style: normal;
 }
 /*
 @font-face {
     font-family: 'PingHei';
-    src: url('/static/fonts/pinghei/pinghei-light-webfont.eot');
-    src: url('/static/fonts/pinghei/pinghei-light-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/static/fonts/pinghei/pinghei-light-webfont.woff2') format('woff2'),
-         url('/static/fonts/pinghei/pinghei-light-webfont.woff') format('woff'),
-         url('/static/fonts/pinghei/pinghei-light-webfont.ttf') format('truetype'),
-         url('/static/fonts/pinghei/pinghei-light-webfont.svg#webfontregular') format('svg');
+    src: url('/assets/fonts/pinghei/pinghei-light-webfont.eot');
+    src: url('/assets/fonts/pinghei/pinghei-light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/fonts/pinghei/pinghei-light-webfont.woff2') format('woff2'),
+         url('/assets/fonts/pinghei/pinghei-light-webfont.woff') format('woff'),
+         url('/assets/fonts/pinghei/pinghei-light-webfont.ttf') format('truetype'),
+         url('/assets/fonts/pinghei/pinghei-light-webfont.svg#webfontregular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -346,14 +346,14 @@ a:active {text-decoration: none}	/* 选定的链接 */
 
 @font-face {
   font-family: 'PingFang-SC';
-  src: url("https://liushoukai.github.io/static/fonts/PingFang-SC-Medium.ttf");
+  src: url("https://liushoukai.github.io/assets/fonts/PingFang-SC-Medium.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'ArchitectsDaughter';
-  src: url("https://liushoukai.github.io/static/fonts/ArchitectsDaughter.ttf");
+  src: url("https://liushoukai.github.io/assets/fonts/ArchitectsDaughter.ttf");
   font-weight: normal;
   font-style: normal;
 }
