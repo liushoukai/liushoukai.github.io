@@ -1,7 +1,5 @@
 timezone: Asia/Shanghai
 
-source: ./src
-
 url: "https://liushoukai.github.io"
 #baseurl: "/blog"
 baseurl: ""
