@@ -1,3 +1,15 @@
+timezone: Asia/Shanghai
+
+url: "https://liushoukai.github.io/blog"
+baseurl: ""
+
+# Serving
+detach: false
+host: 0.0.0.0
+port: 4000
+show_dir_listing: false
+
+##############
 permalink: /:year/:month/:day/:title/
 
 markdown:    kramdown
@@ -14,7 +26,6 @@ title: "Know thyself"
 author: "liushoukai"
 keywords: "博客，Jekyll"
 description: "KAY个人博客"
-baseurl: ""
 
 
 links:
