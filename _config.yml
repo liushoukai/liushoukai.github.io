@@ -1,5 +1,7 @@
 timezone: Asia/Shanghai
 
+source: ./src
+
 url: "https://liushoukai.github.io"
 #baseurl: "/blog"
 baseurl: ""
@@ -17,7 +19,7 @@ markdown:    kramdown
 highlighter: rouge
 lsi:         false
 excerpt_separator: "\n\n"
-incremental: false  
+incremental: false
 
 kramdown:
   input: GFM
@@ -36,8 +38,8 @@ excerpt_separator: "\n\n\n"
 
 analytics:
   provider: google
-  google: 
-    tracking_id: 'UA-70311570-1' 
+  google:
+    tracking_id: 'UA-70311570-1'
 
 defaults:
   - scope:

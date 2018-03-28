@@ -4,7 +4,7 @@ module.exports = {
   entry: "./webpack/entry.js",
   output: {
 	// output the generated files under the js folder so jekyll will grab it.
-    path: path.resolve(__dirname, 'static/js/'),
+    path: path.resolve(__dirname, 'src/assets/js/'),
    	filename: 'bundle.js'
   }
 };

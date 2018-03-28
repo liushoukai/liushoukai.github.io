@@ -20,6 +20,12 @@ Please refer to the official installation [document](https://rubygems.org/pages/
 sudo gem install bundler
 ```
 
+## Run Webpack
+
+```shell
+npm install && npm run build
+```
+
 ## Run Jekyll on local Server
 
 ```shell

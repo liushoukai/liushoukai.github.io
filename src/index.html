@@ -48,7 +48,7 @@ styles: [article-list.css]
                 <li><a href="{{ page |  prepend: '/' | prepend: site.baseurl }}">{{ page }}</a></li>
               {% endif %}
             {% endfor %}
-            {% if !paginator.next_page %}
+            {% if paginator.next_page %}
               <li><a href="{{ paginator.next_page_path | prepend: site.baseurl }}" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
             {% endif %}
           {% endif %}
