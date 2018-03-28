@@ -1,7 +1,7 @@
 timezone: Asia/Shanghai
 
-url: "https://liushoukai.github.io/blog"
-baseurl: ""
+url: "https://liushoukai.github.io"
+baseurl: "/blog"
 
 # Serving
 detach: false

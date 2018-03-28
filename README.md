@@ -24,6 +24,7 @@ sudo gem install bundler
 
 ```shell
 bundle install
-jekyll s
+jekyll doctor
+jekyll serve --host=0.0.0.0
 ```
 
