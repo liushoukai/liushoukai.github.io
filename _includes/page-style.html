@@ -1,0 +1,7 @@
+<link rel="stylesheet" type="text/css" href="{{ '/assets/bootstrap/3.3.5/css/bootstrap.min.css' | prepend: site.baseurl }}">
+<link rel="stylesheet" type="text/css" href="{{ '/assets/octicons/3.3.0/octicons.css' | prepend: site.baseurl }}">
+<link rel="stylesheet" type="text/css" href="{{ '/assets/css/style.css' | prepend: site.baseurl }}" />
+<link rel="stylesheet" type="text/css" href="{{ '/assets/css/highlight.css' | prepend: site.baseurl }}" />
+{% for style in page.styles %}
+<link rel="stylesheet" type="text/css" href="{{ '/assets/css/' | append: style | prepend: site.baseurl }}" />
+{% endfor %}

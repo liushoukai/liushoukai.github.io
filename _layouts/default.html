@@ -9,6 +9,8 @@ layout: null
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <meta name="author" content="{{ site.author }}">
+
+    <title>{% if page.title.size %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
     <meta name="keywords" content="{{ site.keywords }}">
     <meta name="description" content="{{ site.description }}">
 
@@ -17,120 +19,51 @@ layout: null
     <link rel="alternate" hreflang="zh" href="https://liushoukai.gihub.io" />
     <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | prepend: site.baseurl }}"  />
 
-    <link rel="stylesheet" type="text/css" href="{{ '/assets/bootstrap/3.3.5/css/bootstrap.min.css' | prepend: site.baseurl }}">
-    <link rel="stylesheet" type="text/css" href="{{ '/assets/octicons/3.3.0/octicons.css' | prepend: site.baseurl }}">
-    <link rel="stylesheet" type="text/css" href="{{ '/assets/css/style.css' | prepend: site.baseurl }}" />
-    <link rel="stylesheet" type="text/css" href="{{ '/assets/css/highlight.css' | prepend: site.baseurl }}" />
-    {% for style in page.styles %}
-    <link rel="stylesheet" type="text/css" href="{{ '/assets/css/' | append: style | prepend: site.baseurl }}" />
-    {% endfor %}
-
-    <!-- s Google statistics -->
-    <!-- <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-70311570-1', 'auto');
-      ga('send', 'pageview');
-    </script> -->
-    <!-- e Google statistics -->
-
-    <!-- s Baidu statistics -->
-    <script>
-        var _hmt = _hmt || [];
-        (function() {
-        var hm = document.createElement("script");
-        hm.src = "//hm.baidu.com/hm.js?53cda191086a64464e81a4d912ed5ce1";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-        })();
-    </script>
-    <!-- e Baidu statistics -->
-
-    <title>{% if page.title.size %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
-
+    {% include page-style.html %}
+    {% include page-analytics.html %}
   </head>
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-inverse headroom headroom--top" role="banner" style="top: 0px;">
       <div class="container">
         <div class="navbar-header">
            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-    		<span class="sr-only">Toggle navigation</span>
-    		<span class="icon-bar"></span>
-    		<span class="icon-bar"></span>
-    		<span class="icon-bar"></span>
-	   </button>
-	  <a class="navbar-brand" href="https://liushoukai.github.io" title="Know Thyself">Know Thyself</a>
+          		<span class="sr-only">Toggle navigation</span>
+          		<span class="icon-bar"></span>
+          		<span class="icon-bar"></span>
+          		<span class="icon-bar"></span>
+      	   </button>
+      	  <a class="navbar-brand" href="https://liushoukai.github.io" title="Know Thyself">Know Thyself</a>
           </div>
 	  <div role="navigation" class="collapse navbar-collapse bs-navbar-collapse">
 	    <p class="navbar-text pull-right">Know thyself, Nothing in excess</p>
 	    <ul class="nav navbar-nav">
 		  {% if page.url == "/index.html" %}
-                  <li class="active">{% else %}
-                  <li>{% endif %}
-                  <a href="{{ site.baseurl }}/" class="word-keep"><span class="octicon octicon-book"></span></span>&nbsp;&nbsp;Blog</a>
-                  </li>
-                  {% for p in site.pages %}{% if p.isNavItem %}
-                  {% if p.url == page.url %}
-                  <li class="active">{% else %}
-                  <li>{% endif %}
-                      <a href="{{ p.url | prepend: site.baseurl }}" class="word-keep"><span class="octicon {{ p.icon }}"></span>&nbsp;&nbsp;{{ p.title }}</a>
-                  </li>
-                  {% endif %}
-                  {% endfor %}
-		  <!--
-                  <li><a href="#stq=" class="search-button"><span class="octicon octicon-search"></span></a></li>
-		  -->
-            </ul>
+        <li class="active">{% else %}
+        <li>{% endif %}
+        <a href="{{ site.baseurl }}/" class="word-keep"><span class="octicon octicon-book"></span></span>&nbsp;&nbsp;Blog</a>
+        </li>
+        {% for p in site.pages %}{% if p.isNavItem %}
+        {% if p.url == page.url %}
+        <li class="active">{% else %}
+        <li>{% endif %}
+            <a href="{{ p.url | prepend: site.baseurl }}" class="word-keep"><span class="octicon {{ p.icon }}"></span>&nbsp;&nbsp;{{ p.title }}</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+      </ul>
 	  </div>
 	</div>
       </div>
     </nav>
     <div class="main">
-      <a href="{{ site.baseurl }}">
-        <div class="banner">
-          <h1>Rainy Alley</h1>
-          <h3>AA&nbsp;BB</h3>
-        </div>
-      </a>
-      <header></header>
-
       <div class="container">
         {{ content }}
       </div>
-
-      <div class="page-scrollTop" data-toggle="tooltip" data-placement="top" title="Top">
-        <a href="javascript:void(0);">
-          <div class="arrow"></div>
-          <div class="stick"></div>
-        </a>
-      </div>
     </div>
 
-    <footer class="footnote footnote-tiffany">
-      <div class="container">
-        <!-- <a class="foot-item" href="mailto:{{ site.email }}" target="_blank"><span class="octicon octicon-mail"></span></a>
-        <a class="foot-item" href="https://github.com/{{ site.github_username }}" target="_blank"><span class="octicon octicon-mark-github"></span></a>
-        <a class="foot-item" href="{{ '/feed.xml' | prepend: site.baseurl }}" target="_blank"><span class="octicon octicon-rss"></span></a>
-        <a class="foot-item" href="{{ '/link/' | prepend: site.baseurl }}"><span class="octicon octicon-link-external"></span></a> -->
-        <a class="copyright">&copy;2015 - KAY编程人生 - <a href="http://www.miitbeian.gov.cn" class="copyright">粤ICP备15110494号-1</a></a>
-      </div>
-    </footer>
+    {% include page-footer.html %}
 
-    <script type="text/javascript" src="{{ '/assets/jquery/3.0.0-alpha1/jquery.min.js' | prepend: site.baseurl }}"></script>
-    <script type="text/javascript" src="{{ '/assets/jquery/jquery.backstretch.min.js' | prepend: site.baseurl }}"></script>
-    <script type="text/javascript" src="{{ '/assets/bootstrap/3.3.5/js/bootstrap.min.js' | prepend: site.baseurl }}"></script>
-    <script type="text/javascript" src="/assets/js/toc.js" ></script>
-    <script type="text/javascript" src="{{ '/assets/js/script.js' | prepend: site.baseurl }}"></script>
+    {% include page-script.html %}
 
-    <!-- <script type="text/javascript" src="//liushoukai.disqus.com/embed.js"></script> -->
-
-
-    {% for script in page.scripts %}
-    <input type="hidden" value="{{ script }}">
-    <script type="text/javascript" src="{{ '/assets/js/' | append: script | prepend: site.baseurl }}"></script>
-    {% endfor %}
     </body>
 </html>

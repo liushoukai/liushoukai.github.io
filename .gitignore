@@ -4,3 +4,4 @@ _site/
 *.pid
 _posts/*.html
 node_modules
+.idea/

@@ -1,0 +1,13 @@
+<script type="text/javascript" src="{{ '/assets/jquery/3.0.0-alpha1/jquery.min.js' | prepend: site.baseurl }}"></script>
+<script type="text/javascript" src="{{ '/assets/jquery/jquery.backstretch.min.js' | prepend: site.baseurl }}"></script>
+<script type="text/javascript" src="{{ '/assets/bootstrap/3.3.5/js/bootstrap.min.js' | prepend: site.baseurl }}"></script>
+<script type="text/javascript" src="/assets/js/toc.js" ></script>
+<script type="text/javascript" src="{{ '/assets/js/script.js' | prepend: site.baseurl }}"></script>
+
+<!-- <script type="text/javascript" src="//liushoukai.disqus.com/embed.js"></script> -->
+
+
+{% for script in page.scripts %}
+<input type="hidden" value="{{ script }}">
+<script type="text/javascript" src="{{ '/assets/js/' | append: script | prepend: site.baseurl }}"></script>
+{% endfor %}
