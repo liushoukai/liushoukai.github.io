@@ -4,6 +4,8 @@ url: "https://liushoukai.github.io"
 #baseurl: "/blog"
 baseurl: ""
 
+exclude: ["Gemfile", "Gemfile.lock", "node_modules", "vendor/bundle/", "vendor/cache/", "vendor/gems/", "vendor/ruby/", "webpack", "webpack.config.js", "package.json", "package-lock.json", "scripts/"]
+
 # Serving
 detach: false
 host: 0.0.0.0
