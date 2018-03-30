@@ -3,7 +3,7 @@ layout: null
 ---
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,54 +16,22 @@ layout: null
 
     <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon" media="screen">
     <link rel="canonical" href="{{ page.url | prepend: site.baseurl }}">
-    <link rel="alternate" hreflang="zh" href="https://liushoukai.gihub.io" />
-    <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | prepend: site.baseurl }}"  />
+    <link rel="alternate" hreflang="zh" href="https://liushoukai.gihub.io"/>
+    <link rel="alternate" type="application/rss+xml" title="{{ site.title }}"
+          href="{{ '/feed.xml' | prepend: site.baseurl }}"/>
 
     {% include page-style.html %}
     {% include page-analytics.html %}
-  </head>
-  <body>
-    <nav class="navbar navbar-default navbar-fixed-top navbar-inverse headroom headroom--top" role="banner" style="top: 0px;">
-      <div class="container">
-        <div class="navbar-header">
-           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-          		<span class="sr-only">Toggle navigation</span>
-          		<span class="icon-bar"></span>
-          		<span class="icon-bar"></span>
-          		<span class="icon-bar"></span>
-      	   </button>
-      	  <a class="navbar-brand" href="https://liushoukai.github.io" title="Know Thyself">Know Thyself</a>
-          </div>
-	  <div role="navigation" class="collapse navbar-collapse bs-navbar-collapse">
-	    <p class="navbar-text pull-right">Know thyself, Nothing in excess</p>
-	    <ul class="nav navbar-nav">
-		  {% if page.url == "/index.html" %}
-        <li class="active">{% else %}
-        <li>{% endif %}
-        <a href="{{ site.baseurl }}/" class="word-keep"><span class="octicon octicon-book"></span></span>&nbsp;&nbsp;Blog</a>
-        </li>
-        {% for p in site.pages %}{% if p.isNavItem %}
-        {% if p.url == page.url %}
-        <li class="active">{% else %}
-        <li>{% endif %}
-            <a href="{{ p.url | prepend: site.baseurl }}" class="word-keep"><span class="octicon {{ p.icon }}"></span>&nbsp;&nbsp;{{ p.title }}</a>
-        </li>
-        {% endif %}
-        {% endfor %}
-      </ul>
-	  </div>
-	</div>
-      </div>
-    </nav>
-    <div class="main">
-      <div class="container">
+</head>
+<body>
+{% include page-header.html %}
+<div class="main">
+    <div class="container">
         {{ content }}
-      </div>
     </div>
+</div>
 
-    {% include page-footer.html %}
-
-    {% include page-script.html %}
-
-    </body>
+{% include page-footer.html %}
+{% include page-script.html %}
+</body>
 </html>

@@ -9,8 +9,9 @@ styles: [article-list.css]
             <section class="category-slice" post-cate="All">
                 {% for post in paginator.posts %}
                 <article>
-                    <header><a href="{{ site.baseurl }}/archive/#{{ post.date | date: '%Y-%m-%d' }}"><span
-                            class="octicon octicon-calendar"></span>&nbsp;<span>{{ post.date | date: "%Y-%m-%d" }}</span></a>
+                    <header><a href="{{ site.baseurl }}/archive/#{{ post.date | date: '%Y-%m-%d' }}">
+                        <span class="octicon octicon-calendar"></span>&nbsp;
+                        <span>{{ post.date | date: "%Y-%m-%d" }}</span></a>
                     </header>
                     <div class="module">
                         <a class="title" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
@@ -34,34 +35,8 @@ styles: [article-list.css]
                 {% endfor %}
             </section>
 
-            <div class="pad-mid"></div>
-
-            {{ site.baseurl }}
-
             <nav class="text-center">
-                <ul class="pagination">
-                    {% if paginator.total_pages > 1 %}
-                    {% if paginator.previous_page %}
-                    <li><a href="{{ paginator.previous_page_path | prepend: site.baseurl }}" aria-label="Previous"><span
-                            aria-hidden="true">&laquo;</span></a></li>
-                    {% endif %}
-                    {% for page in (1..paginator.total_pages) %}
-                    {% if page == paginator.page %}
-                    <li class="active"><span>{{ page }}</span></li>
-                    {% elsif page == 1 %}
-                    <li><a href="{{ '/' | prepend: site.baseurl }}">{{ page }}</a></li>
-                    {% else %}
-                    <li><a href="{{ page |  prepend: '/' | prepend: site.baseurl }}">{{ page }}</a></li>
-                    {% endif %}
-                    {% endfor %}
-                    {% if paginator.next_page %}
-                    <li>
-                        <a href="{{ paginator.next_page_path | prepend: site.baseurl }}" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span></a>
-                    </li>
-                    {% endif %}
-                    {% endif %}
-                </ul>
+                {% include page-pagination.html %}
             </nav>
 
         </div>
