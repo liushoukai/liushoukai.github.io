@@ -1,8 +1,8 @@
 # 个人信息
 * 姓名：刘守凯
 * 手机：15011931913
-* Email：21156929@qq.com
 * 年限：6年以上
+* Email：21156929@qq.com
 * Github：https://github.com/liushoukai
 
 
