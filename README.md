@@ -31,6 +31,7 @@ npm install && npm run build
 ```shell
 bundle install
 jekyll doctor
-jekyll serve --host=0.0.0.0
+jekyll server --host=0.0.0.0
+jekyll server --drafts
 ```
 
