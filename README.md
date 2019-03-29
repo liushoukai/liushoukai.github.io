@@ -2,8 +2,6 @@
 
 The blog build with Jekyll and Github Pages.
 
-
-
 ## Install Ruby on Ubuntu 14.04
 
 ```shell
