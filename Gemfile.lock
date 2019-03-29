@@ -1,5 +1,5 @@
 GEM
-  remote: https://ruby.taobao.org/
+  remote: https://gems.ruby-china.com/
   specs:
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
@@ -70,4 +70,4 @@ DEPENDENCIES
   redcarpet
 
 BUNDLED WITH
-   1.16.1
+   2.0.1
