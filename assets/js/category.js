@@ -20,20 +20,14 @@ function categoryDisplay() {
 }
 
 function selectCategory(){
-    var exclude = ["",undefined];
-    var thisId = window.location.hash.substring(1);
-    var allow = true;
-    for(var i in exclude){
-        if(thisId == exclude[i]){
-            allow = false;
-            break;
-        }
-    }
-    if(allow){
-        var cate = thisId;
-        $("section[post-cate!='" + cate + "']").hide(200);
-        $("section[post-cate='" + cate + "']").show(200);
+    var cate = window.location.hash.substring(1);
+    $("section[post-cate!='" + cate + "']").hide(200);
+    $("section[post-cate='" + cate + "']").show(200);
+    if (cate === 'All') {
+        $("section[post-cate='all']").show(200);
+        $("article").show(200);
     } else {
-        $("section[post-cate='All']").show();
+        $("article[curr-cate!='" + cate + "']").hide(200);
+        $("article[curr-cate='" + cate + "']").show(200);
     }
 }

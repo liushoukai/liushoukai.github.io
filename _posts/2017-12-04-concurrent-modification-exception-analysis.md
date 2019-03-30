@@ -5,6 +5,7 @@ categories: java
 tags: java
 ---
 
+### 源码分析
 AbstractList的核心属性modCount，初始值为
 
 ```java

@@ -59,15 +59,15 @@ scripts: [toc.js,post.js]
               <span class="octicon octicon-list-unordered"></span>&nbsp;Tags
           </div>
           {% if page.tags != null %}
-          <!-- <div class="content-navigation-list">
-              <ul>
+          <div class="content-navigation-list">
+              <ol>
                   {% for tag in page.tags %}
                   <li>
                       <a href="{{ '/tags' | prepend: site.baseurl }}#{{ tag }}"><span class="octicon octicon-tag"></span>&nbsp;{{ tag }}</a>
                   </li>
                   {% endfor %}
-              </ul>
-          </div> -->
+              </ol>
+          </div>
           {% endif %}
       </div>
     </div>

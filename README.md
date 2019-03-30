@@ -16,6 +16,7 @@ Please refer to the official installation [document](https://rubygems.org/pages/
 
 ```shell
 sudo gem install bundler
+bundle install
 ```
 
 ## Run Webpack
@@ -27,9 +28,7 @@ npm install && npm run build
 ## Run Jekyll on local Server
 
 ```shell
-bundle install
 jekyll doctor
-jekyll server --host=0.0.0.0
-jekyll server --drafts
+jekyll server --host=0.0.0.0 --incremental --drafts
 ```
 

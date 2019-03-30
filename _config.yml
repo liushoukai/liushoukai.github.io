@@ -3,7 +3,20 @@ url: "https://liushoukai.github.io"
 #baseurl: "/blog"
 baseurl: ""
 
-exclude: ["Gemfile", "Gemfile.lock", "node_modules", "vendor/bundle/", "vendor/cache/", "vendor/gems/", "vendor/ruby/", "webpack", "webpack.config.js", "package.json", "package-lock.json", "scripts/"]
+exclude: [
+  "Gemfile",
+  "Gemfile.lock",
+  "node_modules",
+  "vendor/bundle/",
+  "vendor/cache/",
+  "vendor/gems/",
+  "vendor/ruby/",
+  "webpack",
+  "webpack.config.js",
+  "package.json",
+  "package-lock.json",
+  "scripts/"
+]
 
 # Serving
 detach: false
@@ -23,7 +36,7 @@ incremental: false
 
 ##Site
 title: "Know thyself"
-author: "liushoukai"
+author: "Kay"
 keywords: "博客，Jekyll"
 description: "KAY个人博客"
 
