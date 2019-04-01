@@ -3,7 +3,7 @@ layout: page
 title: About
 permalink: /about/
 icon: octicon-heart
-published: false
+isNavItem: true
 ---
 
-自我介绍什么的，最讨厌了！
+I LOVE OPEN SOURCE!
