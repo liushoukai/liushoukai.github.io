@@ -19,18 +19,18 @@ layout: null
     <link rel="alternate" hreflang="zh" href="https://liushoukai.gihub.io"/>
     <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | prepend: site.baseurl }}"/>
 
-    {% include v1/page-style.html %}
-    {% include v1/page-analytics.html %}
+    {% include page-style.html %}
+    {% include page-analytics.html %}
 </head>
 <body>
-{% include v1/page-header.html %}
+{% include page-header.html %}
 <div class="main">
     <div class="container">
         {{ content }}
     </div>
 </div>
 
-{% include v1/page-footer.html %}
-{% include v1/page-script.html %}
+{% include page-footer.html %}
+{% include page-script.html %}
 </body>
 </html>
