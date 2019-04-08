@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  Java7特性
-categories: Java
-tags: java
+categories: java
+tags: java7
 ---
 
 multi-catch

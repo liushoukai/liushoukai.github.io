@@ -2,7 +2,7 @@
 layout: post
 title: 基于栈与基于寄存器的虚拟机架构
 categories: virtual-machine
-tags: Stack-based Register-based VM
+tags: virtual-machine
 ---
 
 ## 虚拟机的通用实现是什么？

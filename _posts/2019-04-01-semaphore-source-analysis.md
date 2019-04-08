@@ -1,19 +1,19 @@
-# Semaphore源码分析
+---
+layout: post
+title: Semaphore源码分析
+categories: java
+tags: java
+---
 
-## 基础解释
-
+### 基础解释
 Semaphore也叫信号量，在JDK1.5被引入，可以用来控制同时访问特定资源的线程数量，通过协调各个线程，以保证合理的使用资源。
-
 - Semaphore内部维护了一组虚拟的许可，许可的数量可以通过构造函数的参数指定。
-
-
 - 访问特定资源前，必须使用acquire方法获得许可，如果许可数量为0，该线程则一直阻塞，直到有可用许可。访问资源后，使用release释放许可。
 
-## 应用场景
+### 应用场景
+比如，通过多线程读取远端数据源实现信息采集，为防止采集线程过多对远端数据源造成压力，所以要限制采集任务的并发执行线程数量，可以通过使用Semaphore信号量实现；
 
-比如通过多线程读取远端数据源实现信息采集，为防止采集线程过多对远端数据源造成压力，所以要限制采集任务的并发执行线程数量，可以通过使用Semaphore信号量实现；
-
-## 源码分析
+### 源码分析
 
 ```java
 public Semaphore(int permits) {
@@ -40,7 +40,7 @@ abstract static class Sync extends AbstractQueuedSynchronizer {...}
  */
 static final class NonfairSync extends Sync {
     ...
-   	protected int tryAcquireShared(int acquires) { 
+    protected int tryAcquireShared(int acquires) {
         return nonfairTryAcquireShared(acquires);
     }
     ...
@@ -51,7 +51,7 @@ static final class NonfairSync extends Sync {
  */
 static final class FairSync extends Sync {
     ...
-	protected int tryAcquireShared(int acquires) {
+    protected int tryAcquireShared(int acquires) {
     for (;;) {
         if (hasQueuedPredecessors())
             return -1;
@@ -59,8 +59,8 @@ static final class FairSync extends Sync {
         int remaining = available - acquires;
         if (remaining < 0 || compareAndSetState(available, remaining))
             return remaining;
-    	}
-	}
+        }
+    }
     ...
 }
 ```
@@ -72,7 +72,7 @@ Sync是什么？Sync是Semaphore的内部抽象类，Sync是继承了AQS（Abstr
 
 NonfairSync与FairSync都是Sync抽象类的具体实现，核心区别在于二者不同的tryAcquireShared实现，其中，
 
-FairSync通过hasQueuedPredecessors()方法检查在AQS队列中是否存在等待获取Permit的线程，如果存在，则返回-1，将获取Permit的机会让给AQS队列总等待的线程，直到AQS队列的中无等待获取Permits的线程，当前线程才有机会获取Permit；
+FairSync通过hasQueuedPredecessors()方法检查在AQS队列中是否存在等待获取Permit的线程，如果存在，则返回-1，将获取Permit的机会让给AQS队列中等待的线程，直到AQS队列的中无等待获取Permits的线程，当前线程才有机会获取Permit；
 
 那么，AQS中的线程是怎么入队出队的呢？由于线程调用Semaphore的acquire()方法时，如果没有获取到Permit会被阻塞。因此，很直观的想法是，会在调用acquire()方法时，将无法获取到Permit的线程入队到AQS；
 
@@ -84,7 +84,7 @@ public void acquire(int permits) throws InterruptedException {
 
 public final void acquireSharedInterruptibly(int arg) throws InterruptedException {
     if (Thread.interrupted()) throw new InterruptedException();
-	if (tryAcquireShared(arg) < 0) doAcquireSharedInterruptibly(arg);
+    if (tryAcquireShared(arg) < 0) doAcquireSharedInterruptibly(arg);
 }
 
 private void doAcquireSharedInterruptibly(int arg) throws InterruptedException {
@@ -135,8 +135,8 @@ private Node addWaiter(Node mode) {
 static final class Node {
     /** Marker to indicate a node is waiting in shared mode */
     static final Node SHARED = new Node();
-	/** Marker to indicate a node is waiting in exclusive mode */
-	static final Node EXCLUSIVE = null;
+    /** Marker to indicate a node is waiting in exclusive mode */
+    static final Node EXCLUSIVE = null;
     ...
 }
 ```

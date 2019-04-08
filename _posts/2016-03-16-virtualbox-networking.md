@@ -2,7 +2,7 @@
 layout: post
 title:  VirtualBox Network
 categories: virtualbox
-tags: VirtualBox NAT
+tags: virtualbox nat
 ---
 
 VirtualBox网络连接方式详解

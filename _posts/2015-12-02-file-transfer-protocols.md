@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  xmodem、ymodem、zmodem
+title:  文件传输协议
 categories: linux
-tags: xmodem ymodem zmodem
+tags: linux
 ---
 
 ### XMODEM

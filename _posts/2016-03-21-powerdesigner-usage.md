@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  PowerDesigner Usage
-categories: virtualbox
-tags: VirtualBox NAT
+title:  PowerDesigner使用
+categories: powerdesigner
+tags: powerdesigner
 ---
 
 数据库的反向工程
