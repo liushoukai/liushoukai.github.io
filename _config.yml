@@ -24,15 +24,6 @@ host: 0.0.0.0
 port: 4000
 show_dir_listing: false
 
-##############
-
-# Conversion
-markdown:    kramdown
-highlighter: rouge
-lsi:         false
-excerpt_separator: "\n\n"
-incremental: false
-
 
 ##Site
 title: "Know thyself"
@@ -71,14 +62,14 @@ paginate_path: /page/:num
 timezone: Asia/Shanghai
 
 # Markdown Processors
-#kramdown:
-#  input: GFM
+markdown: kramdown
 kramdown:
-  auto_ids:      true
+  auto_ids: true
   entity_output: as_char
-  toc_levels:    1..6
-  smart_quotes:  lsquo,rsquo,ldquo,rdquo
-  input:         GFM
-  hard_wrap:     false
-  footnote_nr:   1
-  show_warnings: false
+  toc_levels: 1..6
+  smart_quotes: lsquo,rsquo,ldquo,rdquo
+  input: GFM
+  hard_wrap: false
+  footnote_nr: 1
+  show_warnings: true
+  syntax_highlighter: rouge

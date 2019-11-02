@@ -9,4 +9,6 @@ group :jekyll_plugins do
   gem 'pygments.rb'
   gem 'redcarpet'
   gem 'kramdown'
+  gem 'coderay'
+  gem 'rouge'
 end

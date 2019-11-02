@@ -32,3 +32,8 @@ jekyll doctor
 jekyll server --host=0.0.0.0 --incremental --drafts
 ```
 
+## syntax_highlighter: rouge
+```shell
+rougify style github > assets/css/syntax_highlighter.css
+rougify style thankful_eyes > assets/css/syntax_highlighter.css
+```
