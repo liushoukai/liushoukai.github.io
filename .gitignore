@@ -5,3 +5,4 @@ _site/
 _posts/*.html
 node_modules
 .idea/
+*.code-workspace

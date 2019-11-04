@@ -5,7 +5,7 @@ categories: html
 tags: html-entities
 ---
 
-###HTML Entities
+### HTML Entities
 
 在HTML中下述两类字符必须使用字符实体表示：<br/>
 
