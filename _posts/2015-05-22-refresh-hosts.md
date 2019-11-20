@@ -16,5 +16,5 @@ tags: hosts
 - 重启浏览器			重启浏览器能够断开所有长短连接，新建立连接的时候会解析DNS域名
 - 隐私模式				隐私模式下不会复用TCP连接，新建立连接的时候会解析DNS域名
 - 关闭长连接			执行chrome://net-internals/#sockets中的Close idle sockets
-- 清除浏览器DNS缓存     chrome://net-internals/#DNS
-- 清除操作系统DNS缓存   cmd>ipconfig /flushdns
+- 清除浏览器DNS缓存      chrome://net-internals/#DNS
+- 清除操作系统DNS缓存    cmd>ipconfig /flushdns

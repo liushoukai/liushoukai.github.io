@@ -2,7 +2,7 @@
 layout: post
 title:  Java模板引擎性能对比
 categories: java
-tags: java template
+tags: web template
 ---
 
 # 模板引擎性能对比

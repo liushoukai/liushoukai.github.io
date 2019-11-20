@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Semaphore源码分析
-categories: java
+categories: jdk
 tags: java
 ---
 

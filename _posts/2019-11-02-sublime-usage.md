@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Sublime使用技巧
-categories: tool
-tags: sublime
+categories: sublime
+tags: tool
 ---
 
 ## Sublime配置
