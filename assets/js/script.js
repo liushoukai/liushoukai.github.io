@@ -48,8 +48,6 @@ function backToTop() {
             scrollTop: "0"
         }, 500);
     });
-
-
 }
 
 function search(){

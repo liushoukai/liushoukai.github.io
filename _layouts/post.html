@@ -81,13 +81,15 @@ scripts: [toc.js,post.js]
           </div>
           {% if page.tags != null %}
           <div class="content-navigation-list">
-              <ol>
+              <ul class="tags-item">
                   {% for tag in page.tags %}
                   <li>
-                      <a href="{{ '/tags' | prepend: site.baseurl }}#{{ tag }}"><span class="octicon octicon-tag"></span>&nbsp;{{ tag }}</a>
+                      <a href="{{ '/tags' | prepend: site.baseurl }}#{{ tag }}">
+                        <span class="octicon octicon-tag"></span>&nbsp;{{ tag }}
+                      </a>
                   </li>
                   {% endfor %}
-              </ol>
+              </ul>
           </div>
           {% endif %}
       </div>
