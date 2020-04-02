@@ -9,7 +9,10 @@ $(function() {
 
     $.backstretch([
         "/assets/img/memphis-mini-dark.png",
-        "/assets/img/trees.png"
+        "/assets/img/trees.png",
+        "/assets/img/wheat.png",
+        "/assets/img/morocco-blue.png",
+        "/assets/img/blue-snow.png"
     ], {duration: 3000, fade: 750});
 
     $('#toc').toc({
