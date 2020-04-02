@@ -156,13 +156,13 @@ a:active {text-decoration: none}	/* 选定的链接 */
 }
 
 .sheet{
-    opacity: 0.9;
-    word-break: break-all;
+  opacity: 0.9;
+  word-break: break-all;
 	background-color:#f8f8fd;
-	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.4),0 0 30px rgba(10,10,0,0.1) inset;
-    -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.4),0 0 30px rgba(10,10,0,0.1) inset;
-	-o-box-shadow: 0 1px 2px rgba(0,0,0,0.4),0 0 30px rgba(10,10,0,0.1) inset;
-	box-shadow: 0 1px 2px rgba(0,0,0,0.4),0 0 30px rgba(10,10,0,0.1) inset;
+  -webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.1),0 0 2px rgba(0,0,0,0.1) inset;
+  -moz-box-shadow: 0 1px 5px rgba(0,0,0,0.1),0 0 2px rgba(0,0,0,0.1) inset;
+  -o-box-shadow: 0 1px 5px rgba(0,0,0,0.1),0 0 2px rgba(0,0,0,0.1) inset;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.1),0 0 2px rgba(0,0,0,0.1) inset;
 }
 
 .sheet{
@@ -215,15 +215,15 @@ a:active {text-decoration: none}	/* 选定的链接 */
 }
 
 .shadow-bottom-center{
-	background-color:#f8f8fd;
-    opacity: 0.9;
-    border-radius: 6px;
-    padding: 10px 15px;
-    margin-bottom: 15px;
-	-webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.4),0 0 20px rgba(0,0,0,0.1) inset;
-	-moz-box-shadow: 0 1px 5px rgba(0,0,0,0.4),0 0 20px rgba(0,0,0,0.1) inset;
-	-o-box-shadow: 0 1px 5px rgba(0,0,0,0.4),0 0 20px rgba(0,0,0,0.1) inset;
-	box-shadow: 0 1px 5px rgba(0,0,0,0.4),0 0 20px rgba(0,0,0,0.1) inset;
+  background-color:#f8f8fd;
+  opacity: 0.9;
+  border-radius: 6px;
+  padding: 10px 15px;
+  margin-bottom: 15px;
+	-webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.1),0 0 2px rgba(0,0,0,0.1) inset;
+	-moz-box-shadow: 0 1px 5px rgba(0,0,0,0.1),0 0 2px rgba(0,0,0,0.1) inset;
+	-o-box-shadow: 0 1px 5px rgba(0,0,0,0.1),0 0 2px rgba(0,0,0,0.1) inset;
+	box-shadow: 0 1px 5px rgba(0,0,0,0.1),0 0 2px rgba(0,0,0,0.1) inset;
 }
 
 .word-keep{
