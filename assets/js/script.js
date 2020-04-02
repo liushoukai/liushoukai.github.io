@@ -8,7 +8,7 @@ layout: null
 $(function() {
 
     $.backstretch([
-        "/assets/img/wallpaper/Abraham-Lincoln-Vampire-Hunter_1920x1080.jpg"
+        "/assets/img/geometric-leaves.png"
     ], {duration: 3000, fade: 750});
 
     $('#toc').toc({
@@ -16,8 +16,8 @@ $(function() {
         headers: 'h1, h2, h3',
         "minimumHeaders": 1
     });
-       
-    
+
+
     //backToTop();
     //search();
 });
