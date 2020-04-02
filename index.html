@@ -9,7 +9,6 @@ styles: [article-list.css]
             <section class="category-slice" post-cate="All">
                 {% for post in paginator.posts %}
                 <article>
-                    <header></header>
                     <div class="module">
                         <a class="title" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
                         <p>{% if post.excerpt.size > 500 %}{{ post.content | strip_html | strip_newlines | truncate: 500
