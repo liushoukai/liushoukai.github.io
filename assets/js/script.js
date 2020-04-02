@@ -8,7 +8,11 @@ layout: null
 $(function() {
 
     $.backstretch([
-        "/assets/img/geometric-leaves.png"
+        "/assets/img/email-pattern.png",
+        "/assets/img/geometric-leaves.png",
+        "/assets/img/memphis-mini-dark.png",
+        "/assets/img/so-white.png",
+        "/assets/img/trees.png"
     ], {duration: 3000, fade: 750});
 
     $('#toc').toc({
