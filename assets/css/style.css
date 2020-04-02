@@ -218,7 +218,7 @@ a:active {text-decoration: none}	/* 选定的链接 */
   background-color:#f8f8fd;
   opacity: 0.9;
   border-radius: 6px;
-  padding: 10px 15px;
+  padding: 20px;
   margin-bottom: 15px;
 	-webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.1),0 0 2px rgba(0,0,0,0.1) inset;
 	-moz-box-shadow: 0 1px 5px rgba(0,0,0,0.1),0 0 2px rgba(0,0,0,0.1) inset;

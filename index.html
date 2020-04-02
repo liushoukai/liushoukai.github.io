@@ -9,15 +9,11 @@ styles: [article-list.css]
             <section class="category-slice" post-cate="All">
                 {% for post in paginator.posts %}
                 <article>
-                    <header><a href="{{ site.baseurl }}/archive/#{{ post.date | date: '%Y-%m-%d' }}">
-                        <span class="octicon octicon-calendar"></span>&nbsp;
-                        <span>{{ post.date | date: "%Y-%m-%d" }}</span></a>
-                    </header>
+                    <header></header>
                     <div class="module">
                         <a class="title" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-                        <p>{% if post.excerpt.size > 300 %}{{ post.content | strip_html | strip_newlines | truncate: 300
+                        <p>{% if post.excerpt.size > 500 %}{{ post.content | strip_html | strip_newlines | truncate: 500
                             }}{% else %}{{ post.excerpt }}{% endif %}</p>
-                        <!-- <a class="readmore" href="{{ post.url | prepend: site.baseurl }}">Read More</a> -->
                         <footer>
                             {% for tag in post.tags %}
                             <a class="word-keep" href="{{ site.baseurl }}/tags/#{{ tag }}"><span class="octicon octicon-tag"></span>&nbsp;{{ tag }}</a>
