@@ -7,6 +7,20 @@ tags: docker kubernetes
 
 
 
+### 镜像仓库
+
+本地镜像都保存在 Docker 宿主机的 /var/lib/docker 目录下。镜像从仓库下载而来，而仓库存在于 Registry 中。
+
+默认的 Registry 是由 Docker 公司运营的公用 Registry 服务，即 Docker Hub。
+
+Docker Hub 中有两种类型的仓库：
+
+- 用户仓库（user repository）：由 Docker 用户创建的，用户仓库的命名由用户名和仓库名两部分组成。
+
+- 顶层仓库（top-level repository）：由 Docker 内部的人来管理的，顶层仓库只包含仓库名部分。
+
+
+
 ### 镜像类型
 
 #### intermediate images
@@ -28,80 +42,84 @@ docker rmi $(docker images -f "dangling=true" -q)
 
 
 
+### 镜像标签
+
+为了区分同一个仓库中的不同镜像，Docker 提供了一种称为标签的功能，这种机制使得同一个镜像仓库中可以存储多个镜像。每个镜像在列出来时都带有一个标签，每个标签对组成特定镜像的一些镜像层进行标记（比如：ubuntu:14.04、ubuntu:16.04、ubuntu:18.04）。如果没有指定具体的镜像标签，那么Docker会自动下载lastest标签的镜像。
+
+
+
 ### 构建镜像
 
-1. 编写Dockfile文件
+1.编写Dockfile文件
 
-   ```dockerfile
-   FROM ubuntu:16.04
-   ```
+```dockerfile
+FROM ubuntu:16.04
+```
 
-   
 
-2. 执行构建命令
 
-   由于Docker构建镜像的过程会将中间镜像缓存，再次进行构建时，会直接从最后一次成功的中间镜像开始继续构建。可以通过--no-cache标志强制Docker忽略缓存的中间镜像，从头开始构建。
+2.执行构建命令
 
-   ```shell
-   sudo docker build -t="kayvita/static_web" .
-   ```
+由于Docker构建镜像的过程会将中间镜像缓存，再次进行构建时，会直接从最后一次成功的中间镜像开始继续构建。可以通过--no-cache标志强制Docker忽略缓存的中间镜像，从头开始构建。
 
-   
+```shell
+sudo docker build -t="kayvita/static_web" .
+```
 
-3. 构建失败处理
 
-   如果build失败，利用最后一次成功的中间镜像进行调试，最后一次构建成功的镜像为b3b7ff88db3b。
 
-   ```shell
-   sudo docker run -t -i b3b7ff88db3b /bin/bash
-   ```
+3.构建失败处理
 
-   
+如果build失败，利用最后一次成功的中间镜像进行调试，最后一次构建成功的镜像为b3b7ff88db3b。
 
-4. 查看构建成功的镜像
+```shell
+sudo docker run -t -i b3b7ff88db3b /bin/bash
+```
 
-   ```shell
-   sudo docker images
-   ```
 
-   
+
+4.查看构建成功的镜像
+
+```shell
+sudo docker images
+```
 
 
 
 ### 发布镜像
 
-1. 登录Docker Registry
+1.登录Docker Registry
 
-   ```shell
-   docker login -u username
-   ```
-
-   
-
-2. 为镜像添加 tag
-
-   ```
-   docker tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
-   docker tag friendlyhello username/get-started:tag1
-   ```
-
-   
-
-3. 上传镜像至 Docker Registry
-
-   ```shell
-   docker push username/get-started:tag1
-   ```
+```shell
+docker login -u username
+```
 
 
 
-4. 使用 Docker Registry 镜像
+2.为镜像添加 tag
 
-   ```shell
-   docker run -p 4000:80 username/get-started:tag1
-   ```
+```
+docker tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
+docker tag friendlyhello username/get-started:tag1
+```
 
-   
+
+
+3.上传镜像至 Docker Registry
+
+```shell
+docker push username/get-started:tag1
+```
+
+
+
+4.使用 Docker Registry 镜像
+
+```shell
+docker run -p 4000:80 username/get-started:tag1
+```
+
+
 
 ### 参考资料
 
