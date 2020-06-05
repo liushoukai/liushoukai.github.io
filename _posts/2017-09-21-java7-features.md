@@ -1,11 +1,11 @@
 ---
 layout: post
-title:  Java7特性
+title:  Java版本特性
 categories: java
-tags: java7
+tags: java
 ---
 
-multi-catch
+
 
 ### 允许使用数值文字的加强
 ```java

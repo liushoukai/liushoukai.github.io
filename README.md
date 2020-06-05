@@ -2,10 +2,11 @@
 
 The blog build with Jekyll and Github Pages.
 
-## Install Ruby on Ubuntu 14.04
+## Install Ruby on Ubuntu 16.04
 
 ```shell
 sudo apt-get -y install ruby2.5 ruby2.5-dev
+ruby --version
 ```
 
 ## Install RubyGems

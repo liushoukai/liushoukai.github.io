@@ -61,10 +61,6 @@ nav {
     background-color: #fff;
 }
 
-/*.navbar-nav>li>a{
-    line-height: 1.42857143;
-}*/
-
 .footnote-tiffany a,
 .footnote-tiffany span{
     color:#fff;
@@ -117,10 +113,12 @@ html {
 }
 
 body {
-    !background-image: url({{ "/assets/img/bg.jpg" | prepend: site.baseurl | prepend: site.url }});
     height: 100%;
     padding: 0px 0px 0px 0px;
     margin: 0px 0px 0px 0px;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.75em;
 }
 
 /* body,code,pre {
@@ -308,13 +306,6 @@ a:active {text-decoration: none}	/* 选定的链接 */
     width: 16px;
     text-align: center;
 }
-
-/*@font-face {
-  font-family: 'JosefinSans-Regular';
-  src: url("https://liushoukai.github.io/assets/fonts/JosefinSans-Regular.ttf");
-  font-weight: normal;
-  font-style: normal;
-}*/
 
 #toc ol {
   padding-left: 16px;
