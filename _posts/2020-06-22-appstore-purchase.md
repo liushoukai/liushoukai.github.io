@@ -5,10 +5,6 @@ categories: iOS
 tags: iOS IAP
 ---
 
-```java
-InvocableHandlerMethod.invokeForRequest()
-```
-
 ### iOS内购支付模式
 两种模式主要的不同之处在于对 AppStore 返回的付款凭证（receipt）的验证方式。
 
@@ -33,7 +29,7 @@ sequenceDiagram
 	participant AppStore
 	App->>+Server: 1.获取业务订单号
 	Server-->>-App: 2.返回业务订单号
-	
+
 	rect rgba(0, 0, 255, .1)
 	Note over App,StoreKit: 苹果支付
 	App->>+StoreKit: 3.请求商品信息（productId)
@@ -43,12 +39,12 @@ sequenceDiagram
 	App->>StoreKit: 7.用户支付
 	StoreKit-->>-App: 8.交易成功，返回付款收据
 	end
-
+	
 	App->>+Server: 9.验证订单状态（根据收据、订单号）
 	Server->>AppStore: 10.验证收据有效性
 	AppStore-->>Server: 11.返回收据有效性
 	Server-->>-App: 12.返回处理结果
-
+	
 	App->>StoreKit: 13.关闭交易
 </div>
 
