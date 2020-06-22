@@ -2,10 +2,23 @@
 <script type="text/javascript" src="{{ '/assets/jquery/jquery.backstretch.min.js' | prepend: site.baseurl }}"></script>
 <script type="text/javascript" src="{{ '/assets/bootstrap/3.3.5/js/bootstrap.min.js' | prepend: site.baseurl }}"></script>
 <script type="text/javascript" src="/assets/js/toc.js" ></script>
+<script type="text/javascript" src="/assets/js/mermaid.min.js" ></script>
 <script type="text/javascript" src="{{ '/assets/js/script.js' | prepend: site.baseurl }}"></script>
 
 <!-- <script type="text/javascript" src="//liushoukai.disqus.com/embed.js"></script> -->
-
+<script>
+    var config = {
+      startOnLoad:true,
+      flowchart:{
+        useMaxWidth:false,
+        htmlLabels:true,
+        curve:'cardinal',
+      },
+      securityLevel:'loose',
+    };
+    mermaid.initialize(config);
+    console.info("xxxxx");
+  </script>
 
 {% for script in page.scripts %}
 <input type="hidden" value="{{ script }}">
