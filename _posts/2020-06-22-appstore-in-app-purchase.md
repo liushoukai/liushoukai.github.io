@@ -1,9 +1,12 @@
 ---
 layout: post
-title: iOS内购流程
-categories: iOS
-tags: iOS IAP
+title: App 内购买项目
+categories: appstore
+tags: appstore
 ---
+
+### 官方文档
+[https://developer.apple.com/cn/in-app-purchase/][1]{:target="_blank"} 
 
 ### iOS内购支付模式
 两种模式主要的不同之处在于对 AppStore 返回的付款凭证（receipt）的验证方式。
@@ -73,3 +76,6 @@ Product环境验证付款收据(receipt): https://buy.itunes.apple.com/verifyRec
 方案一：提供一个APP提审专用的审核服务器用于苹果审核，审核服使用沙盒环境，正式服使用正式环境。
 
 方案二：服务器默认使用Product环境验证付款收据，如果验证结果返回的status = 21007时，则将请求地址换成Sandbox环境验证付款收据，再次请求验单。
+
+
+[1]:https://developer.apple.com/cn/in-app-purchase/
