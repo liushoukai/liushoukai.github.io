@@ -7,3 +7,5 @@ isNavItem: true
 ---
 
 I LOVE OPEN SOURCE!
+
+<a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=1Obl5eHi7ebtlKWl_re7uQ" style="text-decoration:none;"><img src="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_21.png"/></a>
