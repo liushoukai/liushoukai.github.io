@@ -6,3 +6,5 @@ _posts/*.html
 node_modules
 .idea/
 *.code-workspace
+
+.vscode/
