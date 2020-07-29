@@ -1,4 +1,5 @@
 ---
+
 layout: post
 title: AppStore内购
 categories: appstore
@@ -340,15 +341,13 @@ AppStore 商店退款政策：
 
 ------
 
-#### 退款处理
+#### 退款流程
 
-官方文档：[https://developer.apple.com/documentation/storekit/in-app_purchase/handling_refund_notifications][2]{:target="_blank"}
+在 Apple 全球开发者大会( [WWDC2020][3]{:target="_blank"} )上，Apple宣布从2020年06月24日开始，针对 App 内购买项目的退款通知现已可用。
 
-2020年06月24日，针对 App 内购买项目的退款通知现已可用。[WWDC20][3]{:target="_blank"}
+App Store 服务器通知现在包含所有类型的 App 内购买项目的退款通知 (包括消耗型项目、非消耗型项目和非续期订阅)。详见：[https://developer.apple.com/videos/play/wwdc2020/10661/][4]{:target="_blank"}
 
-App Store 服务器通知现在包含所有类型的 App 内购买项目的退款通知 (包括消耗型项目、非消耗型项目和非续期订阅)。
-
-2020年06月24日开始，苹果的退款流程：
+2020年06月24日开始，新的退款流程：
 
 <div class="mermaid">
 sequenceDiagram
@@ -363,7 +362,10 @@ sequenceDiagram
 	Apple->>Customer: Contacts you for game compensation(通知用户退款成功)
 	Developer->>Developer: Check for refunded payment(开发者检查退款订单)
 </div>
-退款通知
+------
+
+#### 退款通知
+
 在 App Store 服务端通知中，针对消耗型项目、非消耗型项目和非续期订阅三类商品的退款，增添了新的通知类型：`退款（RUND）`。
 注意，不同于取消（CANCEL）通知类型，取消通知类型针对的是自动续期订阅类型商品，用户通过 AppleCare 支持取消订阅并退还购买款项时触发。
 
@@ -442,7 +444,17 @@ sequenceDiagram
 }
 ```
 
+------
+
+#### 退款处理
+
+![potential-actions](https://liushoukai.github.io/assets/img/potential-actions.jpeg){:width="100%"}
+
+
+
+
+
 [1]:https://developer.apple.com/cn/in-app-purchase/
 [2]:https://developer.apple.com/documentation/storekit/in-app_purchase/handling_refund_notifications
-
 [3]:https://developer.apple.com/wwdc20/
+[4]:https://developer.apple.com/videos/play/wwdc2020/10661/
