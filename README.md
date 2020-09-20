@@ -18,13 +18,13 @@ Please refer to the official installation [document](https://rubygems.org/pages/
 ```shell
 sudo gem install bundler
 bundle install
+bundle update
 ```
 
 ## Run Webpack
 
 ```shell
-sudo npm install -g npm
-npm install -g npm-check-updates
+sudo npm install -g npm npm-check-updates
 npm-check-updates -u
 npm install && npm run build
 ```
