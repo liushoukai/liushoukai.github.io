@@ -71,7 +71,7 @@ DEPENDENCIES
   jekyll
   jekyll-paginate
   jekyll-watch
-  kramdown (>= 2.3.0)
+  kramdown
   pygments.rb
   redcarpet
   rouge
