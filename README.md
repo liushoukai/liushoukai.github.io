@@ -23,6 +23,9 @@ bundle install
 ## Run Webpack
 
 ```shell
+sudo npm install -g npm
+npm install -g npm-check-updates
+npm-check-updates -u
 npm install && npm run build
 ```
 
