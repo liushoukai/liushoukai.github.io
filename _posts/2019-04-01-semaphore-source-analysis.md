@@ -6,12 +6,15 @@ tags: java
 ---
 
 ### 基础解释
+
 Semaphore也叫信号量，在JDK1.5被引入，可以用来控制同时访问特定资源的线程数量，通过协调各个线程，以保证合理的使用资源。
 `注意：Semaphore 限制了并发访问的数量而不是使用速率。`
+
 - Semaphore内部维护了一组虚拟的许可，许可的数量可以通过构造函数的参数指定。
 - 访问特定资源前，必须使用acquire方法获得许可，如果许可数量为0，该线程则一直阻塞，直到有可用许可。访问资源后，使用release释放许可。
 
 ### 应用场景
+
 比如，通过多线程读取远端数据源实现信息采集，为防止采集线程过多对远端数据源造成压力，所以要限制采集任务的并发执行线程数量，可以通过使用Semaphore信号量实现；
 
 ### 源码分析
@@ -142,5 +145,4 @@ static final class Node {
 }
 ```
 
-首先，Node是AQS的内部类，AQS队列采用链表实现，Node为AQS队列的节点；Node存在Shared模式与Exclusive模式；具体的使用说明，会在AbstractQueuedSynchronizer的源码分析中叙述；
-
+首先，Node是AQS的内部类，AQS队列采用链表实现，Node为AQS队列的节点；Node存在Shared模式与Exclusive模式；具体的使用说明，会在AbstractQueuedSynchronizer的源码分析中叙述

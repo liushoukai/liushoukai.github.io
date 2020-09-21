@@ -8,6 +8,7 @@ tags: tool
 ## Sublime配置
 
 ### Sublime3用户设置
+
 ```json
 {
      "color_scheme": "Packages/User/SublimeLinter/Monokai (SL).tmTheme",
@@ -23,6 +24,7 @@ tags: tool
 ```
 
 ### Sublime快捷键设置
+
 ```json
 [
      // Select Lines
@@ -41,6 +43,7 @@ tags: tool
 ```
 
 ### Build System设置
+
 ```json
 $ vim nodejs.sublime-build
 {
@@ -60,7 +63,9 @@ $ vim php.sublime-build
 ```
 
 ## SublimeLinter配置
+
 SublimeLinter
+
 ```json
 {
     "user": {
@@ -80,12 +85,14 @@ SublimeLinter
 ```
 
 ### SublimeLinter-php配置
+
 1. 安装php
 2. 配置SublimeLinter，加入PHP的路径
 
 参考：https://packagecontrol.io/packages/SublimeLinter-php
 
 ### SublimeLinter-jshint配置
+
 1. 安装node.js
 2. 安装jshint，npm install -g jshint
 3. 配置SublimeLinter，加入Node路径
@@ -93,9 +100,9 @@ SublimeLinter
 参考：https://packagecontrol.io/packages/SublimeLinter-jshint
 
 ### SublimeLinter-csslint配置
+
 1. 安装node.js
 2. 安装jshint，npm install -g csslint
 3. 配置SublimeLinter，加入Node路径
 
 参考：https://packagecontrol.io/packages/SublimeLinter-csslint
-

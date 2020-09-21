@@ -12,7 +12,8 @@ Thymeleaf与前三者相比，在性能上存在较大的差距，因此，选�
 参考：https://github.com/jreijn/spring-comparing-template-engines/issues/19
 
 ## System Configuration
-```
+
+```html
 Architecture: x86_64
 CPU op-mode(s): 32-bit, 64-bit
 Byte Order: Little Endian
@@ -40,7 +41,8 @@ NUMA node0 CPU(s): 0-3
 ```
 
 ## `JSP`
-```
+
+```html
 Document Path: /jsp
 Document Length: 8515 bytes
 Concurrency Level: 25
@@ -57,7 +59,8 @@ Transfer rate: 16434.05 (Kbytes/sec) received
 ```
 
 ## `Thymeleaf 3`
-```
+
+```html
 Document Path: /thymeleaf
 Document Length: 8849 bytes
 Concurrency Level: 25
@@ -74,7 +77,8 @@ Transfer rate: 9441.52 (Kbytes/sec) received
 ```
 
 ## `Velocity 1.7`
-```
+
+```html
 Document Path: /velocity
 Document Length: 8951 bytes
 Concurrency Level: 25
@@ -91,7 +95,8 @@ Transfer rate: 16865.88 (Kbytes/sec) received
 ```
 
 ## `Freemarker 2.3.23`
-```
+
+```html
 Document Path: /freemarker
 Document Length: 9035 bytes
 Concurrency Level: 25

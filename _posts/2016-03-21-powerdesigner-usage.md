@@ -6,6 +6,7 @@ tags: powerdesigner
 ---
 
 数据库的反向工程
+
 ==============
 
 1.首先新建一个“PhysicalDataModel”类型的文件，然后点击“Database”->"Configure Connections"，弹出窗口“Configure Data Connections”，并选择"Connection Profiles"。

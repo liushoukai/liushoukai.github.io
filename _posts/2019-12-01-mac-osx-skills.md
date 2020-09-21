@@ -15,8 +15,6 @@ tags: Mac OSX
 
 3、将要添加的文件夹【data】拖向左边侧边栏，即成功添加；
 
-
-
 ## 系统普通用户启动80端口
 
 由于系统限制非root用户不能启动1024以下端口，而我们平时使用Mac一般都是非root用户，所以如果想启动80端口必须用root用户
@@ -27,7 +25,7 @@ sudo vim /etc/pf.conf
 
 1.在pf.conf文件的rdr-anchor "com.apple/*"这一行后面添加如下代码
 
-```
+```java
 rdr on lo0 inet proto tcp from any to 127.0.0.1 port 80 -> 127.0.0.1 port 8080
 ```
 
@@ -40,15 +38,11 @@ sudo pfctl -e
 
 这时，应用启动8080端口即可以，访问的话就可以通过80端口来访问了！
 
-
-
 ## 系统完整性保护 SIP（System Integrity Protection）
 
-### SIP是什么？
+### SIP是什么
 
 在 `OS X El Capitan` 中有一个跟安全相关的模式叫 `SIP（System Integrity Protection ）` ，它禁止让软件以 `root` 身份来在 `mac` 上运行，并且对于目录 `/System 、/sbin、/usr（不包含/usr/local/）` 仅仅供系统使用，其它用户或者程序无法直接使用。
-
-
 
 ### SIP 保护功能
 
@@ -67,8 +61,6 @@ OS X 所有进程都有一个对应的内核 Task ，通过 task_for_pid Mach �
 内核扩展绝对是完全掌握系统控制权的绝佳地点，它直接运行在内核态，也就是拥有几乎全部的系统控制权。
 
 如果你不小心装上了一个恶意 kext，而 SIP 又没有开启的话，理论上你的系统就不再属于你了，你的任何隐私都会暴露在攻击者面前。
-
-
 
 ### 禁用 SIP 保护机制的步骤
 
@@ -92,4 +84,3 @@ Successfully disabled System Integrity Protection. Please restart the machine fo
 ```bash
 csrutil enable
 ```
-

@@ -31,7 +31,7 @@ tags:
 
 * XINFO STREAM FULL, a new subcommand to get the whole stream state.
 
-* CLIENT KILL USER <username>.
+* CLIENT KILL USER <`username`>.
 
 * MIGRATE AUTH2 option, for ACL style authentication support.
 
