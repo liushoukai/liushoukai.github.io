@@ -1,6 +1,6 @@
 ---
 layout: post
-title: HashMap Source
+title: HashMap源码分析
 categories: java
 tags: java
 ---
@@ -25,8 +25,7 @@ public HashMap(int initialCapacity, float loadFactor) {
   if (initialCapacity > MAXIMUM_CAPACITY)
     initialCapacity = MAXIMUM_CAPACITY;
   if (loadFactor <= 0 || Float.isNaN(loadFactor))
-    throw new IllegalArgumentException("Illegal load factor: " +
-                                       loadFactor);
+    throw new IllegalArgumentException("Illegal load factor: " + loadFactor);
   this.loadFactor = loadFactor;
   this.threshold = tableSizeFor(initialCapacity);
 }
@@ -43,4 +42,3 @@ static final int tableSizeFor(int cap) {
 ```
 
 ## 处理结论
-

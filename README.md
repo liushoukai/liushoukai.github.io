@@ -33,7 +33,7 @@ npm install && npm run build
 
 ```shell
 jekyll doctor
-jekyll server --host=0.0.0.0 --incremental --drafts
+jekyll clean && jekyll server --host=0.0.0.0 --incremental --drafts
 ```
 
 ## syntax_highlighter: rouge
