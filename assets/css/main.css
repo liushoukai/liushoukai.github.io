@@ -337,9 +337,9 @@ a:active {text-decoration: none}	/* 选定的链接 */
   font-style: normal;
 }
 
-@font-face {
+/* @font-face {
   font-family: 'ArchitectsDaughter';
   src: url("https://liushoukai.github.io/assets/fonts/ArchitectsDaughter.ttf");
   font-weight: normal;
   font-style: normal;
-}
+} */
