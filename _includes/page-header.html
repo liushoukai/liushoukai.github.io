@@ -15,9 +15,9 @@
                 <li {% if page.url == "/" %} class="active" {% endif %}>
                     <a href="{{ '/' | prepend: site.baseurl }}" class="word-keep"><span class="octicon octicon-book"></span>&nbsp;&nbsp;Blog</a>
                 </li>
-                {% assign sorted = site.pages | sort: 'order' %}
+                {% assign sorted = site.pages | sort: 'navItemOrder' %}
                 {% for p in sorted %}
-                {% if p.isNavItem %}
+                {% if p.navItemDisplay %}
                 <li {% if p.url == page.url %} class="active" {% endif %}>
                     <a href="{{ p.url | prepend: site.baseurl }}" class="word-keep"><span class="octicon {{ p.icon }}"></span>&nbsp;&nbsp;{{ p.title }}</a>
                 </li>
