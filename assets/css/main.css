@@ -154,18 +154,15 @@ a:active {text-decoration: none}	/* 选定的链接 */
 }
 
 .sheet{
-  opacity: 0.9;
-  word-break: break-all;
-	background-color:#f8f8fd;
-  -webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.1),0 0 2px rgba(0,0,0,0.1) inset;
-  -moz-box-shadow: 0 1px 5px rgba(0,0,0,0.1),0 0 2px rgba(0,0,0,0.1) inset;
-  -o-box-shadow: 0 1px 5px rgba(0,0,0,0.1),0 0 2px rgba(0,0,0,0.1) inset;
-  box-shadow: 0 1px 5px rgba(0,0,0,0.1),0 0 2px rgba(0,0,0,0.1) inset;
-}
-
-.sheet{
-    padding:10px 30px;
+    opacity: 0.9;
+    padding: 20px 40px;
     border-radius: 6px;
+    word-break: break-all;
+    background-color:#f8f8fd;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.1),0 0 2px rgba(0,0,0,0.1) inset;
+    -webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.1),0 0 2px rgba(0,0,0,0.1) inset;
+    -moz-box-shadow: 0 1px 5px rgba(0,0,0,0.1),0 0 2px rgba(0,0,0,0.1) inset;
+    -o-box-shadow: 0 1px 5px rgba(0,0,0,0.1),0 0 2px rgba(0,0,0,0.1) inset;
 }
 
 .row-set {
