@@ -1,10 +1,8 @@
----
-layout: null
----
-
 nav {
   opacity: 0.8;
   text-shadow: -1px 0px 0px rgba(0,0,0,0.75);
+  line-height: normal;
+  font-weight: bold;
 }
 
 .navbar-tiffany,
