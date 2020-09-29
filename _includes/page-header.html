@@ -7,26 +7,23 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="https://liushoukai.github.io" title="Know Thyself">Know Thyself</a>
+            <a class="navbar-brand" href="{{ '/' | prepend: site.baseurl }}" title="Know Thyself">Know Thyself</a>
         </div>
         <div role="navigation" class="collapse navbar-collapse bs-navbar-collapse">
             <p class="navbar-text pull-right">Know thyself, Nothing in excess</p>
             <ul class="nav navbar-nav">
-                {% if page.url == "/index.html" %}
-                <li class="active">{% else %}
-                <li>{% endif %}
-                    <a href="{{ site.baseurl }}/" class="word-keep"><span class="octicon octicon-book"></span></span>&nbsp;&nbsp;Blog</a>
+                <li {% if page.url == "/" %} class="active" {% endif %}>
+                    <a href="{{ '/' | prepend: site.baseurl }}" class="word-keep"><span class="octicon octicon-book"></span>&nbsp;&nbsp;Blog</a>
                 </li>
-                {% for p in site.pages %}{% if p.isNavItem %}
-                {% if p.url == page.url %}
-                <li class="active">{% else %}
-                <li>{% endif %}
+                {% assign sorted = site.pages | sort: 'order' %}
+                {% for p in sorted %}
+                {% if p.isNavItem %}
+                <li {% if p.url == page.url %} class="active" {% endif %}>
                     <a href="{{ p.url | prepend: site.baseurl }}" class="word-keep"><span class="octicon {{ p.icon }}"></span>&nbsp;&nbsp;{{ p.title }}</a>
                 </li>
                 {% endif %}
                 {% endfor %}
             </ul>
         </div>
-    </div>
     </div>
 </nav>

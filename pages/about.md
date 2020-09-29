@@ -4,6 +4,7 @@ title: About
 permalink: /about/
 icon: octicon-heart
 isNavItem: true
+order: 4
 ---
 
 I LOVE OPEN SOURCE!

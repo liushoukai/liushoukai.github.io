@@ -1,6 +1,5 @@
 
 url: "https://liushoukai.github.io"
-#baseurl: "/blog"
 baseurl: ""
 
 exclude: [
@@ -25,7 +24,7 @@ port: 4000
 show_dir_listing: false
 
 
-##Site
+# Site
 title: "Know thyself"
 author: "Kay"
 keywords: "博客，Jekyll"
