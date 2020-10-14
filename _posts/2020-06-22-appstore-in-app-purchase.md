@@ -1,12 +1,12 @@
 ---
-
 layout: post
 title: AppStore内购
 categories: appstore
 tags: appstore
 ---
 
-### 官方文档
+### 内购简介
+
 App 内购买 (In‑App Purchase)，简称：IAP内购。
 
 通过 App 内购买项目，直接在 App 里为顾客提供额外的内容和功能，包括特级内容、数字商品和订阅项目。您更可以直接在 App Store 上推广和提供 App 内购买项目。
@@ -16,8 +16,6 @@ App 内购买 (In‑App Purchase)，简称：IAP内购。
 ------
 
 ### 内购模式
-
-------
 
 两种模式主要的不同之处在于对 AppStore 返回的付款凭证（receipt）的验证方式。
 
@@ -69,32 +67,44 @@ sequenceDiagram
 
 ------
 
-### 收据验证
+### 付款收据
 
-收据验证接口地址
-```shell
+#### 收据风格
+
+* iOS 6 style transaction receipts
+* iOS 7 style transaction receipts
+
+#### 收据验证
+
+```java
 Sandbox环境验证付款收据(receipt): https://sandbox.itunes.apple.com/verifyReceipt
 Product环境验证付款收据(receipt): https://buy.itunes.apple.com/verifyReceipt
 ```
 
-验证接口的响应码
-```shell
-21000 App Store无法读取你提供的JSON数据
-21002 收据数据不符合格式
-21003 收据无法被验证
-21004 你提供的共享密钥和账户的共享密钥不一致
-21005 收据服务器当前不可用
-21006 收据是有效的，但订阅服务已经过期。当收到这个信息时，解码后的收据信息也包含在返回内容中
-21007 收据信息是测试用（sandbox），但却被发送到产品环境中验证
-21008 收据信息是产品环境中使用，但却被发送到测试环境中验证
-21010 此收据无法获得授权。对待这个就像从未进行购买一样
-21100 内部数据访问错误
-21101 内部数据访问错误
-...
-21199 内部数据访问错误
-```
+#### 收据响应码
 
-消耗型项目收据结构
+详见官方解释：[https://developer.apple.com/documentation/appstorereceipts/status][5]{:target="_blank"}
+
+{:class="table table-striped table-bordered table-hover"}
+| <img style="width:80px">Status | Description |
+| :-----: | :------- |
+| 21000 | The request to the App Store was not made using the HTTP POST request method.|
+| 21001 | This status code is no longer sent by the App Store.|
+| 21002 | The data in the receipt-data property was malformed or the service experienced a temporary issue. Try again.|
+| 21003 | The receipt could not be authenticated.|
+| 21004 | The shared secret you provided does not match the shared secret on file for your account.|
+| 21005 | The receipt server was temporarily unable to provide the receipt. Try again.|
+| 21006 | This receipt is valid but the subscription has expired. When this status code is returned to your server, the receipt data is also decoded and returned as part of the response. `Only returned for iOS 6-style transaction receipts for auto-renewable subscriptions.`|
+| 21007 | This receipt is from the test environment, but it was sent to the production environment for verification.|
+| 21008 | This receipt is from the production environment, but it was sent to the test environment for verification.|
+| 21009 | Internal data access error. Try again later.|
+| 21010 | The user account cannot be found or has been deleted.|
+| 21100 | Internal data access error. Try again later.|
+| ... | Internal data access error. Try again later.|
+| 21199 | Internal data access error. Try again later.|
+
+#### 消耗型产品收据结构
+
 ```json
 {
     "receipt": {
@@ -163,35 +173,35 @@ Product环境验证付款收据(receipt): https://buy.itunes.apple.com/verifyRec
 
 ------
 
-### 内购商品
+### 内购产品
 
 ------
 
-#### 商品类型
+#### 产品类型
 
-`消耗型项目`
+`消耗型产品(Consumable)`
 
-消耗型项目只可使用一次，使用之后即失效，必须再次购买。
+* 定义：消耗型项目只可使用一次，使用之后即失效，必须再次购买。
+* 特点：购买的商品可消耗，可重复购买。每次购买的值一般都会叠加。如果买了后，用户不消耗，则一直存在用户相关的账号中。
+* 举例：游戏《皇室战争》中，购买宝石。
 
-这种类型的商品的特点就是商品可消耗，可重复购买。每次购买的值一般都会叠加。如果买了后，用户不消耗，则一直存在用户相关的账号中。
+`非消耗型产品(Non‑Consumable)`
 
-该类型的内购的例子很多，比如你玩游戏的时候，花了X元买了N个钻石；花X元兑换了N个虚拟币用于购买App中的某些虚拟服务等。
+* 定义：非消耗品只能购买一次且不会过期。
+* 特点：这种类型的商品的特点就是当用户购买后，这个商品就一直生效，不需要重复购买。
+* 举例：游戏《旅行青蛙》中，解锁游戏中的特定道具。
 
-`非消耗型项目`
+`非续期产品(Non‑Renewing Subscriptions)`
 
-非消耗型项目只需购买一次，不会过期 (例如修图 app 中的其他滤镜)。
+* 定义：用户购买有时限性的服务或内容。
+* 特点：此类订阅到期后不会自动续订，用户需要逐次续订。
+* 举例：腾讯视频VIP会员包月。
 
-这种类型的商品的特点就是当用户购买后，这个商品就一直生效，不需要重复购买。
+`自动续期产品(Auto‑Renewable Subscriptions)`
 
-该种类型的商品主要用于解锁App上的一些功能，或者游戏的某个关卡，又或者是获得某项主题之类的。
-
-`自动续期订阅`
-
-用户可购买固定时段内的服务或更新的内容 (例如云存储或每周更新的杂志)。除非用户选择取消，否则此类订阅会自动续期。
-
-`非续期订阅`
-
-用户可购买有时限性的服务或内容 (例如线上播放内容的季度订阅)。此类的订阅不会自动续期，用户需要逐次续订。
+* 定义：用户购买有时限性的服务或内容，到期后自动续订。
+* 特点：到期前24小时，苹果会主动扣费从而为用户自动续订，直用户取消自动订阅。
+* 举例：腾讯视频VIP会员自动包月。
 
 ------
 
@@ -199,6 +209,7 @@ Product环境验证付款收据(receipt): https://buy.itunes.apple.com/verifyRec
 
 内购商品定价为固定的金额，列表如下：
 
+{:class="table table-striped table-bordered table-hover"}
 |价格      | 等级       |
 | :-----: | :-------: |
 |CNY 6    |（等级 1）   |
@@ -327,7 +338,7 @@ AppStore 商店退款政策：
 - 中国台湾：7天无条件退款。
 - 中国/美国/韩国等其它大多数国家：90天有条件退款。
 
-注：中国区 App Store 的具体退款政策：一个ID有一次无条件退款机会，一年2次有条件退款，第3次退款会非常难。至于退款到账时间快为36小时内，也有7-15个工作日退还。
+注：中国区 AppStore 的具体退款政策：一个 AppleId 有一次无条件退款机会，一年2次有条件退款，第3次退款会非常难。至于退款到账时间快为36小时内，也有7-15个工作日退还。
 
 ------
 
@@ -354,8 +365,8 @@ sequenceDiagram
 	participant Customer
 	participant Apple
 	participant Developer
-	Customer->>Developer: Purchases 100 gems(购买100游戏币)
-	Customer->>Developer: Consumes 100 gems(消费100游戏币)
+	Customer->>Developer: Purchases 100 gems(购买100宝石)
+	Customer->>Developer: Consumes 100 gems(消费100宝石)
 	Customer->>Apple: Contacts Apple for support(顾客联系苹果申请退款)
 	Apple->>Apple: Issues refund(苹果发起退款)
 	Apple->>Developer: Send refund notification(发送退款通知)
@@ -366,7 +377,7 @@ sequenceDiagram
 
 #### 退款通知
 
-在 App Store 服务端通知中，针对消耗型项目、非消耗型项目和非续期订阅三类商品的退款，增添了新的通知类型：`退款（RUND）`。
+在 App Store 服务端通知中，针对消耗型项目、非消耗型项目和非续期订阅三类商品的退款，增添了新的通知类型：`退款（REFUND）`。
 注意，不同于取消（CANCEL）通知类型，取消通知类型针对的是自动续期订阅类型商品，用户通过 AppleCare 支持取消订阅并退还购买款项时触发。
 
 在 unified_receipt.latest_receipt_info 是一个数组，其中包含的最近的100次应用内购买交易，包括正常和退款的交易。
@@ -450,11 +461,10 @@ sequenceDiagram
 
 ![potential-actions](https://liushoukai.github.io/assets/img/potential-actions.jpeg){:width="100%"}
 
-
-
-
+------
 
 [1]:https://developer.apple.com/cn/in-app-purchase/
 [2]:https://developer.apple.com/documentation/storekit/in-app_purchase/handling_refund_notifications
 [3]:https://developer.apple.com/wwdc20/
 [4]:https://developer.apple.com/videos/play/wwdc2020/10661/
+[5]:https://developer.apple.com/documentation/appstorereceipts/status
