@@ -154,6 +154,22 @@ Product环境验证付款收据(receipt): https://buy.itunes.apple.com/verifyRec
 
 ------
 
+#### 沙盒测试
+
+沙盒环境下自动续费订阅时，时限会缩短。
+
+{:class="table table-striped table-bordered table-hover"}
+|生产自动续费周期|沙盒自动续费周期|
+| :-----: | :-------: |
+| 1周  |  3分钟|
+| 1个月 | 5分钟|
+| 2个月 | 10分钟|
+| 3个月 | 15分钟|
+| 6个月 | 30分钟|
+| 1年  |  1小时|
+
+------
+
 #### 区分是否为沙盒充值
 
 * 解析付款收据(receipt)中的 environment 字段，判断 environment=Sandbox。
