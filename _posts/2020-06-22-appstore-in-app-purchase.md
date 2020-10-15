@@ -69,19 +69,114 @@ sequenceDiagram
 
 ### 付款收据
 
+------
+
 #### 收据风格
 
-* iOS 6 style transaction receipts
-* iOS 7 style transaction receipts
+* iOS 6-style transaction receipts
+* iOS 7-style transaction receipts
+
+------
 
 #### 收据验证
 
-```java
+```shell
 Sandbox环境验证付款收据(receipt): https://sandbox.itunes.apple.com/verifyReceipt
 Product环境验证付款收据(receipt): https://buy.itunes.apple.com/verifyReceipt
 ```
 
-#### 收据响应码
+------
+
+#### 收据结构
+
+1、消耗型产品收据结构
+```json
+{
+    "receipt": {
+        "unique_identifier": "...",                     //苹果分配设备唯一标识符
+        "original_transaction_id": "...",               //原交易号
+        "transaction_id": "...",                        //交易号
+        "unique_vendor_identifier": "...",              //唯一供应商标识
+        "product_id": "...",                            //交易产品标识
+        "quantity": "1",                                //交易产品数量
+        "bid": "...",                                   //APP在苹果的唯一标识
+        "is_in_intro_offer_period": "false",            //是否特价优惠（详见推介促销）
+        "is_trial_period": "false",                     //是否免费试用（详见推介促销）
+        "purchase_date_ms": "1531643137200",            //交易付款时间
+        "original_purchase_date_ms": "1531643137200",   //原交易付款时间
+        "bvrs": "3.96.3.0",
+        "app_item_id": "774384491",
+        "item_id": "1146328092",
+        "version_external_identifier": "827233954",
+        "purchase_date": "2018-07-15 08:25:37 Etc/GMT",
+        "purchase_date_pst": "2018-07-15 01:25:37 America/Los_Angeles",
+        "original_purchase_date": "2018-07-15 08:25:37 Etc/GMT"
+        "original_purchase_date_pst": "2018-07-15 01:25:37 America/Los_Angeles",
+    },
+    "status": 0
+}
+```
+
+2、自动订阅型产品收据结构
+```json
+{
+  "auto_renew_status": 0,
+  "latest_expired_receipt_info": {
+    "original_purchase_date_pst": "2018-01-19 16:03:00 America/Los_Angeles",
+    "unique_identifier": "9d89432f1fae59f25c05d44553fe40438a865b9f",
+    "original_transaction_id": "1000000368245564",
+    "expires_date": "1517368991000",
+    "transaction_id": "1000000371718901",
+    "quantity": "1",
+    "product_id": "abc",
+    "bvrs": "721180.450460032",
+    "bid": "ab.bc",
+    "unique_vendor_identifier": "9982B084-BE66-4622-ACCB-6C5B3D9C4CD4",
+    "web_order_line_item_id": "1000000037662245",
+    "original_purchase_date_ms": "1516406580000",
+    "expires_date_formatted": "2018-01-31 03:23:11 Etc/GMT",
+    "purchase_date": "2018-01-31 02:53:11 Etc/GMT",
+    "is_in_intro_offer_period": "false",
+    "purchase_date_ms": "1517367191000",
+    "expires_date_formatted_pst": "2018-01-30 19:23:11 America/Los_Angeles",
+    "is_trial_period": "false",
+    "purchase_date_pst": "2018-01-30 18:53:11 America/Los_Angeles",
+    "original_purchase_date": "2018-01-20 00:03:00 Etc/GMT",
+    "item_id": "1326212778"
+  },
+  "status": 21006,
+  "auto_renew_product_id": "abc",
+  "receipt": {
+    "original_purchase_date_pst": "2018-01-19 16:03:00 America/Los_Angeles",
+    "unique_identifier": "9d89432f1fae59f25c05d44553fe40438a865b9f",
+    "original_transaction_id": "1000000368245564",
+    "expires_date": "1517359990000",
+    "transaction_id": "1000000371686472",
+    "quantity": "1",
+    "product_id": "abc",
+    "bvrs": "721180.450460032",
+    "bid": "ab.bc",
+    "unique_vendor_identifier": "9982B084-BE66-4622-ACCB-6C5B3D9C4CD4",
+    "web_order_line_item_id": "1000000037544589",
+    "original_purchase_date_ms": "1516406580000",
+    "expires_date_formatted": "2018-01-31 00:53:10 Etc/GMT",
+    "purchase_date": "2018-01-31 00:23:10 Etc/GMT",
+    "is_in_intro_offer_period": "false",
+    "purchase_date_ms": "1517358190000",
+    "expires_date_formatted_pst": "2018-01-30 16:53:10 America/Los_Angeles",
+    "is_trial_period": "false",
+    "purchase_date_pst": "2018-01-30 16:23:10 America/Los_Angeles",
+    "original_purchase_date": "2018-01-20 00:03:00 Etc/GMT",
+    "item_id": "1326212778"
+  },
+  "expiration_intent": "1",
+  "is_in_billing_retry_period": "0"
+}
+```
+
+------
+
+#### 收据解析
 
 详见官方解释：[https://developer.apple.com/documentation/appstorereceipts/status][5]{:target="_blank"}
 
@@ -103,35 +198,6 @@ Product环境验证付款收据(receipt): https://buy.itunes.apple.com/verifyRec
 | ... | Internal data access error. Try again later.|
 | 21199 | Internal data access error. Try again later.|
 
-#### 消耗型产品收据结构
-
-```json
-{
-    "receipt": {
-        "original_purchase_date_pst": "2018-07-15 01:25:37 America/Los_Angeles",
-        "unique_identifier": "...", //苹果分配设备唯一标识符
-        "original_transaction_id": "...", //原交易号
-        "bvrs": "3.96.3.0",
-        "app_item_id": "774384491",
-        "transaction_id": "...", //交易号
-        "quantity": "1", //交易商品数量
-        "unique_vendor_identifier": "AC1AF733-1ABE-429E-909D-CAF77B987EE9", //唯一供应商标识
-        "product_id": "...", //交易商品标识
-        "item_id": "1146328092",
-        "version_external_identifier": "827233954",
-        "bid": "...", //bundleId是唯一标识APP的
-        "is_in_intro_offer_period": "false", //是否推介促销优惠
-        "purchase_date_ms": "1531643137200", //交易付款时间
-        "purchase_date": "2018-07-15 08:25:37 Etc/GMT",
-        "is_trial_period": "false", //是否推介促销免费
-        "purchase_date_pst": "2018-07-15 01:25:37 America/Los_Angeles",
-        "original_purchase_date": "2018-07-15 08:25:37 Etc/GMT",
-        "original_purchase_date_ms": "1531643137200" //原交易付款时间
-    },
-    "status": 0
-}
-```
-
 ------
 
 ### 沙盒账号
@@ -148,7 +214,7 @@ Product环境验证付款收据(receipt): https://buy.itunes.apple.com/verifyRec
 #### 沙盒账号的使用流程
 
 1. 在iPhone上安装测试包
-2. 退出iPhone的AppStore账号，设置 iTunes Store 与 App Store -> 选中AppleID -> 退出登录。(注意：退出之后，不需要在App Store登录沙盒账号，因为沙盒账号是一个虚拟的AppleID，因此不能直接登录。只能使用在支付时使用。)
+2. 退出iPhone的AppStore账号，设置 iTunes Store 与 App Store -> 选中AppleID -> 退出登录。(注意：退出之后，不需要在 App Store 登录沙盒账号，因为沙盒账号是一个虚拟的AppleID，因此不能直接登录。只能使用在支付时使用。)
 3. 在测试包中点击购买商品，系统会提示你进行登录，这里点击"使用现有的AppleID"后输入沙盒测试账号进行登录。
 4. 点击确认购买，购买成功。
 
@@ -350,9 +416,9 @@ Product环境验证付款收据(receipt): https://buy.itunes.apple.com/verifyRec
 针对退款，不同国家或地区会有不同的“无条件退款期限”。
 AppStore 商店退款政策：
 
-- 欧盟区： 14天无条件退款。
-- 中国台湾：7天无条件退款。
-- 中国/美国/韩国等其它大多数国家：90天有条件退款。
+* 欧盟区： 14天无条件退款。
+* 中国台湾：7天无条件退款。
+* 中国/美国/韩国等其它大多数国家：90天有条件退款。
 
 注：中国区 AppStore 的具体退款政策：一个 AppleId 有一次无条件退款机会，一年2次有条件退款，第3次退款会非常难。至于退款到账时间快为36小时内，也有7-15个工作日退还。
 
@@ -401,13 +467,13 @@ sequenceDiagram
 
 服务器应发送HTTP状态代码，以指示服务器到服务器的通知接收是否成功：
 
-- 如果回调接收成功，则发送 HTTP 200。您的服务器不需要返回数据。
-- 如果回调接收不成功，请发送 HTTP 50x 或 40x 让 App Store 重试该通知。App Store在一段时间内尝试重试该通知，但在连续失败尝试后最终停止(3次）。
+* 如果回调接收成功，则发送 HTTP 200。您的服务器不需要返回数据。
+* 如果回调接收不成功，请发送 HTTP 50x 或 40x 让 App Store 重试该通知。App Store在一段时间内尝试重试该通知，但在连续失败尝试后最终停止(3次）。
 
 注意事项：
 
-- 当您使用包含退款交易的收据 transaction_data 向苹果服务器校验 verifyReceipt  时，JSON响应中不存在退款交易，自动续订订阅除外。
-- 收到 REFUND 通知时，您有责任为每笔退款交易存储，监控并采取适当的措施。（因为苹果只通知一次，暂时无法在苹果后台查询退款的订单。也不能由开发者主动去苹果服务器查询。）
+* 当您使用包含退款交易的收据 transaction_data 向苹果服务器校验 verifyReceipt  时，JSON响应中不存在退款交易，自动续订订阅除外。
+* 收到 REFUND 通知时，您有责任为每笔退款交易存储，监控并采取适当的措施。（因为苹果只通知一次，暂时无法在苹果后台查询退款的订单。也不能由开发者主动去苹果服务器查询。）
 
 退款（REFUND）通知类型通知的结构如下：
 
@@ -473,7 +539,7 @@ sequenceDiagram
 
 ------
 
-#### 退款处理
+#### 退款操作
 
 ![potential-actions](https://liushoukai.github.io/assets/img/potential-actions.jpeg){:width="100%"}
 
