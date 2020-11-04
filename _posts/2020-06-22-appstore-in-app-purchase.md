@@ -1,8 +1,8 @@
 ---
 layout: post
 title: AppStore内购
-categories: appstore
-tags: appstore
+categories: in-app-purchase
+tags: appstore in-app-purchase
 ---
 
 ### 内购简介
