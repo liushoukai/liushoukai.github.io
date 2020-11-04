@@ -15,13 +15,14 @@ tags: docker kubernetes
 
 Docker Hub 中有两种类型的仓库：
 
-- 用户仓库（user repository）：由 Docker 用户创建的，用户仓库的命名由用户名和仓库名两部分组成。
+* 用户仓库（user repository）：由 Docker 用户创建的，用户仓库的命名由用户名和仓库名两部分组成。
+* 顶层仓库（top-level repository）：由 Docker 内部的人来管理的，顶层仓库只包含仓库名部分。
 
-- 顶层仓库（top-level repository）：由 Docker 内部的人来管理的，顶层仓库只包含仓库名部分。
-
-
+---
 
 ### 镜像类型
+
+---
 
 #### intermediate images
 
@@ -103,6 +104,6 @@ docker run -p 4000:80 username/get-started:tag1
 
 ### 参考资料
 
-[http://www.projectatomic.io/blog/2015/07/what-are-docker-none-none-images/][1]{:target="_blank"} 
+[http://www.projectatomic.io/blog/2015/07/what-are-docker-none-none-images/][1]{:target="_blank"}
 
 [1]:http://www.projectatomic.io/blog/2015/07/what-are-docker-none-none-images/
