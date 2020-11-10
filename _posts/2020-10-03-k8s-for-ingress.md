@@ -1,14 +1,22 @@
 ---
 layout: post
-title: Kubernetes包管理工具Helm
+title: Kubernetes Ingress
 categories: kubernetes
 tags: docker kubernetes helm
 ---
 
-### ingress简介
+### Ingress简介
 
 Ingress(入口)
-在Kubernetes中，Ingress是一个对象，该对象允许从Kubernetes集群外部访问Kubernetes服务。您可以通过创建规则集来配置访问权限，这些规则定义了哪些入站连接可以访问哪些服务。
+Ingress 是 Kubernetes 中的一个 API 接口对象，用于管理对集群中服务的外部访问，通常是 HTTP。
+
+Ingress 暴露从群集外部到群集内服务的HTTP和HTTPS路由接口，流量的路由规则由Ingress定义。
+
+![kubernetes-ingress](/assets/img/kubernetes-ingress.png){:width="100%"}
+
+`Ingress controller`负责实现`Ingress`接口，通常也实现了负载均衡的功能。常见的`Ingress controller`有很多，详见：[https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/][2]{:target="_blank"}。使用Ingress之前需要部署一个Ingress控制器，例如ingress-nginx。
+
+您可以通过创建规则集来配置访问权限，这些规则定义了哪些入站连接可以访问哪些服务。
 这使您可以将路由规则整合到一个资源中。例如，您可能希望将对example.com/api/v1/的请求发送到api-v1服务，而对example.com/api/v2/的请求发送到api-v2服务。
 使用Ingress，您可以轻松地进行设置，而无需创建一堆LoadBalancers或在Node上公开每个服务。
 
@@ -37,6 +45,8 @@ stable/traefik                 	1.87.2       	1.7.24     	A Traefik based Kubern
 stable/voyager                 	3.2.4        	6.0.0      	DEPRECATED Voyager by AppsCode - Secure Ingress...
 ```
 
+
+
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-0.32.0/deploy/static/provider/cloud/deploy.yaml
 
 
@@ -45,3 +55,10 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/cont
 
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm install my-release ingress-nginx/ingress-nginx
+
+### 参考资料
+
+* [https://kubernetes.io/docs/concepts/services-networking/ingress/][1]{:target="_blank"}
+
+[1]:https://kubernetes.io/docs/concepts/services-networking/ingress/
+[2]:https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/

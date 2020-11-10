@@ -5,13 +5,66 @@ categories: kubernetes
 tags: docker kubernetes docker-desktop
 ---
 
-### Docker Desktop 支持 Kubernetes 的意义
+### Docker Desktop 简介
 
-使用 Docker 构建容器化应用程序，并将其部署到同一Docker实例的Kubernetes上。
+[Docker Desktop][4]{:target="_blank"} 是 Docker 公司推出的一款桌面应用程序，用于在本地搭建容器部署环境。
+
+[Docker Desktop][4]{:target="_blank"} 提供对 Kubernetes 的支持，会启动一个单节点 Kubernetes 集群，并同时安装`kubectl`命令工具。
+
+使用 [Docker Desktop][4]{:target="_blank"} 构建容器化应用程序，并将其部署到使用相同 Docker 实例的 Kuberntes 本地集群上，从而使得 Kubernetes 能够直接访问存储于 Docker 本地 Registry 的镜像。
+
+---
 
 ### 阿里云容器服务教程
 
 [https://github.com/AliyunContainerService/k8s-for-docker-desktop][1]{:target="_blank"}
+
+Kubernetes 相关组建的镜像地址目前都在海外，国内无法快速拉去镜像，这个项目通过修改优先从阿里云的镜像服务器拉取镜像，然后再修改为对应的tag名称的方式，解决访问海外镜像困难的问题。
+
+项目在`images.properties`文件中，维护了不同 Kubernetes 版本的镜像地址。
+
+```shell
+k8s.gcr.io/pause:3.2=registry.cn-hangzhou.aliyuncs.com/google_containers/pause:3.2
+k8s.gcr.io/kube-controller-manager:v1.19.3=registry.cn-hangzhou.aliyuncs.com/google_containers/kube-controller-manager:v1.19.3
+k8s.gcr.io/kube-scheduler:v1.19.3=registry.cn-hangzhou.aliyuncs.com/google_containers/kube-scheduler:v1.19.3
+k8s.gcr.io/kube-proxy:v1.19.3=registry.cn-hangzhou.aliyuncs.com/google_containers/kube-proxy:v1.19.3
+k8s.gcr.io/kube-apiserver:v1.19.3=registry.cn-hangzhou.aliyuncs.com/google_containers/kube-apiserver:v1.19.3
+k8s.gcr.io/etcd:3.4.13-0=registry.cn-hangzhou.aliyuncs.com/google_containers/etcd:3.4.13-0
+k8s.gcr.io/coredns:1.7.0=registry.cn-hangzhou.aliyuncs.com/google_containers/coredns:1.7.0
+quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.26.1=registry.cn-hangzhou.aliyuncs.com/google_containers/nginx-ingress-controller:0.26.1
+```
+
+开发者可以直接拉取`k8s-for-docker-desktop`项目，然后切换到对应 Kubernetes 版本的分支，执行`load_images.sh`脚本从阿里云拉取镜像。
+
+```shell
+#!/bin/bash
+
+file="images.properties"
+
+if [ -f "$file" ]
+then
+  echo "$file found."
+
+  while IFS='=' read -r key value
+  do
+    #echo "${key}=${value}"
+    docker pull ${value}
+    docker tag ${value} ${key}
+    docker rmi ${value}
+  done < "$file"
+
+else
+  echo "$file not found."
+fi
+```
+
+执行完`load_images.sh`脚本后，通过`docker images`命令可以本地的镜像。
+
+注意⚠️：如果升级`docker-desktop`的时候，服务端存在使用旧版 API 的服务，则不会升级 Kubernetes 的服务端，要通过控制面板中`Preferences->Kubernetes`的`Reset Kubernetes Cluster`按钮重置后并自动重启 Kuberntes 集群后才会升级到最新的服务端版本。
+
+安装完成后通过`kubectl version`命令查看。
+
+---
 
 ### 安装问题
 
@@ -50,6 +103,9 @@ us.gcr.io/k8s-artifacts-prod/ingress-nginx/controller:v0.34.1 => registry.aliyun
 ---
 
 ### Kubernetes dashboard 管理面板
+
+Kubernetes dashboard 是基于网页的 Kubernetes 用户界面。
+[https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/][5]{:target="_blank"}
 
 ```shell
 # 查看 Kubernetes 版本信息
@@ -97,5 +153,15 @@ kubectl get pods --all-namespaces -l app.kubernetes.io/name=ingress-nginx
 kubectl describe pod ingress-nginx-controller-6967fb79f6-6qgvk -n ingress-nginx
 ```
 
+---
+
+### 参考资料
+
+1. [https://github.com/AliyunContainerService/k8s-for-docker-desktop/][1]{:targe="_blank"}
+2. [https://hasura.io/blog/sharing-a-local-registry-for-minikube-37c7240d0615/][3]{:targe="_blank"}
+
 [1]:https://github.com/AliyunContainerService/k8s-for-docker-desktop/
 [2]:https://www.ipaddress.com/
+[3]:https://hasura.io/blog/sharing-a-local-registry-for-minikube-37c7240d0615/
+[4]:https://docs.docker.com/desktop/
+[5]:https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
