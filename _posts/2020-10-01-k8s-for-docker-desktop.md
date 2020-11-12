@@ -115,7 +115,7 @@ kubectl version
 kubectl cluster-info
 
 # 安装 Kubernetes dashboard 管理面板
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.4/aio/deploy/recommended.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml
 
 # 查看 Kubernetes dashboard 应用状态
 kubectl get pods -n kubernetes-dashboard
