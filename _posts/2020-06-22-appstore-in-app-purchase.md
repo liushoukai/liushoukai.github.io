@@ -2,7 +2,7 @@
 layout: post
 title: AppStore内购
 categories: in-app-purchase
-tags: appstore in-app-purchase
+tags: in-app-purchase
 ---
 
 ### 内购简介
