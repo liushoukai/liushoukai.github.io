@@ -749,7 +749,7 @@ sequenceDiagram
 
 #### 退款操作
 
-![potential-actions](https://liushoukai.github.io/assets/img/potential-actions.jpeg){:width="100%"}
+![potential-actions](/assets/img/potential-actions.jpeg){:width="100%"}
 
 ------
 
