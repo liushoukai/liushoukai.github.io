@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Mac OSX实用技巧
-categories: Mac
-tags: Mac OSX
+title: MacOS实用技巧
+categories: tools
+tags: macOS
 ---
 
 ## 访达侧边栏添加自定义目录

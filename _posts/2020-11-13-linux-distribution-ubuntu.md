@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Linux 发行版 Ubuntu
-categories: ubuntu
+categories: linux
 tags: linux-distribution ubuntu
 ---
 

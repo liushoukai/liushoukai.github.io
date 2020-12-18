@@ -1,8 +1,8 @@
 ---
 layout: post
 title: 操作系统内存
-categories: operating-system
-tags: operating-system
+categories: linux
+tags: linux
 ---
 
 ### 操作系统内存

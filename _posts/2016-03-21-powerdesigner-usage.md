@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  PowerDesigner使用
-categories: powerdesigner
+categories: tools
 tags: powerdesigner
 ---
 

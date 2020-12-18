@@ -1,17 +1,17 @@
 ---
 layout: post
 title:  修改Hosts无法立即生效
-categories: hosts
+categories: linux
 tags: hosts
 ---
 
-###修改Hosts不生效的原因
-- 服务器在响应头设置Connection:keep-alive让客户端与服务器端使用长连接，
-只要长连接不断开，在请求页面的时候就不会重新解析域名
+### 修改Hosts不生效的原因
+
+- 服务器在响应头设置`Connection:keep-alive`让客户端与服务器端使用长连接，只要长连接不断开，在请求页面的时候就不会重新解析域名。
 - 浏览器DNS缓存
 - 操作系统DNS缓存
 
-###解决办法
+### 解决办法
 
 - 重启浏览器			重启浏览器能够断开所有长短连接，新建立连接的时候会解析DNS域名
 - 隐私模式				隐私模式下不会复用TCP连接，新建立连接的时候会解析DNS域名

@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  VirtualBox Network
-categories: virtualbox
+categories: tools
 tags: virtualbox nat
 ---
 

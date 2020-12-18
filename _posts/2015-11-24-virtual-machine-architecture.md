@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 基于栈与基于寄存器的虚拟机架构
-categories: virtual-machine
+categories: linux
 tags: virtual-machine
 ---
 

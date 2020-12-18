@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 设计模式
-categories: design-patterns
+categories: theory
 tags: design-patterns
 ---
 

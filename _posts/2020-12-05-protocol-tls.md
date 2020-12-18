@@ -1,8 +1,8 @@
 ---
 layout: post
 title: SSL/TLS协议运行机制
-categories: TLS
-tags: TLS
+categories: tcp
+tags: tcp
 ---
 
 ### SSL（Secure Socket Layer）

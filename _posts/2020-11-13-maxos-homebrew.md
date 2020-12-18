@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Homebrew 使用
-categories: macOS
+categories: tools
 tags: homebrew macOS
 ---
 

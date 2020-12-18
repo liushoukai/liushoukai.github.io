@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  ConcurrentModificationException源码分析
-categories: jdk
+categories: java
 tags: java
 ---
 
