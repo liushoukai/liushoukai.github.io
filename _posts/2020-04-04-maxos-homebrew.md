@@ -148,6 +148,56 @@ echo 'export PATH="/usr/local/opt/php@7.2/sbin:$PATH"' >> ~/.bash_profile
 
 ---
 
+### Homebrew 安装多版本 java
+
+---
+```shell
+1.安装JDK
+brew update
+brew cask install java
+
+2.列出所有已安装的JDK版本
+/usr/libexec/java_home -V
+
+3.修改~/.profile设置JAVA_HOME环境变量
+JAVA_HOME=$(/usr/libexec/java_home)
+export JAVA_HOME
+
+安装Oracle JDK
+https://www.oracle.com/java/technologies/javase/javase8-archive-downloads.html
+
+Install homebrew
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+Update homebrew if already installed:
+brew update
+
+allow brew to lookup versions
+brew tap homebrew/cask-versions
+
+list available java versions
+brew search java
+
+Optional: to find out the minor version of java
+
+brew cask info java8
+
+install java 8 (or any other version available)
+brew cask install java8
+
+
+$ ll /usr/libexec/java_home
+lrwxr-xr-x  1 root  wheel  79 11 23  2019 /usr/libexec/java_home@ -> /System/Library/Frameworks/JavaVM.framework/Versions/Current/Commands/java_home
+
+
+$ /usr/libexec/java_home -VMatching Java Virtual Machines (5):
+    1.8.0_271, x86_64:    "Java SE 8"    /Library/Java/JavaVirtualMachines/jdk1.8.0_271.jdk/Contents/Home
+    1.8.0_171, x86_64:    "Java SE 8"    /Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home
+    1.8.0_131, x86_64:    "Java SE 8"    /Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home
+    1.8.0_111, x86_64:    "Java SE 8"    /Library/Java/JavaVirtualMachines/jdk1.8.0_111.jdk/Contents/Home
+    1.8.0_40, x86_64:    "Java SE 8"    /Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home
+```
+
 ### 参考资料
 
 ---
