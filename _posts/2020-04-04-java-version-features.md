@@ -5,8 +5,6 @@ categories: java
 tags: java
 ---
 
-
-
 ### 允许使用数值文字的加强
 
 ```java
