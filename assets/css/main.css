@@ -303,6 +303,7 @@ a:active {text-decoration: none}	/* 选定的链接 */
 }
 
 #toc ol {
+  list-style: none;
   padding-left: 16px;
 }
 
