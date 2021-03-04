@@ -5,13 +5,18 @@ categories: java
 tags: web template
 ---
 
-# 模板引擎性能对比
+## 模板引擎性能对比
+
+---
 
 从Github上翻到对JSP、Thymeleaf 3、Velocity 1.7、Freemarker 2.3.23几款主流模板的性能对比，总体上看，Freemarker、Velocity、JSP在性能上差别不大，而
 Thymeleaf与前三者相比，在性能上存在较大的差距，因此，选择Thymeleaf作为模板引擎需要慎重。
-参考：https://github.com/jreijn/spring-comparing-template-engines/issues/19
 
-## System Configuration
+---
+
+### 测试硬件配置
+
+---
 
 ```html
 Architecture: x86_64
@@ -40,7 +45,15 @@ L3 cache: 3072K
 NUMA node0 CPU(s): 0-3
 ```
 
-## `JSP`
+---
+
+## 性能基准测试
+
+---
+
+### JSP
+
+---
 
 ```html
 Document Path: /jsp
@@ -58,7 +71,11 @@ Time per request: 0.520 (ms) (mean, across all concurrent requests)
 Transfer rate: 16434.05 (Kbytes/sec) received
 ```
 
-## `Thymeleaf 3`
+---
+
+### Thymeleaf 3
+
+---
 
 ```html
 Document Path: /thymeleaf
@@ -76,7 +93,11 @@ Time per request: 0.932 (ms) (mean, across all concurrent requests)
 Transfer rate: 9441.52 (Kbytes/sec) received
 ```
 
-## `Velocity 1.7`
+---
+
+### Velocity 1.7
+
+---
 
 ```html
 Document Path: /velocity
@@ -94,7 +115,11 @@ Time per request: 0.528 (ms) (mean, across all concurrent requests)
 Transfer rate: 16865.88 (Kbytes/sec) received
 ```
 
-## `Freemarker 2.3.23`
+---
+
+### Freemarker 2.3.23
+
+---
 
 ```html
 Document Path: /freemarker
@@ -111,3 +136,13 @@ Time per request: 12.988 (ms) (mean)
 Time per request: 0.520 (ms) (mean, across all concurrent requests)
 Transfer rate: 17299.01 (Kbytes/sec) received
 ```
+
+---
+
+## 参考资料
+
+---
+
+[https://github.com/jreijn/spring-comparing-template-engines/issues/19][1]{:target="_blank"}
+
+[1]:https://github.com/jreijn/spring-comparing-template-engines/issues/19

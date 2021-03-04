@@ -5,9 +5,9 @@ categories: tools
 tags: sublime
 ---
 
-## Sublime配置
+## Sublime3用户设置
 
-### Sublime3用户设置
+---
 
 ```json
 {
@@ -23,7 +23,11 @@ tags: sublime
 }
 ```
 
-### Sublime快捷键设置
+---
+
+## Sublime快捷键设置
+
+---
 
 ```json
 [
@@ -42,7 +46,11 @@ tags: sublime
 ]
 ```
 
-### Build System设置
+---
+
+## Build System设置
+
+---
 
 ```json
 $ vim nodejs.sublime-build
@@ -62,7 +70,11 @@ $ vim php.sublime-build
 }
 ```
 
+---
+
 ## SublimeLinter配置
+
+---
 
 SublimeLinter
 
@@ -84,25 +96,51 @@ SublimeLinter
 }
 ```
 
+---
+
 ### SublimeLinter-php配置
+
+---
+
+详见：[https://packagecontrol.io/packages/SublimeLinter-php][1]{:target="_blank"}
 
 1. 安装php
 2. 配置SublimeLinter，加入PHP的路径
 
-参考：https://packagecontrol.io/packages/SublimeLinter-php
+---
 
 ### SublimeLinter-jshint配置
+
+---
+
+详见：[https://packagecontrol.io/packages/SublimeLinter-jshint][2]{:target="_blank"}
 
 1. 安装node.js
 2. 安装jshint，npm install -g jshint
 3. 配置SublimeLinter，加入Node路径
 
-参考：https://packagecontrol.io/packages/SublimeLinter-jshint
+---
 
 ### SublimeLinter-csslint配置
+
+---
+
+详见：[https://packagecontrol.io/packages/SublimeLinter-csslint][3]{:target="_blank"}
 
 1. 安装node.js
 2. 安装jshint，npm install -g csslint
 3. 配置SublimeLinter，加入Node路径
 
-参考：https://packagecontrol.io/packages/SublimeLinter-csslint
+---
+
+## 参考资料
+
+---
+
+* [https://packagecontrol.io/packages/SublimeLinter-php][1]{:target="_blank"}
+* [https://packagecontrol.io/packages/SublimeLinter-jshint][2]{:target="_blank"}
+* [https://packagecontrol.io/packages/SublimeLinter-csslint][3]{:target="_blank"}
+
+[1]:https://packagecontrol.io/packages/SublimeLinter-php
+[2]:https://packagecontrol.io/packages/SublimeLinter-jshint
+[3]:https://packagecontrol.io/packages/SublimeLinter-csslint

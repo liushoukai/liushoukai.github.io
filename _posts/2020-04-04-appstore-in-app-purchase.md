@@ -17,285 +17,49 @@ App 内购买 (In‑App Purchase)，简称：IAP内购。
 
 ---
 
-## 内购模式
-
-两种模式主要的不同之处在于对 AppStore 返回的付款凭证（receipt）的验证方式。
-
-* 客户端验证模式：在客户端验证付款凭证（receipt），简单快捷，但容易被破解。主要适用于非联网APP应用内购，比如旅行青蛙中游戏道具购买。
-
-* 服务器验证模式：在服务端验证付款凭证（receipt），流程相对复杂，但相对安全性更高，主要适用于联网APP应用的内购，比如直播APP中虚拟货币的充值购买。
+### 商品类型
 
 ---
-
-### 客户端模式
-
-1. APP 从服务器获取产品标识列表
-2. APP 从 AppStore 获取产品信息
-3. 用户选择需要购买的产品
-4. APP 发送支付请求到 AppStore
-5. AppStore 处理支付请求，用户完成支付后，AppStore 返回付款收据 (receipt) 给APP
-6. APP 验证返回的付款收据(receipt)，判定用户是否付款成功并提供对应的服务
-
----
-
-### 服务器模式
-
----
-
-<div class="mermaid">
-sequenceDiagram
-	participant StoreKit as StoreKit
-	participant App as iPhone
-	participant Server
-	participant AppStore
-	App->>+Server: 1.获取业务订单号
-	Server-->>-App: 2.返回业务订单号
-
-	rect rgba(0, 0, 255, .1)
-	Note over App,StoreKit: 苹果支付
-	App->>+StoreKit: 3.请求商品信息（productId)
-	StoreKit-->>App: 4.返回商品信息
-	App->>StoreKit: 5.加入交易队列
-	StoreKit-->>App: 6.弹出交易弹窗
-	App->>StoreKit: 7.用户支付
-	StoreKit-->>-App: 8.交易成功，返回付款收据
-	end
-	
-	App->>+Server: 9.验证订单状态（根据收据、订单号）
-	Server->>AppStore: 10.验证收据有效性
-	AppStore-->>Server: 11.返回收据有效性
-	Server-->>-App: 12.返回处理结果
-	
-	App->>StoreKit: 13.关闭交易
-</div>
-
----
-
-## 付款收据
-
----
-
-### 收据风格
-
-* iOS 6-style transaction receipts
-* iOS 7-style transaction receipts
-
----
-
-### 收据验证
-
-```shell
-Sandbox环境验证付款收据(receipt): https://sandbox.itunes.apple.com/verifyReceipt
-Product环境验证付款收据(receipt): https://buy.itunes.apple.com/verifyReceipt
-```
-
----
-
-### 收据结构
-
-1、消耗型产品收据结构
-```json
-{
-    "receipt": {
-        "unique_identifier": "...",                     //苹果分配设备唯一标识符
-        "original_transaction_id": "...",               //原交易号
-        "transaction_id": "...",                        //交易号
-        "unique_vendor_identifier": "...",              //唯一供应商标识
-        "product_id": "...",                            //交易产品标识
-        "quantity": "1",                                //交易产品数量
-        "bid": "...",                                   //APP在苹果的唯一标识
-        "is_in_intro_offer_period": "false",            //是否特价优惠（详见推介促销）
-        "is_trial_period": "false",                     //是否免费试用（详见推介促销）
-        "purchase_date_ms": "1531643137200",            //交易付款时间
-        "original_purchase_date_ms": "1531643137200",   //原交易付款时间
-        "bvrs": "3.96.3.0",
-        "app_item_id": "774384491",
-        "item_id": "1146328092",
-        "version_external_identifier": "827233954",
-        "purchase_date": "2018-07-15 08:25:37 Etc/GMT",
-        "purchase_date_pst": "2018-07-15 01:25:37 America/Los_Angeles",
-        "original_purchase_date": "2018-07-15 08:25:37 Etc/GMT"
-        "original_purchase_date_pst": "2018-07-15 01:25:37 America/Los_Angeles",
-    },
-    "status": 0
-}
-```
-
-2、自动订阅型产品收据结构
-```json
-{
-  "auto_renew_status": 0,
-  "latest_expired_receipt_info": {
-    "original_purchase_date_pst": "2018-01-19 16:03:00 America/Los_Angeles",
-    "unique_identifier": "9d89432f1fae59f25c05d44553fe40438a865b9f",
-    "original_transaction_id": "1000000368245564",
-    "expires_date": "1517368991000",
-    "transaction_id": "1000000371718901",
-    "quantity": "1",
-    "product_id": "abc",
-    "bvrs": "721180.450460032",
-    "bid": "ab.bc",
-    "unique_vendor_identifier": "9982B084-BE66-4622-ACCB-6C5B3D9C4CD4",
-    "web_order_line_item_id": "1000000037662245",
-    "original_purchase_date_ms": "1516406580000",
-    "expires_date_formatted": "2018-01-31 03:23:11 Etc/GMT",
-    "purchase_date": "2018-01-31 02:53:11 Etc/GMT",
-    "is_in_intro_offer_period": "false",
-    "purchase_date_ms": "1517367191000",
-    "expires_date_formatted_pst": "2018-01-30 19:23:11 America/Los_Angeles",
-    "is_trial_period": "false",
-    "purchase_date_pst": "2018-01-30 18:53:11 America/Los_Angeles",
-    "original_purchase_date": "2018-01-20 00:03:00 Etc/GMT",
-    "item_id": "1326212778"
-  },
-  "status": 21006,
-  "auto_renew_product_id": "abc",
-  "receipt": {
-    "original_purchase_date_pst": "2018-01-19 16:03:00 America/Los_Angeles",
-    "unique_identifier": "9d89432f1fae59f25c05d44553fe40438a865b9f",
-    "original_transaction_id": "1000000368245564",
-    "expires_date": "1517359990000",
-    "transaction_id": "1000000371686472",
-    "quantity": "1",
-    "product_id": "abc",
-    "bvrs": "721180.450460032",
-    "bid": "ab.bc",
-    "unique_vendor_identifier": "9982B084-BE66-4622-ACCB-6C5B3D9C4CD4",
-    "web_order_line_item_id": "1000000037544589",
-    "original_purchase_date_ms": "1516406580000",
-    "expires_date_formatted": "2018-01-31 00:53:10 Etc/GMT",
-    "purchase_date": "2018-01-31 00:23:10 Etc/GMT",
-    "is_in_intro_offer_period": "false",
-    "purchase_date_ms": "1517358190000",
-    "expires_date_formatted_pst": "2018-01-30 16:53:10 America/Los_Angeles",
-    "is_trial_period": "false",
-    "purchase_date_pst": "2018-01-30 16:23:10 America/Los_Angeles",
-    "original_purchase_date": "2018-01-20 00:03:00 Etc/GMT",
-    "item_id": "1326212778"
-  },
-  "expiration_intent": "1",
-  "is_in_billing_retry_period": "0"
-}
-```
-
----
-
-### 收据解析
-
-详见官方解释：[https://developer.apple.com/documentation/appstorereceipts/status][5]{:target="_blank"}
-
-{:class="table table-striped table-bordered table-hover"}
-| <img style="width:80px">Status | Description |
-| :-----: | :------- |
-| 21000 | The request to the AppStore was not made using the HTTP POST request method.|
-| 21001 | This status code is no longer sent by the AppStore.|
-| 21002 | The data in the receipt-data property was malformed or the service experienced a temporary issue. Try again.|
-| 21003 | The receipt could not be authenticated.|
-| 21004 | The shared secret you provided does not match the shared secret on file for your account.|
-| 21005 | The receipt server was temporarily unable to provide the receipt. Try again.|
-| 21006 | This receipt is valid but the subscription has expired. When this status code is returned to your server, the receipt data is also decoded and returned as part of the response. `Only returned for iOS 6-style transaction receipts for auto-renewable subscriptions.`|
-| 21007 | This receipt is from the test environment, but it was sent to the production environment for verification.|
-| 21008 | This receipt is from the production environment, but it was sent to the test environment for verification.|
-| 21009 | Internal data access error. Try again later.|
-| 21010 | The user account cannot be found or has been deleted.|
-| 21100 | Internal data access error. Try again later.|
-| ... | Internal data access error. Try again later.|
-| 21199 | Internal data access error. Try again later.|
-
----
-
-## 沙盒环境
-
-在开发过程中，需要测试应用是否能够正常的进行支付，但是又不可能每一次测试都进行实际的支付，因此需要使用苹果提供的 Sandbox Store 测试。苹果提供了沙盒账号的方式，这个沙箱账号其实是虚拟的AppleID，在开发者账号后台的iTune Connect上配置了之后就能使用沙盒账号测试内购。StoreKit不能在iOS模拟器中使用，因此，测试StoreKit必须在真机上进行。
-
-```shell
-Sandbox环境验证付款收据(receipt): https://sandbox.itunes.apple.com/verifyReceipt
-Product环境验证付款收据(receipt): https://buy.itunes.apple.com/verifyReceipt
-```
-
----
-
-### 沙盒账号
-
-1. 在iPhone上安装测试包
-2. 退出iPhone的AppStore账号，设置 iTunes Store 与 AppStore -> 选中AppleID -> 退出登录。注意⚠️：退出之后，不需要在 AppStore 登录沙盒账号，因为沙盒账号是一个虚拟的AppleID，因此不能直接登录。只能使用在支付时使用。
-3. 在测试包中点击购买商品，系统会提示你进行登录，这里点击"使用现有的AppleID"后输入沙盒测试账号进行登录。
-4. 点击确认购买，购买成功。
-
----
-
-### 沙盒测试
-
-沙盒环境下自动续费订阅时，时限会缩短。
-
-{:class="table table-striped table-bordered table-hover"}
-|生产自动续费周期|沙盒自动续费周期|
-| :-----: | :-------: |
-| 1周  |  3分钟|
-| 1个月 | 5分钟|
-| 2个月 | 10分钟|
-| 3个月 | 15分钟|
-| 6个月 | 30分钟|
-| 1年  |  1小时|
-
----
-
-#### 区分是否为沙盒充值
-
-* 解析付款收据(receipt)中的 environment 字段，判断 environment=Sandbox。
-* 根据生产环境收据验证接口返回的状态码。如果 status=21007，则表示当前的收据为沙盒环境下收据。
-
----
-
-## 苹果审核
-
-苹果审核APP是在沙盒环境下验证充值相关功能的。因此，当APP提交苹果审核时，服务端需换成沙盒环境，否则就无法通过苹果审核。
-
-收据验证最佳实践：
-
-首先使用 production URL 验证收据，如果收到了21007的状态码，那么继续使用sandbox URL进行验证。
-
-遵循这种方法可以确保你的应用程序在测试、App审核以及AppStore中运行时，不需要在url之间切换。
-
----
-
-### 内购产品
-
----
-
-#### 产品类型
 
 `消耗型产品(Consumable)`
 
 * 定义：消耗型项目只可使用一次，使用之后即失效，必须再次购买。
 * 特点：购买的商品可消耗，可重复购买。每次购买的值一般都会叠加。如果买了后，用户不消耗，则一直存在用户相关的账号中。
-* 举例：游戏《皇室战争》中，购买宝石。
+* 举例：《皇室战争》中，购买宝石。
 
 `非消耗型产品(Non‑Consumable)`
 
 * 定义：非消耗品只能购买一次且不会过期。
 * 特点：这种类型的商品的特点就是当用户购买后，这个商品就一直生效，不需要重复购买。
-* 举例：游戏《旅行青蛙》中，解锁游戏中的特定道具。
+* 举例：《旅行青蛙》中，解锁游戏中的特定道具。
 
 `非续期产品(Non‑Renewing Subscriptions)`
 
 * 定义：用户购买有时限性的服务或内容。
 * 特点：此类订阅到期后不会自动续订，用户需要逐次续订。
-* 举例：腾讯视频VIP会员包月。
+* 举例：《腾讯视频》中，VIP会员包月。
 
 `自动续期产品(Auto‑Renewable Subscriptions)`
 
 * 定义：用户购买有时限性的服务或内容，到期后自动续订。
 * 特点：到期前24小时，苹果会主动扣费从而为用户自动续订，直用户取消自动订阅。
-* 举例：腾讯视频VIP会员自动包月。
+* 举例：《腾讯视频》中，VIP会员连续包月。
 
 ---
 
-#### 商品定价
+### 商品定价
 
 内购商品定价为固定的金额，分为非自动订阅商品定价与自动订阅商品定价两类。
 
 注意⚠️：定价并非全部都是整数，自动订阅的定价包含类似`¥1.99`的定价。
+
+疑问🤔️：苹果的定价是固定的，如何满足产品业务灵活的定价？
+
+按照最接近商品价格的苹果定价执行扣费，计算苹果定价与商品实际定价的差额，这部分差额转换为虚拟货币发放到用户的余额中；
+
+疑问🤔️：什么是苹果抽成？
+
+由于在使用苹果内购时，根据商品类型的不同，苹果会按商品定价抽成约30%左右。因此，在应用内购买虚拟币时，如果在安卓端的兑换比例为：1元 = 100宝石；那么在苹果端兑换比例为：1元 = 66宝石；
 
 `非自动订阅商品定价列表`
 
@@ -605,19 +369,265 @@ Product环境验证付款收据(receipt): https://buy.itunes.apple.com/verifyRec
 
 ---
 
-### 推介促销
-
-推介促销优惠是针对自动续期订阅类商品的优惠促销活动，如果用户参与过推介促销优惠，则无法再享受该商品所属订阅分组的推介促销优惠。
+### 商品促销
 
 ---
 
-### 内购监控
+推介促销优惠是针对自动续期订阅类商品的优惠促销活动，包含免费试用和特价优惠，分别通过收据的`is_trial_period`和`is_in_intro_offer_period`字段体现；
 
-1. 监控iOS内购充值商品列表接口失败率与时延
-2. 监控iOS内购下单接口失败率与时延
-3. 监控iOS内购上报接口失败率与时延
-4. 监控iOS内购退款的监控
-5. 监控iOS内购沙盒的监控
+注意⚠️：如果用户参与过推介促销优惠，则无法再享受该商品所属订阅分组的推介促销优惠。即推介促销的优惠针对每个订阅分组，苹果只允许用户享受一次；
+
+---
+
+## 内购模式
+
+---
+
+两种模式主要的不同之处在于对 AppStore 返回的付款凭证（receipt）的验证方式。
+
+* `客户端验证模式`：在客户端验证付款凭证（receipt），简单快捷，但容易被破解。主要适用于非联网APP应用内购，比如，《旅行青蛙》中游戏道具购买。
+
+* `服务器验证模式`：在服务端验证付款凭证（receipt），流程相对复杂，但相对安全性更高，主要适用于联网APP应用的内购，比如，直播APP中虚拟货币的充值购买。
+
+---
+
+### 客户端模式
+
+---
+
+1. APP 从服务器获取产品标识列表
+2. APP 从 AppStore 获取产品信息
+3. 用户选择需要购买的产品
+4. APP 发送支付请求到 AppStore
+5. AppStore 处理支付请求，用户完成支付后，AppStore 返回付款收据 (receipt) 给APP
+6. APP 验证返回的付款收据(receipt)，判定用户是否付款成功并提供对应的服务
+
+---
+
+### 服务器模式
+
+---
+
+<div class="mermaid">
+sequenceDiagram
+	participant StoreKit as StoreKit
+	participant App as iPhone
+	participant Server
+	participant AppStore
+	App->>+Server: 1.获取业务订单号
+	Server-->>-App: 2.返回业务订单号
+
+	rect rgba(0, 0, 255, .1)
+	Note over App,StoreKit: 苹果支付
+	App->>+StoreKit: 3.请求商品信息（productId)
+	StoreKit-->>App: 4.返回商品信息
+	App->>StoreKit: 5.加入交易队列
+	StoreKit-->>App: 6.弹出交易弹窗
+	App->>StoreKit: 7.用户支付
+	StoreKit-->>-App: 8.交易成功，返回付款收据
+	end
+	
+	App->>+Server: 9.验证订单状态（根据收据、订单号）
+	Server->>AppStore: 10.验证收据有效性
+	AppStore-->>Server: 11.返回收据有效性
+	Server-->>-App: 12.返回处理结果
+	
+	App->>StoreKit: 13.关闭交易
+</div>
+
+---
+
+## 内购收据
+
+---
+
+内购收据是用户付款后，苹果服务器返回给iOS客户端的一个付款凭证，通过在客户端/服务端验证苹果的收据验证付款凭证的真实性，从而为用户提供收据买对应的服务。
+
+---
+
+### 收据风格
+
+---
+
+* iOS 6-style transaction receipts
+* iOS 7-style transaction receipts
+
+---
+
+### 收据验证
+
+---
+
+```shell
+Sandbox环境验证付款收据(receipt): https://sandbox.itunes.apple.com/verifyReceipt
+Product环境验证付款收据(receipt): https://buy.itunes.apple.com/verifyReceipt
+```
+
+---
+
+### 收据结构
+
+1、消耗型产品收据结构
+```json
+{
+    "receipt": {
+        "unique_identifier": "...",                     //苹果分配设备唯一标识符
+        "original_transaction_id": "...",               //原交易号
+        "transaction_id": "...",                        //交易号
+        "unique_vendor_identifier": "...",              //唯一供应商标识
+        "product_id": "...",                            //交易产品标识
+        "quantity": "1",                                //交易产品数量
+        "bid": "...",                                   //APP在苹果的唯一标识
+        "is_in_intro_offer_period": "false",            //是否特价优惠（详见推介促销）
+        "is_trial_period": "false",                     //是否免费试用（详见推介促销）
+        "purchase_date_ms": "1531643137200",            //交易付款时间
+        "original_purchase_date_ms": "1531643137200",   //原交易付款时间
+        "bvrs": "3.96.3.0",
+        "app_item_id": "774384491",
+        "item_id": "1146328092",
+        "version_external_identifier": "827233954",
+        "purchase_date": "2018-07-15 08:25:37 Etc/GMT",
+        "purchase_date_pst": "2018-07-15 01:25:37 America/Los_Angeles",
+        "original_purchase_date": "2018-07-15 08:25:37 Etc/GMT"
+        "original_purchase_date_pst": "2018-07-15 01:25:37 America/Los_Angeles",
+    },
+    "status": 0
+}
+```
+
+2、自动订阅型产品收据结构
+```json
+{
+  "auto_renew_status": 0,
+  "latest_expired_receipt_info": {
+    "original_purchase_date_pst": "2018-01-19 16:03:00 America/Los_Angeles",
+    "unique_identifier": "9d89432f1fae59f25c05d44553fe40438a865b9f",
+    "original_transaction_id": "1000000368245564",
+    "expires_date": "1517368991000",
+    "transaction_id": "1000000371718901",
+    "quantity": "1",
+    "product_id": "abc",
+    "bvrs": "721180.450460032",
+    "bid": "ab.bc",
+    "unique_vendor_identifier": "9982B084-BE66-4622-ACCB-6C5B3D9C4CD4",
+    "web_order_line_item_id": "1000000037662245",
+    "original_purchase_date_ms": "1516406580000",
+    "expires_date_formatted": "2018-01-31 03:23:11 Etc/GMT",
+    "purchase_date": "2018-01-31 02:53:11 Etc/GMT",
+    "is_in_intro_offer_period": "false",
+    "purchase_date_ms": "1517367191000",
+    "expires_date_formatted_pst": "2018-01-30 19:23:11 America/Los_Angeles",
+    "is_trial_period": "false",
+    "purchase_date_pst": "2018-01-30 18:53:11 America/Los_Angeles",
+    "original_purchase_date": "2018-01-20 00:03:00 Etc/GMT",
+    "item_id": "1326212778"
+  },
+  "status": 21006,
+  "auto_renew_product_id": "abc",
+  "receipt": {
+    "original_purchase_date_pst": "2018-01-19 16:03:00 America/Los_Angeles",
+    "unique_identifier": "9d89432f1fae59f25c05d44553fe40438a865b9f",
+    "original_transaction_id": "1000000368245564",
+    "expires_date": "1517359990000",
+    "transaction_id": "1000000371686472",
+    "quantity": "1",
+    "product_id": "abc",
+    "bvrs": "721180.450460032",
+    "bid": "ab.bc",
+    "unique_vendor_identifier": "9982B084-BE66-4622-ACCB-6C5B3D9C4CD4",
+    "web_order_line_item_id": "1000000037544589",
+    "original_purchase_date_ms": "1516406580000",
+    "expires_date_formatted": "2018-01-31 00:53:10 Etc/GMT",
+    "purchase_date": "2018-01-31 00:23:10 Etc/GMT",
+    "is_in_intro_offer_period": "false",
+    "purchase_date_ms": "1517358190000",
+    "expires_date_formatted_pst": "2018-01-30 16:53:10 America/Los_Angeles",
+    "is_trial_period": "false",
+    "purchase_date_pst": "2018-01-30 16:23:10 America/Los_Angeles",
+    "original_purchase_date": "2018-01-20 00:03:00 Etc/GMT",
+    "item_id": "1326212778"
+  },
+  "expiration_intent": "1",
+  "is_in_billing_retry_period": "0"
+}
+```
+
+---
+
+### 收据解析
+
+详见官方解释：[https://developer.apple.com/documentation/appstorereceipts/status][5]{:target="_blank"}
+
+{:class="table table-striped table-bordered table-hover"}
+| <img style="width:80px">Status | Description |
+| :-----: | :------- |
+| 21000 | The request to the AppStore was not made using the HTTP POST request method.|
+| 21001 | This status code is no longer sent by the AppStore.|
+| 21002 | The data in the receipt-data property was malformed or the service experienced a temporary issue. Try again.|
+| 21003 | The receipt could not be authenticated.|
+| 21004 | The shared secret you provided does not match the shared secret on file for your account.|
+| 21005 | The receipt server was temporarily unable to provide the receipt. Try again.|
+| 21006 | This receipt is valid but the subscription has expired. When this status code is returned to your server, the receipt data is also decoded and returned as part of the response. `Only returned for iOS 6-style transaction receipts for auto-renewable subscriptions.`|
+| 21007 | This receipt is from the test environment, but it was sent to the production environment for verification.|
+| 21008 | This receipt is from the production environment, but it was sent to the test environment for verification.|
+| 21009 | Internal data access error. Try again later.|
+| 21010 | The user account cannot be found or has been deleted.|
+| 21100 | Internal data access error. Try again later.|
+| ... | Internal data access error. Try again later.|
+| 21199 | Internal data access error. Try again later.|
+
+---
+
+## 沙盒环境
+
+在开发过程中，需要测试应用是否能够正常的进行支付，但是又不可能每一次测试都进行实际的支付，因此需要使用苹果提供的 Sandbox Store 测试。苹果提供了沙盒账号的方式，这个沙箱账号其实是虚拟的AppleID，在开发者账号后台的iTune Connect上配置了之后就能使用沙盒账号测试内购。StoreKit不能在iOS模拟器中使用，因此，测试StoreKit必须在真机上进行。
+
+```shell
+Sandbox环境验证付款收据(receipt): https://sandbox.itunes.apple.com/verifyReceipt
+Product环境验证付款收据(receipt): https://buy.itunes.apple.com/verifyReceipt
+```
+
+---
+
+### 沙盒账号
+
+1. 在iPhone上安装测试包
+2. 退出iPhone的AppStore账号，设置 iTunes Store 与 AppStore -> 选中AppleID -> 退出登录。注意⚠️：退出之后，不需要在 AppStore 登录沙盒账号，因为沙盒账号是一个虚拟的AppleID，因此不能直接登录。只能使用在支付时使用。
+3. 在测试包中点击购买商品，系统会提示你进行登录，这里点击"使用现有的AppleID"后输入沙盒测试账号进行登录。
+4. 点击确认购买，购买成功。
+
+---
+
+### 沙盒测试
+
+沙盒环境下自动续费订阅时，时限会缩短。
+
+{:class="table table-striped table-bordered table-hover"}
+|生产自动续费周期|沙盒自动续费周期|
+| :-----: | :-------: |
+| 1周  |  3分钟|
+| 1个月 | 5分钟|
+| 2个月 | 10分钟|
+| 3个月 | 15分钟|
+| 6个月 | 30分钟|
+| 1年  |  1小时|
+
+---
+
+### 沙盒识别
+
+* 解析付款收据(receipt)中的 environment 字段，判断 environment=Sandbox。
+* 根据生产环境收据验证接口返回的状态码。如果 status=21007，则表示当前的收据为沙盒环境收据。
+
+---
+
+### 苹果审核
+
+苹果审核APP是在沙盒环境下验证充值相关功能的。因此，当APP提交苹果审核时，服务端需换成沙盒环境，否则就无法通过苹果审核。
+
+疑问🤔️：生产和沙盒环境的收据需要切换不同的验证接口，如何简化？
+
+最佳实践：首先使用 production URL 验证收据，如果收到了21007的状态码，那么继续使用sandbox URL进行验证。遵循这种方法可以确保你的应用程序在测试、App审核以及AppStore中运行时，不需要在url之间切换。
 
 ---
 
@@ -751,15 +761,11 @@ sequenceDiagram
 
 ### 退款处理
 
----
-
 ![potential-actions](/assets/img/potential-actions.jpeg){:width="100%"}
 
 ---
 
 ## 服务器通知
-
----
 
 使用来自 AppStore 的服务器通知来监视和响应用户的订阅状态更改。启用 AppStore 服务器通知功能是可选的，但建议这样做，特别是在跨多个平台提供订阅服务且需要保持订阅记录更新的情况下。
 设置服务器后，您可以随时通过在 App Store Connect 中添加服务器URL来开始接收通知。 将通知与收据验证结合使用可以验证用户的当前订阅状态，并根据该状态为用户提供服务或促销优惠。
@@ -769,8 +775,6 @@ sequenceDiagram
 
 ### 配置服务器通知
 
----
-
 1. 在服务器上支持 App Transport Security（ATS）。在发送通知之前，AppStore必须使用ATS协议与您的服务器建立安全的网络连接。
 2. 确定应用服务器提供的URL可用于订阅状态更新。
 3. 在AppStore Connect中为您的应用配置订阅状态URL。请参阅：https://help.apple.com/app-store-connect/#/dev0067a330b
@@ -778,8 +782,6 @@ sequenceDiagram
 ---
 
 ### 服务器通知类型
-
----
 
 AppStore 通过HTTP协议的POST请求，将JSON格式的通知消息传递给业务的应用服务器，以处理的订阅事件。
 
@@ -914,6 +916,25 @@ A new subscription (which is listed in clause 2) may differ from the subscriptio
 表示成功自动续订过去无法续订的过期订阅。检查expires_date，以确定下一个续订日期和时间。
 
 ---
+
+## 内购监控
+
+---
+
+### 业务监控
+
+* 商品列表监控（失败率与时延）
+* 购买下单监控（失败率与时延）
+* 收据上报监控（失败率与时延）
+* 内购退款监控
+* 沙盒充值监控
+* 到账延迟监控
+
+---
+
+### 链路监控
+
+访问苹果收据服务器网络链路监控，监控可访问性与时延
 
 [1]:https://developer.apple.com/cn/in-app-purchase/
 [2]:https://developer.apple.com/documentation/storekit/in-app_purchase/handling_refund_notifications
