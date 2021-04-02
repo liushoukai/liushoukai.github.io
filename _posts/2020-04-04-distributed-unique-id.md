@@ -73,7 +73,7 @@ UUID(Universally Unique Identifier)的标准型式包含32个16进制数字，�
 
 ---
 
-#### Snowflake的workerId分配
+#### 如何解决workerId分配问题？
 
 在相同的 reserved、timestamp、workerId 情况下，即每个全局唯一ID生成的工作节点，每毫秒可以生成`2^12=4096`个唯一标识，可以满足单节点`4096/ms`的QPS。
 如果每毫秒生成了4096个全局唯一ID，那么，Snowflake 算法会阻塞直到进入下一毫秒才会继续生成新的全局唯一ID。
@@ -84,6 +84,12 @@ UUID(Universally Unique Identifier)的标准型式包含32个16进制数字，�
 
 * 通过实现分布式一致性协议算法的服务分配`workerId`，比如部署zookeeper集群，用于工作节点启动时，获取全局唯一的`workerId`。
 * 通过集群中工作节点本地IP地址生成唯一识别，前提是工作节点的IP网关有规划，不会出现重复的场景。
+
+#### 如何解决机器时钟回拨问题？
+
+问题🤔️：由于Snowflake算法依赖本地时钟，一旦机器时钟回拨会导致41bit的时间戳重复的问题，导致在相同的workerId节点，产生重复的uniqId；
+
+解决：？？？
 
 ### 参考资料
 

@@ -1,9 +1,51 @@
 ---
 layout: post
 title: CPU架构
-categories: java
-tags: threadsafe jvm
+categories: system
+tags: cpu
 ---
+
+## CPU缓存
+
+多核处理器：将多个CPU（称为"核"）集成到一个集成电路芯片上。
+![image](/assets/img/system-cpu/1.png){:width="50%"}
+
+### Intel Core i5-2520M (PGA) specifications
+
+`Level 1 cache size`
+
+* 2 x 32 KB 8-way set associative instruction caches
+* 2 x 32 KB 8-way set associative data caches
+
+`Level 2 cache size`
+
+* 2 x 256 KB 8-way set associative caches
+
+`Level 3 cache size`
+
+* 3 MB 12-way set associative shared cache
+
+### L1 Cache
+
+在现代微处理器中，如Intel Core i5-2530M型号的双核CPU，缓存配置为：2 x (32KB + 32KB + 256KB) + 3M
+L1 cache被分割为两个大小相同的缓存，一个用于缓存数据(32KB)，一个用于缓存微处理器指令(32KB)。
+
+### L2 Cache
+
+Level2 cache，又被称为secondary cache，用于存储最近访问的信息。其目的在于可以减少访问相同数据的时间。在具有数据预抓去的现在微处理器中，Level2 cache用于缓存将要从系统内存中获取的程序指令与数据。注意Level2 cache是CPU的二级缓存，没有Level1 cache的速度快，尽管Level2 cache的容量更大。Level2 cache通常
+作为一个统一的整体，既用于存储程序指令，又用于存储程序数据。Level2 cache通常被简称为L2 cache。
+
+L2 cache可能存在于以下位置：
+
+1. on the processor core - integrated or on-die cache.
+2. in the same package/cartridge as the processor, but separate from the processor core - backside cache.
+3. separate from the core and processor package. In this case L2 cache memory is usually located on the motherboard.
+
+### L3 Cache
+
+L3 Cache缓存被所有核心共享，大小为3M，速度相比而言也是最慢。
+
+## CPU架构
 
 ```shell
 # 查看CPU的架构
@@ -32,23 +74,26 @@ NUMA node0 CPU(s):     0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30
 NUMA node1 CPU(s):     1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31
 ```
 
-## SMP架构
+### SMP架构
 
 SMP（Symmetric Multiprocessing）对称多处理器。顾名思义, 在SMP中所有的处理器都是对等的, 它们通过总线连接共享同一块物理内存。
 
-## NMUA架构
+### NMUA架构
 
-单核CPU -> FSB总线 -> 内存控制器(北桥) -> 内存1/内存2/.../内存N
-多核CPU1/CPU2/.../CPUN -> FSB总线 -> 内存控制器(北桥) -> 内存1/内存2/.../内存N
+* 单核CPU -> FSB总线 -> 内存控制器(北桥) -> 内存1/内存2/.../内存N
+* 多核CPU1/CPU2/.../CPUN -> FSB总线 -> 内存控制器(北桥) -> 内存1/内存2/.../内存N
+
 刚开始核不多的时候，FSB总线勉强还可以支撑。但是随着CPU内核越来越多，所有的数据IO都通过一条FSB总线和内存交换数据，这条FSB就成为了整个计算机系统的瓶颈。
 
 为了解决这个问题，CPU的设计者们引入了QPI总线，相应的CPU的结构就叫NMUA架构；
 
 内存1/内存2 <- CPU1内存控制器 <-- QPI总线 --> CPU2内存控制器 -> 内存3/内存4
 
-### NUMA陷阱
+#### NUMA陷阱
 
-NUMA陷阱指的是引入QPI总线后，在计算机系统里可能会存在的一个坑。大致的意思就是如果你的机器打开了numa，那么你的内存即使在充足的情况下，也会使用磁盘上的swap，导致性能低下。原因就是NUMA为了高效，会仅仅只从你的当前node里分配内存，只要当前node里用光了（即使其它node还有），也仍然会启用硬盘swap。
+NUMA陷阱指的是引入QPI总线后，在计算机系统里可能会存在的一个坑。大致的意思就是如果你的机器打开了NUMA，那么你的内存即使在充足的情况下，也会使用磁盘上的swap，导致性能低下。
+
+原因就是NUMA为了高效，会仅仅只从你的当前node里分配内存，只要当前node里用光了（即使其它node还有），也仍然会启用硬盘swap。
 
 ```shell
 # 查看服务器NUMA状态（机器有两个内存区域(zone)：node0和node1，分别有16个核心，各有32GB的内存）
@@ -97,61 +142,3 @@ nonvoluntary_ctxt_switches:     1449
 # 绑定CPU和内存的亲和性
 $ numactl --cpunodebind=0 --membind=0 ./redis-server ./redis.conf
 ```
-
-```sql
--- 查看LSN的情况
-$ show engine innodb status
----
-LOG
----
-Log sequence number 127847508936 -- 表示当前的LSN
-Log flushed up to   127847419933 -- 表示刷新到重做日志文件的LSN
-Last checkpoint at  127845797495 -- 表示刷新到磁盘的LSN
-0 pending log writes, 0 pending chkp writes
-167531559 log i/o's done, 102.19 log i/o's/second
-```
-
-Logsequencenumber和Logflushedupto的值在实际生产环境中有可能是不同的，因为在一个事务中从日志缓冲刷新到重做日志文件并不只是在事务提交时发生，每秒都会有从日志缓冲刷新到重做日志文件的动作。
-
-恢复
-
-InnoDB存储引擎在启动时不管上次数据库运行时是否正常关闭，都会尝试进行恢复操作。
-
-## MySQL磁盘写入策略
-
-`innodb_flush_log_at_trx_commit`和`sync_binlog`两个参数是控制MySQL磁盘写入策略以及数据安全性的关键参数。
-
-### innodb_flush_log_at_trx_commit
-
-* 参数说明：当重新安排并批量处理与提交相关的I/O操作时，可以控制磁盘的写入策略，严格遵守ACID合规性和高性能之间的平衡，该参数默认值为2
-* 取值范围：0, 1, 2
-
-0：日志缓存区将每隔一秒写到日志文件中，并且将日志文件的数据刷新到磁盘上。该模式下在事务提交时不会主动触发写入磁盘的操作。
-1：每次事务提交时MySQL都会把日志缓存区的数据写入日志文件中，并且刷新到磁盘中，该模式为系统默认。
-2：每次事务提交时MySQL都会把日志缓存区的数据写入日志文件中，但是并不会同时刷新到磁盘上。该模式下，MySQL会每秒执行一次刷新磁盘操作。
-
-说明：
-当设置为0，该模式速度最快，但不太安全，mysqld进程的崩溃会导致上一秒钟所有事务数据的丢失；
-当设置为1，该模式是最安全的，但也是最慢的一种方式。在mysqld服务崩溃或者服务器主机宕机的情况下，日志缓存区只有可能丢失最多一个语句或者一个事务；
-当设置为2，该模式速度较快，较取值为0情况下更安全，只有在操作系统崩溃或者系统断电的情况下，上一秒钟所有事务数据才可能丢失；
-
-### sync_binlog
-
-* 参数说明：同步binlog（MySQL持久化到硬盘，或依赖于操作系统）。
-* 取值范围：0～4,294,967,295
-
-sync_binlog=1 or N
-
-默认情况下，并不是每次写入时都将binlog日志文件与磁盘同步。因此如果操作系统或服务器崩溃，有可能binlog中最后的语句丢失。
-
-为了防止这种情况，你可以使用"sync_binlog"全局变量（1是最安全的值，但也是最慢的），使binlog在每N次binlog日志文件写入后与磁盘同步。
-
-### 推荐配置组合
-
-* innodb_flush_log_at_trx_commit = 1 && sync_binlog = 1，合数据安全性要求非常高，而且磁盘写入能力足够支持业务。
-* innodb_flush_log_at_trx_commit = 1 && sync_binlog = 0，适合数据安全性要求高，磁盘写入能力支持业务不足，允许备库落后或无复制。
-* innodb_flush_log_at_trx_commit = 2 && sync_binlog = `0/N(0<N<100)`，适合数据安全性要求低，允许丢失一点事务日志，允许复制延迟。
-* innodb_flush_log_at_trx_commit = 0 && sync_binlog = 0，磁盘写能力有限，无复制或允许复制延迟较长。
-
-说明：
-"innodb_flush_log_at_trx_commit"和"sync_binlog"两个参数设置为1的时候，安全性最高，写入性能最差。在mysqld服务崩溃或者服务器主机宕机的情况下，日志缓存区只有可能丢失最多一个语句或者一个事务。但是会导致频繁的磁盘写入操作，因此该模式也是最慢的一种方式。当sync_binlog=N(N>1)，innodb_flush_log_at_trx_commit=2时，在当前模式下MySQL的写操作才能达到最高性能。

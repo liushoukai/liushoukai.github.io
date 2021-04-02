@@ -1,8 +1,8 @@
 ---
 layout: post
 title: 操作系统内存
-categories: linux
-tags: linux
+categories: system
+tags: memory
 ---
 
 ### 操作系统内存
@@ -24,4 +24,4 @@ tags: linux
 
 为了实现虚拟内存空间到物理内存空间映射，内核会为系统中每一个进程维护一份相互独立的页映射表。页映射表的基本原理是将程序运行过程中需要访问的一段虚拟内存空间通过页映射表映射到一段物理内存空间上，这样CPU访问对应虚拟内存地址的时候就可以通过这种查找页映射表的机制访问物理内存上的某个对应的地址。其中，"页（page）"是虚拟内存空间向物理内存空间映射的基本单元。
 
-![system-memory](/assets/img/operating-system-memory.png){:width="100%"}
+![system-memory](/assets/img/system-memory/1.png){:width="100%"}
