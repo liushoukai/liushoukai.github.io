@@ -116,3 +116,33 @@ binlog的默认是保持时间由参数expire_logs_days配置，也就是说对�
 
 　　关于事务提交时，redo log和binlog的写入顺序，为了保证主从复制时候的主从一致（当然也包括使用binlog进行基于时间点还原的情况），是要严格一致的，
 MySQL通过两阶段提交过程来完成事务的一致性的，也即redo log和binlog的一致性的，理论上是先写redo log，再写binlog，两个日志都提交成功（刷入磁盘），事务才算真正的完成。
+
+### event有序性
+
+对于解析MySQL的binlog用来更新其他数据存储的应用来说，binlog的顺序标识是很重要的。比如，根据时间戳得到binlog位点作为解析起点。
+
+但是binlog里面的事件，是否有稳定的有序性？binlog中有三个看上去可能有序的信息：xid、timestamp、gno。
+
+Xid
+
+当binlog格式为row，且事务中更新的是事务引擎时，每个事务的结束位置都有Xid，Xid的类型为整型。MySQL中每个语句都会被分配一个全局递增的query_id(重启会被重置)，每个事务的Xid来源于事务第一个语句的query_id。
+
+考虑一个简单的操作顺序：
+
+* session 1: begin; select; update;
+* session 2: begin; select; update; insert; commit;
+* session 1: insert; commit;
+
+显然Xid2 > Xid1，但因为事务2会先于事务1记录写binlog，因此在这个binlog中会出现Xid不是有序的情况。
+
+TIMESTAMP
+
+时间戳的有序性可能是被误用最多的。在mysqlbinlog这个工具的输出结果中，每个事务起始有会输出一个SET TIMESTAMP=n。这个值取自第一个更新事件的时间。上一节的例子中,timestamp2>timestamp1,但因为事务2会先于事务1记录写binlog，因此在这个binlog中，会出现TIMESTAMP不是有序的情况。
+
+GNO
+
+对于打开了gtid_mode的实例，每个事务起始位置都会有一个gtid event，其内容输出格式为UUID:gn，gno是一个整型数。由于NEXT_GTID是可以直接指定的，因此若故意构造，可以很容易得到不是递增的情况，这里只讨论automatic模式下的有序性。与上述两种情况不同，gno生成于事务提交时写binlog的时候。注意这里不是生成binlog，而是将binlog写入磁盘的时候。因此实现上确保了同一个UUID下gno的有序性。
+
+小结
+
+一个binlog文件中的Xid和TIMESTAMP无法保证有序性。在无特殊操作的情况下，相同的UUID可以保证gno的有序性。
