@@ -2,7 +2,7 @@
 layout: post
 title: linux-sudo-su
 categories: linux-shell
-tags: linux sudo su
+tags: linux shell
 ---
 
 ### 以其他用户身份执行命令
@@ -49,5 +49,4 @@ out of their way to re-enable the root account.
 1. 使用用户账户登录，你运行的程序只能写到你自己的目录中，在没有获得root权限的情况下，你无法修改系统文件
 2. 如果应用程序Firefox存在安全漏洞，恰好你又在使用root权限运行Firefox，那么而已的网页会有权读写系统的所有文件
 
-Well, to put it simply, installing as a root does not allow any of the user to alter the programs/applications installed.
-In general, it is always recommended to install some sensitive applications(depending upon scenario based usage), as root.
+>Well, to put it simply, installing as a root does not allow any of the user to alter the programs/applications installed.In general, it is always recommended to install some sensitive applications(depending upon scenario based usage), as root.

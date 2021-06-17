@@ -5,7 +5,7 @@ categories: tools
 tags: virtualbox nat
 ---
 
-VirtualBox网络连接方式详解
+## VirtualBox网络连接方式详解
 ========================
 
 > **介绍VirtualBox中常见的几种网络连接方式:**

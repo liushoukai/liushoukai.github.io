@@ -1,7 +1,7 @@
 ---
 layout: post
 title: SSL/TLS协议运行机制
-categories: tcp
+categories: protocol
 tags: tcp
 ---
 
