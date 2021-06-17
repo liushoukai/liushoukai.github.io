@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Spring Bean初始化/销毁
-categories: spring
+categories: java
 tags: spring spring-boot
 ---
 

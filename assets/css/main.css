@@ -115,19 +115,8 @@ body {
     padding: 0px 0px 0px 0px;
     margin: 0px 0px 0px 0px;
     font-size: 16px;
-    font-weight: 300;
     line-height: 1.75em;
 }
-
-/* body,code,pre {
-    font-family: "KaiTi", "Microsoft YaHei", "微软雅黑", "SimSun", "宋体", sans-serif, "Arial";
-} */
-
-/* @media (min-width: 600px) {
-    body,.sheet,pre,code{
-        font-size: 14px;
-    }
-} */
 
 @media (max-width: 600px) {
     body,.sheet,pre,code{
@@ -332,10 +321,3 @@ a:active {text-decoration: none}	/* 选定的链接 */
   font-weight: normal;
   font-style: normal;
 }
-
-/* @font-face {
-  font-family: 'ArchitectsDaughter';
-  src: url("https://liushoukai.github.io/assets/fonts/ArchitectsDaughter.ttf");
-  font-weight: normal;
-  font-style: normal;
-} */
