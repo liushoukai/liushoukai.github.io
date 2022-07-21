@@ -16,7 +16,7 @@ Please refer to the official installation [document](https://rubygems.org/pages/
 ## Install Bundler with RubyGems
 
 ```shell
-sudo gem install bundler
+sudo gem install bundler jekyll
 bundle install
 bundle update
 ```
