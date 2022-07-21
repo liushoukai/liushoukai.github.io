@@ -1,0 +1,19 @@
+#!/bin/bash
+Description=Jekyll service
+After=syslog.target network.target
+
+[Service]
+User=kay
+Type=simple
+WorkingDirectory=/data/webapp/liushoukai.github.io
+ExecStart=/usr/local/bin/jekyll serve --watch --source "/data/webapp/liushoukai.github.io"
+ExecStop=/usr/bin/pkill -f jekyll
+Restart=always
+TimeoutStartSec=60
+RestartSec=60
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=jekyll
+
+[Install]
+WantedBy=multi-user.target network-online.target
