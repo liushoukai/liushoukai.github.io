@@ -11,4 +11,5 @@ group :jekyll_plugins do
   gem 'kramdown'
   gem 'coderay'
   gem 'rouge'
+  gem 'public_suffix'
 end
