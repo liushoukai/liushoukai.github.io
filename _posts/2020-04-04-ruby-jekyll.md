@@ -71,3 +71,45 @@ end
 # 安装Gemfile文件内的依赖项
 bundle install
 ```
+
+## jekyll kramdown 语法高亮
+
+GitHub 推荐使用的 Jekyll 的 Markdown 插件为 kramdown。kramdown 是一个强大且高性能的文本转换引擎，kramdown是markdown的超集。在Jekyll中支持, 可以用于Github搭建博客. 和Jekyll一样使用Ruby作为核心语言。由于Maruku不再更新, Github推荐使用kramdown作为markdown解析。
+
+官方文档：https://kramdown.gettalong.org/documentation.html
+
+`Rouge语法高亮`
+
+1、配置 kramdown 转换引擎在转换 Markdown 为 HTML 的时候，使用 rouge 格式的样式（具体只语法高亮所用的 css 的 class）
+```
+markdown: kramdown
+kramdown: 
+  input: GFM 
+  syntax_highlighter: rouge
+```
+2、使用Rouge生成并引入Rouge语法高亮样式
+```shell
+gem install rouge
+rougify help style
+
+##########################################
+available themes:
+  base16, base16.dark, base16.light, base16.monokai, base16.monokai.dark, base16.monokai.light, base16.solarized, base16.solarized.dark, base16.solarized.light, colorful, github, gruvbox, gruvbox.dark, gruvbox.light, igorpro, molokai, monokai, monokai.sublime, thankful_eyes, tulip
+##########################################
+
+rougify style github > assets/css/syntax_highlighter.css
+rougify style thankful_eyes > assets/css/syntax_highlighter.css
+```
+
+3、修改页面样式
+```html
+<link rel="stylesheet" type="text/css" href="{{ '/assets/css/syntax_highlighter.css' | prepend: site.baseurl }}" />
+```
+
+`Coderay语法高亮`
+```
+markdown: kramdown
+kramdown: 
+  input: GFM 
+  syntax_highlighter: coderay
+```
