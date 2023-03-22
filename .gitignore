@@ -10,3 +10,5 @@ node_modules
 .vscode/
 
 .jekyll-cache/
+
+jekyll.log

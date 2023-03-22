@@ -19,7 +19,7 @@
                 {% for p in sorted %}
                 {% if p.navItemDisplay %}
                 <li {% if p.url == page.url %} class="active" {% endif %}>
-                    <a href="{{ p.url | prepend: site.baseurl }}" class="word-keep"><span class="octicon {{ p.icon }}"></span>&nbsp;&nbsp;{{ p.title }}</a>
+                    <a href="{{ p.url | prepend: site.baseurl }}" class="word-keep"><span class="octicon {{ p.icon }}"></span>&nbsp;&nbsp;{{ p.title  | prepend: site.baseurl }}</a>
                 </li>
                 {% endif %}
                 {% endfor %}

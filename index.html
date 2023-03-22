@@ -17,9 +17,9 @@ styles: [article-list.css]
                         <a class="word-keep" href="{{ site.baseurl }}/tags/#{{ tag }}"><span class="octicon octicon-tag"></span>&nbsp;{{ tag }}</a>
                         {% endfor %}
                         <span class="word-keep pull-right">
-                            <a href="{{ post.url | prepend: site.baseurl | prepend: site.url }}#post-comment">
+                            <a href="{{ post.url | prepend: site.baseurl }}#post-comment">
                             <span class="octicon octicon-comment"></span>&nbsp;Comment</a>
-                            <a href="{{ post.url | prepend: site.baseurl | prepend: site.url }}#post-share">
+                            <a href="{{ post.url | prepend: site.baseurl }}#post-share">
                             <span class="octicon octicon-file-symlink-file"></span>&nbsp;Share</a>
                         </span>
                     </footer>

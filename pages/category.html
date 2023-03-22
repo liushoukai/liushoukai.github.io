@@ -24,7 +24,7 @@ navItemOrder: 2
       {% for posts in category %}
       {% for post in posts %}
       {% if post.title != null %}
-      <li itemscope><a href="{{ post.url | prepend: site.baseurl | prepend: site.url }}">{{ post.title }}</a></li>
+      <li itemscope><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></li>
       {% endif %}
       {% endfor %}
       {% endfor %}
