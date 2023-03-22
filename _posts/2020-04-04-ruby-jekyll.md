@@ -72,7 +72,7 @@ end
 bundle install
 ```
 
-## jekyll kramdown 语法高亮
+## Kramdown 语法高亮
 
 GitHub 推荐使用的 Jekyll 的 Markdown 插件为 kramdown。kramdown 是一个强大且高性能的文本转换引擎，kramdown是markdown的超集。在Jekyll中支持, 可以用于Github搭建博客. 和Jekyll一样使用Ruby作为核心语言。由于Maruku不再更新, Github推荐使用kramdown作为markdown解析。
 

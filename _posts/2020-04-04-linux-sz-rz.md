@@ -2,7 +2,7 @@
 layout: post
 title:  文件传输协议
 categories: linux
-tags: linux
+tags: sz rz
 ---
 
 ### XMODEM

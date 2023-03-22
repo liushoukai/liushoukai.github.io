@@ -2,7 +2,7 @@
 layout: post
 title: Docker镜像
 categories: kubernetes
-tags: docker kubernetes
+tags: docker
 ---
 
 

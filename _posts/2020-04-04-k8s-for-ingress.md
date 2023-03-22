@@ -2,7 +2,7 @@
 layout: post
 title: Kubernetes Ingress
 categories: kubernetes
-tags: docker kubernetes helm
+tags: ingress
 ---
 
 ### Ingress 简介

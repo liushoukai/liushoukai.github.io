@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  VirtualBox Network
-categories: tools
-tags: virtualbox nat
+categories: tool
+tags: virtualbox
 ---
 
 ## VirtualBox网络连接方式详解

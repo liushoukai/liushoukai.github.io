@@ -2,7 +2,7 @@
 layout: post
 title: Docker Desktop 启用 Kubernetes
 categories: kubernetes
-tags: docker kubernetes docker-desktop
+tags: docker docker-desktop
 ---
 
 ### Docker Desktop 简介
