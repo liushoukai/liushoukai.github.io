@@ -5,29 +5,28 @@ categories: rpc
 tags: thrift
 ---
 
+## RPC远程方法调用
 
-## Mac安装thrift
+尽管“调用远程方法”与“调用本地方法”只有两字之差，但若要兼顾简单、透明、性能、正确、鲁棒、一致等特点，两者的复杂度就完全不可同日而语了。且不说远程方法不能再依靠本地方法那些以内联为代表的传统编译优化来提升速度，光是“远程”二字带来的网络环境下的新问题，譬如，远程的服务在哪里（服务发现），有多少个（负载均衡），网络出现分区、超时或者服务出错了怎么办（熔断、隔离、降级），方法的参数与返回结果如何表示（序列化协议），信息如何传输（传输协议），服务权限如何管理（认证、授权），如何保证通信安全（网络安全层），如何令调用不同机器的服务返回相同的结果（分布式数据一致性）等一系列问题，全都需要设计者耗费大量精力。
+
+## 安装thrift
+
 ```shell
 brew install boost
 brew install libevent
 brew install thrift
 ```
 
-`Mac安装python pip`
-
-Mac默认就安装了Python，因此，无需使用brew重复安装；
-sudo easy_install pip
-
 `Thrift生成Java代码`
 ```shell
-thrift -r --gen java -out /data/source/git/phoenix/phoenix-admin-web/src/main/java ./test.thrift
+thrift -r --gen java -out ./src/main/gen ./demo.thrift
 ```
 
 ## Thrift结构
 
 Thrift的结构一共有三层，这三层需要我们在编程的时候根据自己的需求来设置。
 
-### `Transport`
+### Transport
 
 传输层，定义数据传输方式，比如：网络或者文件。
 每种编程语言都必须具备双向传输原始数据的通用接口，特定传输的实现对服务的开发者来说应该是透明的。
@@ -60,7 +59,7 @@ TNonblockingTransport 使用非阻塞方式，用于构建异步客户端。
 
 ---
 
-### `Protocol`
+### Protocol
 
 协议层，定义数据传输格式，比如：XML、Binary、JSON
 数据类型必须有某种方式使用传输层对自身进行编码和解码。同样，应用层开发人员也不必关心协议层的实现。
@@ -142,7 +141,7 @@ i32存储的28bit对应的十进制值是268435455，考虑常规传输的数值
 
 ---
 
-`Processors`
+### Processors
 
 最终，我们生成的代码具备处理数据流的能力，从而实现了远程调用。
 Thrift服务模型

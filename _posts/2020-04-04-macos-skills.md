@@ -19,19 +19,19 @@ tags: macOS
 
 由于系统限制非root用户不能启动1024以下端口，而我们平时使用Mac一般都是非root用户，所以如果想启动80端口必须用root用户
 
-```bash
+```
 sudo vim /etc/pf.conf
 ```
 
 1.在pf.conf文件的rdr-anchor "com.apple/*"这一行后面添加如下代码
 
-```java
+```
 rdr on lo0 inet proto tcp from any to 127.0.0.1 port 80 -> 127.0.0.1 port 8080
 ```
 
 2.其中 lo0 通过 ifconfig 看自己那个设备绑定的是127.0.0.1, lo0是这个网络设备的名字。 8080是要转发的端口
 
-```bash
+```
 sudo pfctl -f /etc/pf.conf
 sudo pfctl -e
 ```
@@ -84,3 +84,16 @@ Successfully disabled System Integrity Protection. Please restart the machine fo
 ```bash
 csrutil enable
 ```
+
+## Charles不能抓包问题处理
+
+1. charles proxy设置
+遇到mac的网络请求不能抓包，首先确认charles的proxy选项设置，Proxy -> macOS Proxy，勾选上macOS Proxy，再试一试能否抓取mac的网络请求包。
+
+3. 信任Charles根证书
+有时候不能抓包是charles的根证书没有被开发者信任，通过如下方式信任根证书，选择charles菜单，help -> SSL Proxying -> Install Charles Root Certificate，此时会打开mac的钥匙串访问程序，右键选择证书列表中的charles根证书，将该证书选择永久信任。需要注意的是，永久信任的选项隐藏比较深，找的时候注意点。再试一试能否抓包。
+
+3. 代理冲突导致不能抓包
+代理上网方式，这可能根charles的代理有所冲突，
+解决方法是，设置 -> 网络 -> Wifi -> 高级 -> 代理，在左侧的配置协议列表中取消勾选"自动发现代理"和"自动代理配置"。
+重启charles，再尝试一下，看能否charles抓取mac的网络请求包。

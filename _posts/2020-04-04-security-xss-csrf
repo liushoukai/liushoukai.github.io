@@ -32,3 +32,25 @@ tags: xss csrf sql-injection
 2. Charly注意到Bob的站点具有存储式的XSS漏洞。
 3. Charly发布一个热点信息，吸引其它用户纷纷阅读。
 4. Bob或者是任何的其他人如Alice浏览该信息，其会话cookies或者其它信息将被Charly盗走。
+
+
+## CSRF
+
+CSRF(Cross Site Request Forgery) 跨站域请求伪造
+
+HTTP Referer 记录HTTP请求的来源地址，值由浏览器提供
+服务端检查Http Referer是否在域名白名单中
+
+1.低版本浏览器Referer存在被篡改的漏洞
+2.为保护个人隐私部分浏览器在发送请求时不再提供Referer
+
+1.服务器接受到请求，如果用户已登录，将ukey=随机字符串写入cookie
+2.客户端从cookie中获取到的ukey,使用hash算法生成csrf_token
+3.客户端将csrf_token代入发送到服务器的请求中
+4.服务器判断是否为用户登录态下发起的POST
+5.读取ukey后根据相同的hash算法生成csrf_token并将其与请求中的token进行比较
+
+为什么读取操作不需要csrf_token?
+1.如果查询请求是异步的，必定跨域
+2.如果查询请求是同步的，页面跳转
+上述两种情形恶意站点脚本都无法获取服务器的响应信息
