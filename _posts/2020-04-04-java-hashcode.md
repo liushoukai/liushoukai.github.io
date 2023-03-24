@@ -24,7 +24,7 @@ tags: java
 
 ### System.identityHashCode(obj)
 
-identityHashCode是System里面提供的本地方法，java.lang.System#identityHashCode。
+java.lang.System#identityHashCode是System里面提供的本地方法。
 
 ```java
 /**

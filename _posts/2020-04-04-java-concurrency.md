@@ -5,6 +5,8 @@ categories: java
 tags: java
 ---
 
+## ConcurrentModificationException
+
 ### 源码分析
 
 AbstractList的核心属性modCount，初始值为0，表示List结构已经被修改的次数。结构修改包括改变List的大小，或以其他类似的方式导致其在迭代的过程中产生不正确的结果的行为。
