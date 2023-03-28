@@ -1,9 +1,12 @@
 ---
 layout: post
-title: 模板示例（请勿编辑）
+title: 编写基准测试用例
 categories: java
-tags: threadsafe jvm
+tags: benchmark
 ---
+
+
+编写基准测试用例比对 Thymeleaf 3.x 版本与 2.x 版本性能：
 
 https://github.com/mbosecke/template-benchmark
 
@@ -33,17 +36,14 @@ https://github.com/mbosecke/template-benchmark
 |Trimou.benchmark     | 1.8.2.Final    | thrpt |  50 | 18117.914 | ±  305.510 | ops/s |
 |Velocity.benchmark   | 1.7            | thrpt |  50 | 16610.908 | ±  214.678 | ops/s |
 
-结论
-虽然纵向比较Thymeleaf 3.x版本对比2.x性能有了大幅度的提升，但是横向与其他模板引擎对比，
 
-
-1、gunplot:画图工具，python下使用libsvm必须是用的吧，matlab下面可能不需要安装
+使用 gunplot 画图工具，python下使用libsvm必须是用的吧，matlab下面可能不需要安装
 
 安装gnuplot
 java -jar target/benchmarks.jar -rff results.csv -rf csv
 gnuplot benchmark.plot
 
-1. 在ubuntu中安装gnuplot-x11包, `sudo apt-get -y install gnuplot-x11`，检查是否安装`dpkg -s gnuplot-x11`
+1. 在ubuntu中安装gnuplot-x11包, `sudo apt -y install gnuplot-x11`，检查是否安装`dpkg -s gnuplot-x11`
 2. 安装后输入gnuplot进入Gnuplot命令界面
 3. 输入plot sin(x)结果如下图所示
 4. 退出gnuplot按q

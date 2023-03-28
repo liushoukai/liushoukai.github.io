@@ -82,7 +82,7 @@ kafka-topics.sh --list --zookeeper localhost:2181
 kafka-topics.sh --describe --zookeeper localhost:2181 --topic test
 ```
 
-![kafka-topics](/assets/img/kafka-topics.png){:width="100%"}
+![kafka-topics](/assets/img/af86b8bb-c1b5-449c-a7a7-f1397cf284f7.png){:width="100%"}
 
 * leader      负责给定分区的所有读取和写入的节点。每个节点将成为随机选择的分区部分的领导者。
 * replicas    复制此分区日志的节点列表，无论它们是否为领导者，或者即使它们当前处于活动状态。
@@ -296,7 +296,7 @@ kafka-consumer-groups.sh
 
 Kafka 生产者架构图
 
-![kafka-producer](/assets/img/kafka-producer.png){:width="50%"}
+![kafka-producer](/assets/img/df07c892-8a9a-4e33-ab66-b3d7ac99a973.png){:width="50%"}
 
 从生产者的架构图里可以看到，消息先是被放进缓冲区，然后使用单独的线程发送到服务器端。
 
@@ -438,8 +438,8 @@ Topic是发布消息/订阅消息所属类别的抽象。
 
 无论分区日志中的消息是否被消费过，Kafka集群都会持久保存所有的分区日志，并按照配置的保留期删除历史分区日志中的消息；
 
-![kafka-parition-log](/assets/img/kafka-partitions-log-1.png){:width="45%"}
-![kafka-parition-log](/assets/img/kafka-partitions-log-2.png){:width="45%"}
+![kafka-parition-log](/assets/img/b00cf95b-2ad0-4991-9570-b72efd55892d.png){:width="45%"}
+![kafka-parition-log](/assets/img/8797a5d6-0176-4539-b0be-8321b53ee808.png){:width="45%"}
 
 实际上，每个消费者保留的唯一元数据就是已经消费过的消息在分区日志中的偏移量。
 这种偏移由消费者控制：通常消费者在读取记录时会线性地提高其偏移量，但事实上，由于该位置由消费者控制，因此它可以按照自己喜欢的任何顺序消费记录。
@@ -466,8 +466,8 @@ Broker-2包含10个分区日志，5个分区日志的Leader(0,2,4,6,8)，5个分
 假设写入Partition-3，那么客户端会将消息会被发送给Broker-1，由Broker-1将消息追加到分区日志3中，然后，Broker-2会将数据复制到自己的副本分区日志3中。
 即时Broker-1所在的服务宕机，Broker-2会从5个分区日志(1,3,5,7,9)的Follower变为新的Leader，接收对应分区日志的所有读写请求；
 
-![kafka-parition-log](/assets/img/kafka-partitions-1.png){:width="100%"}
-![kafka-parition-log](/assets/img/kafka-partitions-2.png){:width="100%"}
+![kafka-parition-log](/assets/img/97579062-fe76-4fdf-a479-7eebbce7f124.png){:width="100%"}
+![kafka-parition-log](/assets/img/3a271928-0a60-4918-99f2-473d57a6430f.png){:width="100%"}
 
 ---
 

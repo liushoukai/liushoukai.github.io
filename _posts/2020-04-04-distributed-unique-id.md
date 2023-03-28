@@ -46,7 +46,7 @@ UUID(Universally Unique Identifier)的标准型式包含32个16进制数字，�
 
 对于分布式的ID生成，以 Twitter Snowflake 为代表的， Flake 系列算法，属于划分命名空间并行生成的一种算法，生成的数据为64bit的long型数据，在数据库中应该用大于等于64bit的数字类型的字段来保存该值，比如在 MySQL 中应该使用 BIGINT。
 
-![snowflake-64bit](/assets/img/snowflake-64bit.jpg){:width="100%"}
+![snowflake-64bit](/assets/img/2dcc8af7-c6a6-4bb6-aa2e-0ba2acb22669.jpg){:width="100%"}
 
 {:class="table table-striped table-bordered table-hover"}
 | <img style="width:80px">长度 | <img style="width:80px">描述 | <img style="width:150px">解释 | 取值范围 |
