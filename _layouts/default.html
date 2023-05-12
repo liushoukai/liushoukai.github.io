@@ -4,6 +4,7 @@ layout: null
 <!DOCTYPE html>
 <html>
 <head>
+    {% include page-analytics.html %}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,9 +19,7 @@ layout: null
     <link rel="canonical" href="{{ page.url | prepend: site.baseurl }}">
     <link rel="alternate" hreflang="zh" href="https://liushoukai.gihub.io"/>
     <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | prepend: site.baseurl }}"/>
-
     {% include page-style.html %}
-    {% include page-analytics.html %}
 </head>
 <body>
 {% include page-header.html %}
