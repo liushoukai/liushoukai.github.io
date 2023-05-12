@@ -7,9 +7,9 @@ tags: jekyll
 
 ## 安装Ruby版本管理器RVM
 
-RVM(Ruby Version Manager)是一个Ruby版本管理工具，类似nodejs中的nave。
+Ruby enVironment (Version) Manager (RVM) 是一个Ruby的命令行版本管理工具，允许您轻松地安装、管理和使用从解析器到 gems 集的多个 ruby 环境。
 
-1、安装Ruby版本管理器RVM，参考：https://rvm.io/rvm/install。
+1、安装Ruby版本管理器RVM，参考官方文档：[https://rvm.io/rvm/install](https://rvm.io/rvm/install){:target="_blank"}。
 
 ```shell
 source ~/.rvm/scripts/rvm
