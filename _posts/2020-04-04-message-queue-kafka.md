@@ -50,17 +50,17 @@ KAFKA_HEAP_OPTS 变量设置 JVM HEAP 内存。Kafka 启动和停止的时间，
 #### 启动zookeeper
 
 ```shell
-nohup /usr/local/kafka/bin/zookeeper-server-start.sh /usr/local/kafka/config/zookeeper.properties >> /data/log/zookeeper/zookeeper.log 2>&1 &
+nohup /usr/local/kafka/bin/zookeeper-server-start.sh /usr/local/kafka/config/zookeeper.properties >> /data/logszookeeper/zookeeper.log 2>&1 &
 ```
 
 #### 启动kafka
 
 ```shell
-nohup /usr/local/kafka/bin/kafka-server-start.sh /usr/local/kafka/config/server-1.properties >> /data/log/kafka/kafka-server-1.log 2>&1 &
-nohup /usr/local/kafka/bin/kafka-server-start.sh /usr/local/kafka/config/server-2.properties >> /data/log/kafka/kafka-server-2.log 2>&1 &
-nohup /usr/local/kafka/bin/kafka-server-start.sh /usr/local/kafka/config/server-3.properties >> /data/log/kafka/kafka-server-3.log 2>&1 &
+nohup /usr/local/kafka/bin/kafka-server-start.sh /usr/local/kafka/config/server-1.properties >> /data/logskafka/kafka-server-1.log 2>&1 &
+nohup /usr/local/kafka/bin/kafka-server-start.sh /usr/local/kafka/config/server-2.properties >> /data/logskafka/kafka-server-2.log 2>&1 &
+nohup /usr/local/kafka/bin/kafka-server-start.sh /usr/local/kafka/config/server-3.properties >> /data/logskafka/kafka-server-3.log 2>&1 &
 
-tail -fn 3 /data/log/kafka/kafka-server-*.log
+tail -fn 3 /data/logskafka/kafka-server-*.log
 ```
 
 #### 创建消息主题
@@ -264,7 +264,7 @@ Kafka-Manage基于JMX对Kafka进行监控，因此，启用Kafka时设置JMX的�
 JMX_PORT=8888 kafka-server-start.sh config/server-1.properties
 
 3.启动kafka-manager
-nohup /usr/local/kafka-manager/bin/kafka-manager -Dconfig.file=/usr/local/kafka-manager/conf/application.conf -Dhttp.port=9999 >> /data/log/kafka/kafka-manager.log 2>&1 &
+nohup /usr/local/kafka-manager/bin/kafka-manager -Dconfig.file=/usr/local/kafka-manager/conf/application.conf -Dhttp.port=9999 >> /data/logskafka/kafka-manager.log 2>&1 &
 
 ```
 
