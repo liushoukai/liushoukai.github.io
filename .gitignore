@@ -12,3 +12,5 @@ node_modules
 .jekyll-cache/
 
 jekyll.log
+
+.DS_Store
