@@ -107,7 +107,7 @@ rougify style thankful_eyes > assets/css/syntax_highlighter.css
 ```
 
 `Coderay语法高亮`
-```
+```ruby
 markdown: kramdown
 kramdown: 
   input: GFM 

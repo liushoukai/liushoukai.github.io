@@ -23,23 +23,16 @@ host: 0.0.0.0
 port: 4000
 show_dir_listing: false
 
-
 # Site
 title: "思索者"
 author: "Kay"
 keywords: "博客，Jekyll"
 description: "KAY个人博客"
 
-
 links:
   - github: "https://github.com/liushoukai/"
 
 excerpt_separator: "\n\n\n"
-
-analytics:
-  provider: google
-  google:
-    tracking_id: 'UA-70311570-1'
 
 defaults:
   - scope:
