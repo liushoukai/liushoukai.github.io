@@ -1,8 +1,8 @@
 ---
 layout: post
-title: thrift
+title: rpc
 categories: rpc
-tags: thrift
+tags: thrift gRpc
 ---
 
 ## RPC远程方法调用
