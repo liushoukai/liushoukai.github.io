@@ -1,23 +1,19 @@
 ---
 layout: post
-title:  VirtualBox Network
+title:  VirtualBox
 categories: tool
 tags: virtualbox
 ---
 
 ## VirtualBox网络连接方式详解
-========================
-
-> **介绍VirtualBox中常见的几种网络连接方式:**
-> - 网络地址转换（NAT）
-> - 桥接网卡（Bridged networking）
-> - 内部网络（Internal networking)
-> - 仅主机适配器（Host-only network）
-
-----------
-
+---
+> 介绍VirtualBox中常见的几种网络连接方式:
 网络地址转换（NAT）
-----------------
+桥接网卡（Bridged networking）
+内部网络（Internal networking)
+仅主机适配器（Host-only network）
+
+### 网络地址转换（NAT）
 
 网络地址转换是虚拟机访问外网最简单的方式。通常，网络地址转换不需要在宿主机上做任何网络配置。
 因此，网络地址转换是VirtualBox默认的网络连接方式。
@@ -44,28 +40,28 @@ Virtualbox监听宿主机的特定端口，将所有发送至该端口的数据�
 对于虚拟机上的应用服务而言，就像被代理的服务应用是运行在宿主机上的。这也意味着你不能在宿主机相同的端口上
 运行同样的的服务，然而仍可以在虚拟机中运行服务。
 
-#### 配置端口转发
+1、通过命令行配置端口转发
 
-- **通过命令行配置端口转发**
+```shell
+# 添加端口转发配置
+VBoxManage modifyvm "ubuntu1404" --natpf1 "reportssh,tcp,,9022,,22"
+# 删除端口转发配置
+VBoxManage modifyvm "ubuntu1404" --natpf1 delete "reportssh"
+
+# natpf1代表网卡1，natpf2代表网卡2，...，依次类推
+# reportssh为自定义端口转发的名字
+# tcp为转发的协议
 ```
-VBoxManage modifyvm "ubuntu1404" --natpf1 "reportssh,tcp,,9022,,22" //添加端口转发配置
-VBoxManage modifyvm "ubuntu1404" --natpf1 delete "reportssh"        //删除端口转发配置
-```
 
-    > **Note:**
-    > - natpf1代表网卡1，natpf2代表网卡2，...，依次类推
-    > - reportssh为自定义端口转发的名字
-    > - tcp为转发的协议
+2、通过图形界面配置端口转发
 
-- **通过图形界面配置端口转发**
 ![网络设置][2]
 ![端口转发规则][1]
 
-#### 测试配置的端口转发规则是否正确
+测试配置的端口转发规则是否正确
 ![测试][3]
 
-桥接网卡（Bridged networking）
----------------------------
+### 桥接网卡（Bridged networking）
 
 在桥接网络中，Virtualbox使用宿主机的网卡驱动，过滤物理网卡的数据。
 该驱动被称为“网络过滤”驱动。从而允许Virtualbox通过物理网卡接收发送数据，
@@ -80,8 +76,7 @@ VBoxManage modifyvm "ubuntu1404" --natpf1 delete "reportssh"        //删除端�
 ![网络设置][4]
 ![端口转发规则][5]
 
-内部网络（Internal networking)
------------------------------
+### 内部网络（Internal networking)
 
 内部网络类似于桥接网络，虚拟机能够直接同外部网络通信。然而，外部网络仅限于相同宿主机上的其他虚拟机。
 尽管从技术上来讲，任何可以使用内部网络完成的都可以使用桥接网络替代，然而内部网络具备一些安全优势。
@@ -89,32 +84,33 @@ VBoxManage modifyvm "ubuntu1404" --natpf1 delete "reportssh"        //删除端�
 如果出于某些原因，想在同一机器上的多个虚拟机之间进行私密的交流，桥接网络就无法做到了。虚拟机只
 能相互间通信而无法连接到外网，因为虚拟机没有连接到物理网卡。
 
-#### 配置两台机器的内部网络
+配置两台机器的内部网络
 
-##### 添加一个dhcp服务器
+添加一个dhcp服务器
 
-```
+```shell
+# 添加一个dhcp服务器
 VBoxManage dhcpserver add --netname testlab --ip 10.10.10.1 --netmask 255.255.255.0 --lowerip 10.10.10.2 --upperip 10.10.10.12 --enable
 ```
 
-##### 配置两台虚拟机ubuntu1404与Ubuntu1401的为内部网络
+配置两台虚拟机ubuntu1404与Ubuntu1401的为内部网络
 
 ![虚拟机1410][6]
 ![虚拟机1404][7]
 
-##### 验证两台机器的连通性
+验证两台机器的连通性
 
 ![虚拟机1410][8]
 ![虚拟机1404][9]
 
 
-仅主机适配器（Host-only network）
-------------------------------
+### 仅主机适配器（Host-only network）
 
 Host-only网络适用于多个虚拟机相互协作的情况。例如，一台虚拟机包含web服务，另一台虚拟机包含数据库，
 由于web服务需要访问数据库，可以为两台虚拟机设置设置host-only网络，确保两者在同一个私有的局域网内，
 同时设置包含web服务器的虚拟机为桥接网络，从而可以通过外网访问服务器。
-```
+
+```shell
 # 将指定客户机的网卡X修改为Host-only模式
 vboxmanage modifyvm <vmname> --nic<x> hostonly
 
@@ -129,15 +125,4 @@ ifconfig
 
 # 对新建网络开启VBox提供的DHCP服务
 vboxmanage dhcpserver add --netname <network_name>
-
 ```
-
-[1]:http://7xr4ey.com1.z0.glb.clouddn.com/20160222112239.jpg
-[2]:http://7xr4ey.com1.z0.glb.clouddn.com/20160222111947.jpg
-[3]:http://7xr4ey.com1.z0.glb.clouddn.com/20160222114406.jpg
-[4]:http://7xr4ey.com1.z0.glb.clouddn.com/20160223094900.jpg
-[5]:http://7xr4ey.com1.z0.glb.clouddn.com/20160222131255.jpg
-[6]:http://7xr4ey.com1.z0.glb.clouddn.com/20160223103008.jpg
-[7]:http://7xr4ey.com1.z0.glb.clouddn.com/20160223103114.jpg
-[8]:http://7xr4ey.com1.z0.glb.clouddn.com/20160223104547.jpg
-[9]:http://7xr4ey.com1.z0.glb.clouddn.com/20160223104713.jpg
