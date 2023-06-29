@@ -5,6 +5,28 @@ categories: redis
 tags: 
 ---
 
+
+## Redis Bitmap 应用限制
+
+Redis 位图是字符串数据类型的扩展，可以将字符串视为位向量。
+
+![img](/assets/img/0725a0f0-b58f-4a8a-ada3-52cf9782466f.png)
+
+```redis
+SETBIT key offset value
+```
+
+当 key 不存在时，将创建一个新的字符串值。字符串长度要确保可以包含 offset。
+offset 参数必须大于或等于0，小于2^32(这将位映射限制为512MB)。当键处的字符串增长时，添加的位被设置为0。
+
+2^32bit / 8 / 1024 / 1024 = 512MB
+
+8 * 1024 * 1024 * 512 = 2^32
+
+两点限制：
+- offset的最大长度是 unsigned i32，即取值范围是[0, 4294967295]；
+- 如果首次写入4294967295，会直接分配到 512MB 的内存，内存占用比较多之外也会有一定的停顿；
+
 ### [Redis 6.0.0][4]{:target="_blank"} Released Apr 30 2020
 
 > what's new in Redis 6.0?
