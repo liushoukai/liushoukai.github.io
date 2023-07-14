@@ -1,36 +1,55 @@
 ---
 layout: post
-title: Spring Bean初始化/销毁
-categories: java
+title: Spring Bean生命周期
+categories: spring
 tags: spring spring-boot
 ---
 
-## 解决什么问题？
+## Spring Bean 生命周期
 
----
+### 应用场景
 
-### 缓存预热
+缓存预热
 
 为什么要关注Spring Bean的创建和销毁流程，最常见的一个应用场景是服务的缓存预热，通常是放在Bean的初始化阶段。
 
 线上就因为对初始化的流程理解存不够深入，预热的代码存在BUG，导致数据预热完成之前，已经开始监听端口接收流量导致的线上故障。
 
----
-
 ## Bean初始化/销毁方式
-
----
 
 * init-method/destroy-method
 * InitializingBean/DisposableBean
 * @PostConstruct/@PreDestroy
 * ContextStartedEvent/ContextClosedEvent
 
----
+## Bean初始化/销毁的顺序
+
+<div class="mermaid">
+%%{init: {"flowchart": {"htmlLabels": false}} }%%
+flowchart LR
+    subgraph Bean Initialization
+    markdown1 --> markdown2 --> markdown3 --> markdown4 --> markdown5
+    markdown1["`@PostConstruct`"]
+    markdown2["`InitializingBean`"]
+    markdown3["`init-method`"]
+    markdown4["`ContextStartedEvent`"]
+    markdown5["`Spring 启动完毕`"]
+    end
+</div>
+<div class="mermaid">
+%%{init: {"flowchart": {"htmlLabels": false}} }%%
+flowchart LR
+    subgraph Bean Destruction
+    markdown6 --> markdown7 --> markdown8 --> markdown9 --> markdown10
+    markdown6["`关闭 Spring`"]
+    markdown7["`ContextedClosedEvent`"]
+    markdown8["`@PreDestroy`"]
+    markdown9["`DisposableBean`"]
+    markdown10["`destroy-method`"]
+    end
+</div>
 
 ### init-method/destroy-method
-
----
 
 通过自定义的初始化和销毁方法。
 
@@ -44,11 +63,7 @@ public class AppConfig {
 }
 ```
 
----
-
 ### InitializingBean/DisposableBean
-
----
 
 继承 Spring 的 InitializingBean / DisposableBean 接口，其中 InitializingBean 用于初始化操作，而 DisposableBean 用于在销毁之前执行清理操作。
 
@@ -66,11 +81,11 @@ public class HelloService implements InitializingBean, DisposableBean {
 }
 ```
 
----
+
 
 ### @PostConstruct/@PreDestroy
 
----
+
 
 与上述两种方法相比，该方法最容易使用。您只需要在相应的方法上使用注释。
 
@@ -90,11 +105,11 @@ public class HelloService {
 }
 ```
 
----
+
 
 ### ContextStartedEvent/ContextClosedEvent
 
----
+
 
 通过这种方式，使用了Spring事件机制，并且很少进行日常业务开发，通常将其与框架集成在一起。
 
@@ -128,19 +143,7 @@ public class HelloListener {
 }
 ```
 
----
-
-## Bean初始化/销毁的顺序
-
----
-
-![spring-bean-initialization-destruction](/assets/img/spring-bean-initialization-destruction/spring-bean-initialization-destruction.jpg){:width="70%"}
-
----
-
 ## Bean初始化/销毁源码分析
-
----
 
 使用ClassPathXmlApplicationContext启动Spring容器将调用refresh()来初始化容器。
 
@@ -247,11 +250,11 @@ public void start() {
 }
 ```
 
----
+
 
 ### Bean销毁源码分析
 
----
+
 
 调用classpathxmlapplicationcontext吗？方法将关闭容器，并且特定的逻辑将在doClose方法中执行。 doClose方法首先发送ContextClosedEvent，然后开始销毁Bean。
 

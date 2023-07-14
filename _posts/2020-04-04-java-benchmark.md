@@ -39,18 +39,16 @@ https://github.com/mbosecke/template-benchmark
 
 使用 gunplot 画图工具，python下使用libsvm必须是用的吧，matlab下面可能不需要安装
 
-安装gnuplot
+# 安装gnuplot
+```bash
 java -jar target/benchmarks.jar -rff results.csv -rf csv
 gnuplot benchmark.plot
+```
 
-1. 在ubuntu中安装gnuplot-x11包, `sudo apt -y install gnuplot-x11`，检查是否安装`dpkg -s gnuplot-x11`
+1. 在ubuntu中安装gnuplot-x11包：`sudo apt -y install gnuplot-x11`，
+2. 检查是否安装：`dpkg -s gnuplot-x11`
 2. 安装后输入gnuplot进入Gnuplot命令界面
 3. 输入plot sin(x)结果如下图所示
-4. 退出gnuplot按q
+4. 退出 gnuplot 按q
 
-
--rff results.csv -rf csv
-
-- "org.ponderers.benchmark.StringBuilderTest.testStringAdd","thrpt",2,15,10780.077210,1110.554348,"ops/ms"
-- "org.ponderers.benchmark.StringBuilderTest.testStringBuilderAdd","thrpt",2,15,26546.021272,6819.037910,"ops/ms"
 

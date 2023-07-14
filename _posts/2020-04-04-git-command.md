@@ -2,12 +2,10 @@
 layout: post
 title: git
 categories: git
-tags: git
+tags: git-command
 ---
 
-# GIT命令
-
-`git config`
+# 环境配置
 ```shell
 # 项目配置（.git/config）
 git config --edit
@@ -24,7 +22,7 @@ git config --global merge.tool vimdiff
 git config --global http.proxy "socks5:127.0.0.1:1080"
 ```
 
-`git help`
+# 查看命令说明
 ```shell
 # 查看具体的COMMAND或GUIDE
 git help [COMMAND|GUIDE]
@@ -34,7 +32,7 @@ git help -a
 git help -g
 ```
 
-`git remote`
+# 维护远程分支
 ```shell
 # 删除远程仓库配置
 git remote rm origin
@@ -46,7 +44,7 @@ git remote set-url origin git@github.com:USERNAME/REPOSITORY.git
 git remote update origin --prune
 ```
 
-`git clean`
+# 删除本地未跟踪代码
 ```shell
 # 删除本地未跟踪代码（模拟删除）
 git clean -dxn
@@ -54,7 +52,7 @@ git clean -dxn
 git clean -dxf
 ```
 
-`git merge`
+# 合并本地分支
 ```shell
 # 禁用fast-forward
 git merge --no-ff
@@ -62,7 +60,7 @@ git merge --no-ff
 git merge --abort
 ```
 
-`git stash`
+# 暂存本地改动
 ```shell
 # 查看stash
 git stash list
@@ -77,14 +75,8 @@ git stash apply stash@{0}
 # 注意：git stash pop stash@{0}等价于git stash apply stash@{0} + git stash drop stash@{0}命令；
 ```
 
-`git submodule`
-```shell
-git submodule init
-git submodule update --recursive —remote
-```
-
 # git强制推送
-将项目A的代码推送到项目B的仓库，并且需要保留项目A历史的GIT提交记录；
+背景：将项目A的代码推送到项目B的仓库，并且需要保留项目A历史的提交记录；
 ```shell
 git remote rm 
 git remote add origin git@git.***.cn:*****/*****.git
@@ -115,13 +107,13 @@ git branch -d dev_hlct
 
 # 关联远程分支
 ```shell
-# 1、已经存在的本地分支关联远程分支
+# 已经存在的本地分支关联远程分支
 git branch --set-upstream-to=origin/remoteBranch localBranch
-# 2、推送本地分支时关联远程分支
+# 推送本地分支时关联远程分支
 git push -u origin localBranch
-# 3、创建本地分支时建立追踪关系
+# 创建本地分支时关联远程分支
 git checkout -b localBranch origin/remoteBranch
-# 查看追踪关系
+# 查看关联关系
 git branch -vv
 ```
 
@@ -151,4 +143,32 @@ source /etc/profile
 # 5.查看版本号
 git --version
 git version 2.7.2
+```
+
+# git添加空目录
+
+创建空文件并添加到Git进行管理的方法是在目录中创建一个.gitignore文件，内容如下：
+```shell
+# Ignore everything in this directory
+*
+# Except this file
+!.gitignore
+```
+
+# git大文件存储LFS
+
+```shell
+# 安装git-lfs扩展
+git lfs install
+
+# 添加git-lfs处理的文件后缀
+git lfs track "*.psd"
+
+# 添加.gitattributes文件到暂存区
+git add .gitattributes
+
+# 其他步骤同使用Git相同
+git add file.psd
+git commit -m "Add design file"
+git push origin master
 ```

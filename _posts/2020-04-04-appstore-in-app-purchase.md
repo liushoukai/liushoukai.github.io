@@ -675,17 +675,42 @@ A new subscription (which is listed in clause 2) may differ from the subscriptio
 
 内购账单的出账周期是T-2，账单的统计时间口径不透明，无法通过日账单进行精准的对账；
 
+除了苹果官方30%的手续费抽成以外，每个国家都有其税费；
+
 ```json
 [
   {
-    "developer_proceeds": 224.97,  // 开发者收入
-    "currency_of_proceeds": "TRY", // 开发者收入币种
-    "customer_price": 409.99,      // 顾客购买价格
-    "customer_currency": "TRY"     // 顾客购买币种
+    "provider": "APPLE",
+    "provider_country": "US",
+    "apple_identifier": "...",                  // 产品item-id
+    "sku": "...",                               // 产品sku
+    "developer": "",
+    "title": "...",                             // 产品描述
+    "version": "11.4.7",
+    "product_type_identifier": "IA1",           // 产品类型（详见：https://rdrr.io/cran/RTConnect/man/kProductTypeIdentifier.html）
+    "units": 2,                                 // 产品件数
+    "developer_proceeds": 20.63,                // 开发者收入
+    "currency_of_proceeds": "CNY",              // 开发者收入币种
+    "begin_date": "06/19/2023",
+    "end_date": "06/19/2023",
+    "customer_price": 30.00,                    // 顾客购买价格
+    "customer_currency": "CNY",                 // 顾客购买币种
+    "country_code": "CN",                       // 顾客商店国家
+    "promo_code": "",
+    "parent_identifier": "...",
+    "subscription": "",
+    "period": "",
+    "category": "Music",
+    "cmb": "",
+    "device": "iPhone",
+    "supported_platforms": "iOS and watchOS",
+    "proceeds_reason": "",
+    "preserved_pricing": "",
+    "client": "",
+    "order_type": ""
   }
 ]
 ```
-- developer_proceeds 开发者收入
 
 
 [1]:https://developer.apple.com/cn/in-app-purchase/
