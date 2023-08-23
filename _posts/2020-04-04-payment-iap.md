@@ -5,8 +5,88 @@ categories: payment
 tags: iap
 ---
 
+# 苹果内购JWS回调解析
 
-# PEM格式证书
+## JWS简介
+JWS 也就是 Json Web Signature，是构造 JWT 的基础结构（JWT 其实涵盖了 JWS 和 JWE 两类，其中 JWT 的载荷还可以是嵌套的 JWT），包括三部分 JOSE Header、JWS Payload、JWS Signature。
+这里的 Signature 可以有两种生成方式，一种是标准的签名，使用非对称加密，因为私钥的保密性，能够确认签名的主体，同时能保护完整性；另一种是消息认证码 MAC（Message Authentication Code），使用对称秘钥，该秘钥需要在签发、验证的多个主体间共享，因此无法确认签发的主体，只能起到保护完整性的作用。
+
+JWS 最终有两种序列化的表现形式，一种是 `JWS Compact Serialization` 为一串字符；另一种是 `JWS JSON Serialization`，是一个标准的 Json 对象，允许为同样的内容生成多个签名/消息认证码。
+
+<div class="mermaid">
+mindmap
+JWS
+  id[JWS Compact Serialization]
+    id["base64url (utf8(Protected Header))"]
+    id["base64url(Payload)"]
+    id["base64url(Signature = ASCII(BASE64URL(UTF8(JWS Protected Header)) ||'
+|| BASE64URL(JWS Payload)))."]
+  id[JWS Json Serialization]
+    id["通用格式"]
+      id["payload"]
+        id["base64url(Payload)"]
+      id["Signatures"]
+        id["protected • base64url(utf8(Protected Header))"]
+        id["header • Unprotected Header"]
+        id["signature • base64url(Signature)"]
+    id["扁平格式"]
+      id["payload • base64url(Payload)"]
+      id["protected • base64url(utf8(Protected Header))"]
+      id["header • Unprotected Header"]
+      id["signature • base64url(Signature)"]
+</div>
+
+### JWS Compact Serialization
+JWS Compact Serialization，各部分以 ‘.’ 分隔。
+
+1. BASE64URL(UTF8(JWS Protected Header)) || ’.’ ||
+2. BASE64URL(JWS Payload) || ’.’ ||
+3. BASE64URL(JWS Signature)
+
+### JWS Json Serialization
+JWS Json Serialization 还可以分为两种子格式：通用、扁平。
+通用格式，最外层为 payload、signatures。signatures 中可以包含多个 json 对象，内层的 json 对象由 protected、header、signature 组成。不同的 protected header 生成不同的 Signature。
+```json
+{
+  "payload": "<payload contents>",
+  "signatures": [
+    {
+      "protected": "<integrity-protected header 1 contents>",
+      "header": "<non-integrity-protected header 1 contents>",
+      "signature": "<signature 1 contents>"
+    },
+    {
+      "protected": "<integrity-protected header N contents>",
+      "header": "<non-integrity-protected header 1 contents>",
+      "signature": "<signature N contents>"
+    }
+    ......
+  ]
+}
+```
+扁平格式，就是为只有一个 signature/mac 准备的。
+```json
+{
+  "payload": "<payload contents>",
+  "protected": "<integrity-protected header contents>",
+  "header": "<non-integrity-protected header contents>",
+  "signature": "<signature contents>"
+}
+```
+
+## 解析苹果JWS
+```php
+array:2 [
+  "alg" => "ES256"      // 加密算法
+  "x5c" => array:3 [    // 证书链 用于链状证书验证
+    0 => "..."
+    1 => "..."
+    2 => "..."
+  ]
+]
+```
+
+## PEM格式证书
 
 - 以“-----BEGIN CERTIFICATE-----”开头，以“-----END CERTIFICATE-----”结尾。
 - 每行64个字符，最后一行可以不足64个字符。
@@ -18,14 +98,14 @@ Root CA机构颁发的证书是唯一的，
 苹果推送通知服务(Apple Push Notification Service)
 
 
-# APNS .p8 file
+## APNS .p8 file
 The APNS(Apple Push Notification service) .p8 file contains the PRIVATE KEY that is used to SIGN the JWT content for APNS messages. The file itself is a pure text file, the KEY inside is formatted in PEM format.
 
 The part between the -----BEGIN PRIVATE KEY----- and -----END PRIVATE KEY----- is a base64 formatted ASN.1 PKCS#8 representation of the key itself. Some can use the following web service to extract its contents (ASN1JS).
 
 The KEY itself is 32 bytes long and is used to create the required ECDSA P-256 SHA-256 signature for the JWT. The resulting JWT looks like this '{JWT header base64 encoded}.{JWT payload base64 encoded}.Signature (64 bytes) base64 encoded'.
 
-# Apple证书链
+## Apple证书链
 
 [Apple PKI](https://www.apple.com/certificateauthority/)
 

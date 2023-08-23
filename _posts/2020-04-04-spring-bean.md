@@ -26,27 +26,29 @@ tags: spring spring-boot
 
 <div class="mermaid">
 %%{init: {"flowchart": {"htmlLabels": false}} }%%
-flowchart LR
-    subgraph Bean Initialization
-    markdown1 --> markdown2 --> markdown3 --> markdown4 --> markdown5
-    markdown1["`@PostConstruct`"]
-    markdown2["`InitializingBean`"]
-    markdown3["`init-method`"]
-    markdown4["`ContextStartedEvent`"]
-    markdown5["`Spring 启动完毕`"]
-    end
-</div>
-<div class="mermaid">
-%%{init: {"flowchart": {"htmlLabels": false}} }%%
-flowchart LR
-    subgraph Bean Destruction
-    markdown6 --> markdown7 --> markdown8 --> markdown9 --> markdown10
-    markdown6["`关闭 Spring`"]
-    markdown7["`ContextedClosedEvent`"]
-    markdown8["`@PreDestroy`"]
-    markdown9["`DisposableBean`"]
-    markdown10["`destroy-method`"]
-    end
+flowchart TD
+
+subgraph A["Bean Initialization"]
+direction LR
+markdown1 --> markdown2 --> markdown3 --> markdown4 --> markdown5
+markdown1["`@PostConstruct`"]
+markdown2["`InitializingBean`"]
+markdown3["`init-method`"]
+markdown4["`ContextStartedEvent`"]
+markdown5["`Spring Started`"]
+end
+
+subgraph B["Bean Destruction"]
+direction RL
+markdown6 --> markdown7 --> markdown8 --> markdown9 --> markdown10
+markdown6["`Spring Stoped`"]
+markdown7["`ContextedClosedEvent`"]
+markdown8["`@PreDestroy`"]
+markdown9["`DisposableBean`"]
+markdown10["`destroy-method`"]
+end
+ 
+A --> B
 </div>
 
 ### init-method/destroy-method
