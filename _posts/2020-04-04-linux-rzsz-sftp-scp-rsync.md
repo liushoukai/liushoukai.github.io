@@ -5,7 +5,7 @@ categories: linux-shell
 tags: rzsz rsync scp
 ---
 
-# rzsz
+## rzsz
 
 文件传输协议
 
@@ -32,13 +32,13 @@ sz -bye
 rz -bye
 ```
 
-# sftp
+## sftp
 lftp user@192.168.56.100 使用端口21，只有远程主机上安装有FTP服务器才能使用FTP
 
 sftp是一个交互式文件传输程式，其它类似于ftp, 但它进行加密传输，比FTP有更高的安全性
 sftp -oPort=22 user@192.168.56.100
 
-# scp
+## scp
 SCP(Secure Copy 安全复制)是一项比传统远程复制工具RCP更安全的文件复制技术。
 文件都是通过SSH加密通道进行传输的，需要实现SSH自动登录，SCP就可以直接执行。
 
@@ -59,7 +59,7 @@ scp -r /home/slynux user@remotehost:/home/backups
 scp -v -P 31931 ./redis-2.2.8.tgz kay@192.168.56.100:/tmp
 ```
 
-# rsync
+## rsync
 
 rsync命令使用SSH连接远程主机，rsync通常会询问SSH连接的密码，可以通过使用SSH密钥来实现自动化
 默认端口：873

@@ -5,7 +5,8 @@ categories: git
 tags: git-command
 ---
 
-# 环境配置
+## 环境配置
+
 ```shell
 # 项目配置（.git/config）
 git config --edit
@@ -22,7 +23,8 @@ git config --global merge.tool vimdiff
 git config --global http.proxy "socks5:127.0.0.1:1080"
 ```
 
-# 查看命令说明
+## 查看命令说明
+
 ```shell
 # 查看具体的COMMAND或GUIDE
 git help [COMMAND|GUIDE]
@@ -32,7 +34,8 @@ git help -a
 git help -g
 ```
 
-# 维护远程分支
+## 维护远程分支
+
 ```shell
 # 删除远程仓库配置
 git remote rm origin
@@ -44,7 +47,8 @@ git remote set-url origin git@github.com:USERNAME/REPOSITORY.git
 git remote update origin --prune
 ```
 
-# 删除本地未跟踪代码
+## 删除本地未跟踪代码
+
 ```shell
 # 删除本地未跟踪代码（模拟删除）
 git clean -dxn
@@ -52,7 +56,8 @@ git clean -dxn
 git clean -dxf
 ```
 
-# 合并本地分支
+## 合并本地分支
+
 ```shell
 # 禁用fast-forward
 git merge --no-ff
@@ -60,7 +65,8 @@ git merge --no-ff
 git merge --abort
 ```
 
-# 暂存本地改动
+## 暂存本地改动
+
 ```shell
 # 查看stash
 git stash list
@@ -75,8 +81,10 @@ git stash apply stash@{0}
 # 注意：git stash pop stash@{0}等价于git stash apply stash@{0} + git stash drop stash@{0}命令；
 ```
 
-# git强制推送
+## git强制推送
+
 背景：将项目A的代码推送到项目B的仓库，并且需要保留项目A历史的提交记录；
+
 ```shell
 git remote rm 
 git remote add origin git@git.***.cn:*****/*****.git
@@ -84,7 +92,8 @@ git remote -av
 git push origin master -u -f
 ```
 
-# git克隆远程指定分支
+## git克隆远程指定分支
+
 ```shell
 # git克隆远程指定分支
 git clone -b dev_hlct username@192.168.56.100:aiotrade.git
@@ -93,7 +102,8 @@ git clone -b dev_hlct username@192.168.56.100:aiotrade.git
 git checkout -b experimental origin/experimental
 ```
 
-# git删除本地/远程分支
+## git删除本地/远程分支
+
 ```shell
 # 查看远程分支 
 git ls-remote idc 
@@ -105,7 +115,8 @@ git push idc :dev_hlct
 git branch -d dev_hlct
 ```
 
-# 关联远程分支
+## 关联远程分支
+
 ```shell
 # 已经存在的本地分支关联远程分支
 git branch --set-upstream-to=origin/remoteBranch localBranch
@@ -117,9 +128,10 @@ git checkout -b localBranch origin/remoteBranch
 git branch -vv
 ```
 
-# git安装升级
+## git安装升级
 
 `Centos安装Git`
+
 ```shell
 # 1.安装依赖
 yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel gcc perl-ExtUtils-MakeMaker
@@ -145,9 +157,10 @@ git --version
 git version 2.7.2
 ```
 
-# git添加空目录
+## git添加空目录
 
 创建空文件并添加到Git进行管理的方法是在目录中创建一个.gitignore文件，内容如下：
+
 ```shell
 # Ignore everything in this directory
 *
@@ -155,7 +168,7 @@ git version 2.7.2
 !.gitignore
 ```
 
-# git大文件存储LFS
+## git大文件存储LFS
 
 ```shell
 # 安装git-lfs扩展

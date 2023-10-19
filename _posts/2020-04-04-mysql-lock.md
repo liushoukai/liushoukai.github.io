@@ -5,6 +5,30 @@ categories: database
 tags: mysql
 ---
 
+## lock与latch
+
+在数据库中，lock与latch都可以被称为“锁”。但是两者有着截然不同的含义，本章主要关注的是lock。 
+
+latch一般称为闩锁（轻量级的锁），因为其要求锁定的时间必须非常短。若持续的时间长，则应用的性能会非常差。在InnoDB存储引擎中，latch又可以分为mutex（互斥量）和rwlock（读写锁）。其目的是用来保证并发线程操作临界资源的正确性，并且通常没有死锁检测的机制。 
+
+lock的对象是事务，用来锁定的是数据库中的对象，如表、页、行。并且一般lock的对象仅在事务commit或rollback后进行释放（不同事务隔离级别释放的时间可能不同）。此外，lock，正如在大多数数据库中一样，是有死锁机制的。
+
+{:class="table table-striped table-bordered table-hover"}
+| | lock | latch |
+| :-: | :-: | :-: |
+| 对象 | 事物 | 线程 |
+| 保护 | 数据库内容 | 内存数据结构 |
+| 持续时间 | 事务期间 | 临界资源 |
+| 模式 | 行锁、表锁、意向锁 | 读写锁、互斥量 |
+| 死锁 | waits-for graph、 time out 等机制处理死锁 | 无死锁检测机制，通过应用程序加锁的顺序(lock leveling)保证无死锁情况发生 |
+| 存在于 | Lock Manager 的哈希表中 | 每个数据结构的对象中 |
+
+
+
+InnoDB存储引擎实现了如下两种标准的行级锁： 
+◆ 共享锁（S Lock），允许事务读一行数据。 
+◆ 排他锁（X Lock），允许事务删除或更新一行数据。
+
 事务由存储引擎层实现（Innodb）
 通过Redo Log实现原子性和持久性
 通过Undo Log实现一致性
