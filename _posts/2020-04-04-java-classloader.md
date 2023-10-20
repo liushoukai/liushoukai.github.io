@@ -1,13 +1,11 @@
 ---
 layout: post
-title: git
-categories: git
-tags: git-command
+title: Java类加载器
+categories: java
+tags: class-loaders
 ---
 
-## 类加载器
-
-### Default Class Loaders
+## Default Class Loaders
 
 默认的类加载器加载各自类路径上的类和资源：
 
@@ -17,7 +15,7 @@ tags: git-command
 
 Bootstrap 或 Primordial 类加载器是所有类加载器的父类。它加载 Java 运行时，即运行JVM本身所需的类。
 
-#### 默认类加载器加载机制
+### 默认类加载器加载机制
 
 Java中的类加载机制是双亲委派模型，即按照 `AppClassLoader → SystemClassLoader → BootstrapClassLoader` 的顺序。
 
@@ -30,7 +28,7 @@ Java中的类加载机制是双亲委派模型，即按照 `AppClassLoader → S
 这个ClassLoader可以通过 `java.lang.Thread` 类的 `setContextClassLoaser()` 方法进行设置；
 如果创建线程时没有设置，则它会从父线程中继承；如果在应用程序的全局范围内都没有设置过的话，那这个类加载器默认为 AppClassLoader。
 
-### Context Class Loaders
+## Context Class Loaders
 
 JDBC是Java提出的一个有关数据库访问和操作的一个标准，也就是定义了一系列接口。不同的数据库厂商提供对该接口的实现，即提供的Driver驱动包。Java定义的JDBC接口位于JDK的rt.jar中（java.sql包），因此这些接口会由BootstrapClassLoader进行加载；而数据库厂商提供的Driver驱动包一般由我们自己在应用程序中引入（比如位于CLASSPATH下），这已经超出了BootstrapClassLoader的加载范围，即这些驱动包中的JDBC接口的实现类无法被BootstrapClassLoader加载，只能由AppClassLoader或自定义的ClassLoader来加载。
 
