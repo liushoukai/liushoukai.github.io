@@ -5,9 +5,10 @@ categories: payment
 tags: iap
 ---
 
-# 苹果内购JWS回调解析
+## 苹果内购JWS回调解析
 
 ## JWS简介
+
 JWS 也就是 Json Web Signature，是构造 JWT 的基础结构（JWT 其实涵盖了 JWS 和 JWE 两类，其中 JWT 的载荷还可以是嵌套的 JWT），包括三部分 JOSE Header、JWS Payload、JWS Signature。
 这里的 Signature 可以有两种生成方式，一种是标准的签名，使用非对称加密，因为私钥的保密性，能够确认签名的主体，同时能保护完整性；另一种是消息认证码 MAC（Message Authentication Code），使用对称秘钥，该秘钥需要在签发、验证的多个主体间共享，因此无法确认签发的主体，只能起到保护完整性的作用。
 
@@ -37,6 +38,7 @@ JWS
 </div>
 
 ### JWS Compact Serialization
+
 JWS Compact Serialization，各部分以 ‘.’ 分隔。
 
 1. BASE64URL(UTF8(JWS Protected Header)) || ’.’ ||
@@ -44,8 +46,10 @@ JWS Compact Serialization，各部分以 ‘.’ 分隔。
 3. BASE64URL(JWS Signature)
 
 ### JWS Json Serialization
+
 JWS Json Serialization 还可以分为两种子格式：通用、扁平。
 通用格式，最外层为 payload、signatures。signatures 中可以包含多个 json 对象，内层的 json 对象由 protected、header、signature 组成。不同的 protected header 生成不同的 Signature。
+
 ```json
 {
   "payload": "<payload contents>",
@@ -94,11 +98,10 @@ array:2 [
 Root CA机构颁发的证书
 Root CA机构颁发的证书是唯一的，
 
-
 苹果推送通知服务(Apple Push Notification Service)
 
-
 ## APNS .p8 file
+
 The APNS(Apple Push Notification service) .p8 file contains the PRIVATE KEY that is used to SIGN the JWT content for APNS messages. The file itself is a pure text file, the KEY inside is formatted in PEM format.
 
 The part between the -----BEGIN PRIVATE KEY----- and -----END PRIVATE KEY----- is a base64 formatted ASN.1 PKCS#8 representation of the key itself. Some can use the following web service to extract its contents (ASN1JS).
@@ -112,6 +115,7 @@ The KEY itself is 32 bytes long and is used to create the required ECDSA P-256 S
 > Apple established the Apple PKI in support of the generation, issuance, distribution, revocation, administration, and management of public/private cryptographic keys that are contained in CA-signed X.509 Certificates.
 
 Apple Root Certificates
+
 - Apple Inc. Root
 - Apple Computer, Inc. Root
 - Apple Root CA - G2 Root
@@ -120,6 +124,7 @@ Apple Root Certificates
 苹果内购 `Apple Root CA - G3 Root` 根证书，下载地址：https://www.apple.com/certificateauthority/AppleRootCA-G3.cer
 
 ### AppleRootCA-G3.cer
+
 ```shell
 issuer:  C=US, O=Apple Inc., OU=Apple Certification Authority, CN=Apple Root CA - G3
 subject: C=US, O=Apple Inc., OU=Apple Certification Authority, CN=Apple Root CA - G3
@@ -130,6 +135,7 @@ pubKey:  Sun EC public key, 384 bits
 ```
 
 ### Certificate Chain
+
 ```shell
 0 
 issuer:  C=US, O=Apple Inc., OU=G6, CN=Apple Worldwide Developer Relations Certification Authority
