@@ -23,6 +23,14 @@ git config --global merge.tool vimdiff
 git config --global http.proxy "socks5:127.0.0.1:1080"
 ```
 
+### 暂存区操作
+
+```shell
+git add ./node_modules/
+# git add的逆操作，将已经加入暂存区的数据从暂存区移除
+git rm --cached -r ./node_modules/
+```
+
 ## 查看命令说明
 
 ```shell
@@ -79,6 +87,15 @@ git stash pop stash@{0}
 # 使用stash@{0]中的内容，将其应用到工作目录
 git stash apply stash@{0}    
 # 注意：git stash pop stash@{0}等价于git stash apply stash@{0} + git stash drop stash@{0}命令；
+```
+
+## git撤销远程分支commit
+
+```shell
+# 1.回滚本地分支，本地分支版本将落后远程分支
+git reset --hard [commit]
+# 2.必须使用强制推送-f覆盖远程分支，否则无法推送到远程分支
+git push -f
 ```
 
 ## git强制推送
@@ -186,10 +203,7 @@ git commit -m "Add design file"
 git push origin master
 ```
 
-## git reset与checkout
-
-git log
-git reset --hard commit_id
+## git reset与checkout区别
 
 `HEAD`
 HEAD 是当前分支引用的指针，它总是指向该分支上的最后一次提交。 这表示 HEAD 将是下一次提交的父结点。通常，理解 HEAD 的最简方式，就是将它看做 你的上一次提交 的快照。
