@@ -23,8 +23,6 @@ lock的对象是事务，用来锁定的是数据库中的对象，如表、页�
 | 死锁 | waits-for graph、 time out 等机制处理死锁 | 无死锁检测机制，通过应用程序加锁的顺序(lock leveling)保证无死锁情况发生 |
 | 存在于 | Lock Manager 的哈希表中 | 每个数据结构的对象中 |
 
-
-
 InnoDB存储引擎实现了如下两种标准的行级锁： 
 ◆ 共享锁（S Lock），允许事务读一行数据。 
 ◆ 排他锁（X Lock），允许事务删除或更新一行数据。
@@ -68,7 +66,6 @@ doublewrite由两部分组成，一部分为内存中的doublewrite buffer，其
 2、接着从两次写缓冲区分两次写入磁盘共享表空间中(连续存储，顺序写，性能很高)，每次写1MB；
 3、待第二步完成后，再将doublewrite buffer中的脏页数据写入实际的各个表空间文件(离散写)；(脏页数据固化后，即进行标记对应doublewrite数据可覆盖)
 
-
 ## Innodb存储结构
 
 Innodb存储结构
@@ -76,3 +73,13 @@ Innodb存储结构
 最小存储单位是页
 每个页16KB
 64个连续的页组成区
+
+## LOCK IN SHARE / FOR UPDATE
+
+[https://dev.mysql.com/doc/refman/5.7/en/innodb-locking-reads.html]
+
+`LOCK IN SHARE`和`FOR UPDATE`都是读锁，用于确保没有其他事务可以更新或删除查询的相同行。两者之间的区别在于它们在读取数据时如何处理锁。
+
+`LOCK IN SHARE`模式不会阻止另一个事务读取被锁定的同一行。
+
+`FOR UPDATE`防止对同一行的其他锁读操作。

@@ -532,8 +532,6 @@ AppStore 通过HTTP协议的POST请求，将JSON格式的通知消息传递给�
 
 * 由于无法从用户账户成功扣款，订阅被自动取消一段事件后，用户重新续订时，会触发RENEWAL事件；
 
-
-
 #### INTERACTIVE_RENEWAL
 
 >Indicates the customer renewed a subscription interactively, either by using your app’s interface, or on the App Store in the account's Subscriptions settings. Make service available immediately.
@@ -629,6 +627,47 @@ A new subscription (which is listed in clause 2) may differ from the subscriptio
   }
 ]
 ```
+
+## iOS StoreKit
+
+2021 年 WWDC，在 iOS 15 系统上推出了一个新的 StoreKit 2 库，该库采用了完全新的 API 来解决应用内购买问题。
+
+### StoreKit 1 存在的问题
+
+1. 苹果后台不能查看到退款的订单详情。只能苹果处理退款后发通知给我们的服务器，告知发生了一笔退款。
+2. 消耗性、非消耗性、非续期订阅、自动续订能不能在沙盒环境测试退款，系统没提供这种测试方式。
+3. 不能够将用户反馈的苹果付费收据里的 orderID 与具体的业务订单进行关联。
+4. 研发过程中，无法直接关联苹果交易号 transactionId 与 业务订单号 orderID 之间联系
+
+[https://juejin.cn/post/7096063372159877150](https://juejin.cn/post/7096063372159877150)
+
+收据：https://developer.apple.com/documentation/appstoreserverapi/get_transaction_info
+https://developer.apple.com/documentation/appstoreserverapi/data_types
+国家storefront
+
+1.5收据appAccountToken
+
+### StoreKit 2
+
+StoreKit 2 主要的更新有这几个：
+
+#### 仅支持Swift语言
+
+StoreKit 2 使用了 Swift 5.5 的新特性进行开发，因此支持Swift语言开发。
+
+#### 新增appAccountToken属性
+
+提供的新购买商品接口增加了可选参数 PurchaseOption 结构体，该结构体里有新增的 appAccountToken 字段， 类似 SKPayment.applicationUsername 字段，但是 appAccountToken 信息会永久保存在 Transaction 信息内。
+
+appAccountToken 字段是由开发者创建的；关联到 App 里的用户账号；使用 UUID 格式；永久存储在 Transaction 信息里。这里的 appAccountToken 字段苹果的意思是用来存储用户账号信息的，但是应该也可以用来存储 orderID 相关的信息，需要将 orderID 转成 UUID 格式塞到 Transaction 信息内，方便处理补单、退款等操作。
+
+#### Transaction History
+
+提供了三个新的交易（Transcation）相关的 API：
+
+> All transactions：全部的购买交易订单，在 transaction 里面获取
+> Latest transactions：最新的购买交易订单。
+> Current entitlements：所有当前订阅的交易，以及所有购买（且未退还）的非消耗品。
 
 [1]:https://developer.apple.com/cn/in-app-purchase/
 [2]:https://developer.apple.com/documentation/storekit/in-app_purchase/handling_refund_notifications

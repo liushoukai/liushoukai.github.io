@@ -23,6 +23,18 @@ git config --global merge.tool vimdiff
 git config --global http.proxy "socks5:127.0.0.1:1080"
 ```
 
+## 将已经存在的代码放入仓库
+
+```shell
+cd existing_folder
+git init
+git remote add origin git@github.com:username/server.git
+git add .
+git commit . -m 'Init commit'
+git branch --set-upstream-to=origin/main main
+git push -u origin master
+```
+
 ### 暂存区操作
 
 ```shell
