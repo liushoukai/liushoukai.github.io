@@ -107,11 +107,7 @@ public class HelloService {
 }
 ```
 
-
-
 ### ContextStartedEvent/ContextClosedEvent
-
-
 
 通过这种方式，使用了Spring事件机制，并且很少进行日常业务开发，通常将其与框架集成在一起。
 
@@ -351,3 +347,18 @@ public void destroy() {
     }
 }
 ```
+
+## 排查案例
+
+已经通过BeanDefinition动态注册了`GlobalIdService.Client`的Bean，但是在做类型转换时报错如下：
+
+```java
+GlobalIdService.Client globalIdService = (GlobalIdService.Client) applicationContext.getBean("globalIdService");
+
+java.lang.ClassCastException: class org.ponderers.totoro.infrastructure.rpc.thrift.GlobalIdService$Client cannot be cast to class org.ponderers.totoro.infrastructure.rpc.thrift.GlobalIdService$Client (org.ponderers.totoro.infrastructure.rpc.thrift.GlobalIdService$Client is in unnamed module of loader 'app'; org.ponderers.totoro.infrastructure.rpc.thrift.GlobalIdService$Client is in unnamed module of loader org.springframework.boot.devtools.restart.classloader.RestartClassLoader @55c747b)
+```
+
+`GlobalIdService$Client`类文件被不同的类加载器各加载了一次，产生两个不同的类，导致在类型转换时失败。
+
+1. 通过默认的未命名模块类加载器'app'加载了一次；
+2. 通过 Spring Devtools 的未命名模块类加载器'RestartClassLoader'加载了一次；

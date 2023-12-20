@@ -12,7 +12,6 @@ tags: spring spring-boot
 org.springframework.context.ApplicationListener=<class implements ApplicationListener>
 ```
 
-
 ## SpringApplicationRunListener
 
 ```java

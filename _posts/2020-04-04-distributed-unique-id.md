@@ -2,7 +2,7 @@
 layout: post
 title: 分布式全局唯一ID服务
 categories: distributed
-tags: distributed
+tags: distributed id
 ---
 
 ### 分布式GlobalId设计的目标
