@@ -620,9 +620,7 @@ A new subscription (which is listed in clause 2) may differ from the subscriptio
 
 服务器通知类型
 
-![Alt text](/assets/img/cf85f679-c541-41fe-b49b-ad5fefc92e7c.jpeg)
-
-
+![Alt text](/assets/img/cf85f679-c541-41fe-b49b-ad5fefc92e7c.jpeg){:width="100%"}
 
 ## 内购监控
 
