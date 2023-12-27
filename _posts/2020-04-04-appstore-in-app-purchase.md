@@ -474,7 +474,7 @@ sequenceDiagram
 2. 确定应用服务器提供的URL可用于订阅状态更新。
 3. 在AppStore Connect中为您的应用配置订阅状态URL。请参阅：[https://help.apple.com/app-store-connect/#/dev0067a330b][8]{:target="_blank"}
 
-### Server Notifications V1
+### App Store Server Notifications V1
 
 服务器通知类型
 
@@ -608,7 +608,7 @@ A new subscription (which is listed in clause 2) may differ from the subscriptio
 触发条件：
 当客户针对消耗型 App 内购买项目发起退款请求时，App Store 会通过 App Store 服务器通知 V2 端点向你的服务器发送退款 CONSUMPTION_REQUEST notificationType 请求。如果客户同意，则通过调用此 API 并将 App Store 中的 ConsumptionRequest 消费数据发送到 App Store 进行响应。如果没有，请不要回复通知 CONSUMPTION_REQUEST 。
 
-### Server Notifications V2
+### App Store Server Notifications V2
 
 > Apple is adding both new events and a new field called substate.  The combination of a single server notification and its substate is now supposed to have a 1:1 mapping to an actual customer lifecycle event.
 
@@ -678,7 +678,7 @@ A new subscription (which is listed in clause 2) may differ from the subscriptio
 ]
 ```
 
-## iOS StoreKit
+## StoreKit
 
 ### StoreKit 1
 
@@ -736,7 +736,7 @@ ConsumptionRequest响应体要求将appAccountToken值设置为UUID或空字符�
 
 而现在，苹果打通了 applicationUsername 和 appAccountToken，当用 Original StoreKit 创建订单时，applicationUsername 字段赋值使用 UUID 格式内容时，则可以在服务端通知或者解析收据(Receipt) 时，可以获取这个 UUID 值，也就意味着通过收据的信息就能够关联订单。
 
-## Server-Side APIs
+## App Store Server API
 
 苹果宣布了一系列新的服务器端API，以下是完整的清单:
 
