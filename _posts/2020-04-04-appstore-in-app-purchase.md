@@ -734,7 +734,7 @@ appAccountToken 字段是由开发者创建的；关联到 App 里的用户账�
 
 ConsumptionRequest响应体要求将appAccountToken值设置为UUID或空字符串。
 
-![Alt text](/assets/img/52c15a45-ce69-49d6-8bf4-f3b15884a3b7.png)
+![Alt text](/assets/img/52c15a45-ce69-49d6-8bf4-f3b15884a3b7.png){:width="100%"}
 
 而现在，苹果打通了 applicationUsername 和 appAccountToken，当用 Original StoreKit 创建订单时，applicationUsername 字段赋值使用 UUID 格式内容时，则可以在服务端通知或者解析收据(Receipt) 时，可以获取这个 UUID 值，也就意味着通过收据的信息就能够关联订单。
 
@@ -746,37 +746,37 @@ ConsumptionRequest响应体要求将appAccountToken值设置为UUID或空字符�
 
 > Consumption - provide data on consumable IAP usage to help Apple make a decision on a refund request
 
-![Alt text](/assets/img/a4b46523-87bd-4b56-8e3f-8096692ceb99.jpeg)
+![Alt text](/assets/img/a4b46523-87bd-4b56-8e3f-8096692ceb99.jpeg){:width="100%"}
 
 ### In-App Purchase History
 
 > In-App Purchase History - Get a list of Signed Transactions for all purchase the user has made
 
-![Alt text](/assets/img/91634626-b91b-4472-9b5f-6ab3b15279cb.jpeg)
+![Alt text](/assets/img/91634626-b91b-4472-9b5f-6ab3b15279cb.jpeg){:width="100%"}
 
 ### Invoice Lookup
 
 > Invoice Lookup - takes the order ID from their emailed invoice and returns if the ID is valid and any associated Signed Transactions
 
-![Alt text](/assets/img/2d6ccaab-12ea-44dc-98e2-8fe773cdee12.jpeg)
+![Alt text](/assets/img/2d6ccaab-12ea-44dc-98e2-8fe773cdee12.jpeg){:width="100%"}
 
 ### Refunded Purchases
 
 > Refunded Purchases - takes the original transaction ID and returns a list of Signed Transactions for any purchases that have been refunded
 
-![Alt text](/assets/img/03514238-a208-46a8-8993-9f9f83cf5ca7.jpeg)
+![Alt text](/assets/img/03514238-a208-46a8-8993-9f9f83cf5ca7.jpeg){:width="100%"}
 
 ### Renewal Extension
 
 > Renewal Extension - allows you to extend the current bill term of a subscription by up to 90 days. Used to issue refunds or credits on subscriptions
 
-![Alt text](/assets/img/868a4a3e-b6ed-4240-a891-501e91044a4d.jpeg)
+![Alt text](/assets/img/868a4a3e-b6ed-4240-a891-501e91044a4d.jpeg){:width="100%"}
 
 ### Subscription Status
 
 > Subscription Status - Check the status of a subscription at any time with the original transaction ID
 
-![Alt text](/assets/img/de35ec70-93ce-4356-ac6c-40684750c8da.jpeg)
+![Alt text](/assets/img/de35ec70-93ce-4356-ac6c-40684750c8da.jpeg){:width="100%"}
 
 [1]:https://developer.apple.com/cn/in-app-purchase/
 [2]:https://developer.apple.com/documentation/storekit/in-app_purchase/handling_refund_notifications
