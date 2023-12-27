@@ -472,9 +472,13 @@ sequenceDiagram
 
 1. 在服务器上支持 App Transport Security（ATS）。在发送通知之前，AppStore必须使用ATS协议与您的服务器建立安全的网络连接。
 2. 确定应用服务器提供的URL可用于订阅状态更新。
-3. 在AppStore Connect中为您的应用配置订阅状态URL。请参阅：https://help.apple.com/app-store-connect/#/dev0067a330b
+3. 在AppStore Connect中为您的应用配置订阅状态URL。请参阅：[https://help.apple.com/app-store-connect/#/dev0067a330b][8]{:target="_blank"}
 
-### 服务器通知类型
+### Server Notifications V1
+
+服务器通知类型
+
+[https://developer.apple.com/documentation/appstoreservernotifications/notification_type][9]{:target="_blank"}
 
 AppStore 通过HTTP协议的POST请求，将JSON格式的通知消息传递给业务的应用服务器，以处理的订阅事件。
 
@@ -482,11 +486,11 @@ AppStore 通过HTTP协议的POST请求，将JSON格式的通知消息传递给�
 
 #### INITIAL_BUY
 
-> Occurs at the initial purchase of the subscription. Store latest_receipt on your server as a token to verify the user’s subscription status at any time, by validating it with the App Store.
+> Occurs at the user’s initial purchase of the subscription. Store latest_receipt on your server as a token to verify the user’s subscription status at any time by validating it with the App Store.
 
 ![INITIAL_BUY](/assets/img/appstore-in-app-purchase/INITIAL_BUY.png){:width="100%"}
 
-存储事件消息中的latest_receipt字段，作为通过AppStore查询用户订阅状态的凭证。
+存储消息中的latest_receipt字段，作为通过AppStore查询用户订阅状态的凭证。
 
 触发条件：
 
@@ -494,11 +498,11 @@ AppStore 通过HTTP协议的POST请求，将JSON格式的通知消息传递给�
 
 #### CANCEL
 
-> Indicates that either Apple customer support canceled the subscription or the user upgraded their subscription. The cancellation_date key contains the date and time of the change.
+> Indicates that Apple Support canceled the auto-renewable subscription and the customer received a refund as of the timestamp in cancellation_date_ms.
 
 ![CANCEL](/assets/img/appstore-in-app-purchase/CANCEL.png){:width="100%"}
 
-事件消息中的cancellation_date字段包含更改的日期和时间，用于获取iOS续费退款信息。通过iOS设置取消订阅时，不会发送CANCEL事件，而是发送DID_CHANGE_RENEWAL_STATUS事件。
+表示苹果支持已经取消了自动续期订阅并且用户在`cancellation_date_ms`时间收到了退款信息。注意⚠️：通过iOS设置取消订阅时，不会发送CANCEL通知，而是发送DID_CHANGE_RENEWAL_STATUS通知。
 
 触发条件：
 
@@ -518,29 +522,30 @@ AppStore 通过HTTP协议的POST请求，将JSON格式的通知消息传递给�
 * 当订阅状态发生的更改时触发，包括已订阅状态时取消订阅或未订阅状态时重新订阅；
 
 1. 订阅状态变更：取消订阅（订阅服务未过期）
-判定条件：auto_renew_status == 0 && status = 0
+判定条件：`auto_renew_status == 0 && status = 0`
 过期处理：
-续费订阅状态（renewStatus）： 1 -> 0
-最后续费时间（LastRenewalTime）：latest_receipt_info.purchase_date_ms
-下次续费时间（nextRenewalTime）：latest_receipt_info.expires_date
+续费订阅状态（renewStatus）： `1 ➡️ 0`
+最后续费时间（LastRenewalTime）：`latest_receipt_info.purchase_date_ms`
+下次续费时间（nextRenewalTime）：`latest_receipt_info.expires_date`
 
 2. 订阅状态变更：取消订阅（订阅服务已过期）
-判定条件：auto_renew_status == 0 && status = 0
+判定条件：`auto_renew_status == 0 && status = 0`
 过期处理：
-续费订阅状态（renewStatus）： 1 -> 0
-最后续费时间（LastRenewalTime）：latest_expired_receipt_info.purchase_date_ms
-下次续费时间（nextRenewalTime）：latest_expired_receipt_info.expires_date
+续费订阅状态（renewStatus）： `1 ➡️ 0`
+最后续费时间（LastRenewalTime）：`latest_expired_receipt_info.purchase_date_ms`
+下次续费时间（nextRenewalTime）：`latest_expired_receipt_info.expires_date`
 
 3. 订阅状态变更：恢复订阅（订阅服务未过期）
-判定条件：auto_renew_status == 1 && status = 0
+判定条件：`auto_renew_status == 1 && status = 0`
 过期处理：
-续费订阅状态（renewStatus）： 0 -> 1
-最后续费时间（LastRenewalTime）：latest_receipt_info.purchase_date_ms
-下次续费时间（nextRenewalTime）：latest_receipt_info.expires_date
+续费订阅状态（renewStatus）： `0 ➡️ 1`
+最后续费时间（LastRenewalTime）：`latest_receipt_info.purchase_date_ms`
+下次续费时间（nextRenewalTime）：`latest_receipt_info.expires_date`
 
-#### RENEWAL
+#### RENEWAL (DEPRECATED)
 
 >Indicates successful automatic renewal of an expired subscription that failed to renew in the past. Check expires_date to determine the next renewal date and time.
+> As of March 10, 2021 this notification is no longer sent in production and sandbox environments. Update your existing code to rely on the DID_RECOVER notification type instead.
 
 ![RENEWAL](/assets/img/appstore-in-app-purchase/RENEWAL.png){:width="100%"}
 
@@ -588,9 +593,36 @@ A new subscription (which is listed in clause 2) may differ from the subscriptio
 
 #### DID_RECOVER
 
->Indicates successful automatic renewal of an expired subscription that failed to renew in the past. Check expires_date to determine the next renewal date and time.
+>Indicates a successful automatic renewal of an expired subscription that failed to renew in the past. Check expires_date to determine the next renewal date and time.
 
-表示成功自动续订过去无法续订的过期订阅。检查expires_date，以确定下一个续订日期和时间。
+表示成功自动续订一个过去续订失败的过期订阅。检查expires_date以确定下一次续费的日期和时间。
+
+#### CONSUMPTION_REQUEST
+
+>Indicates that the customer initiated a refund request for a consumable in-app purchase, and the App Store is requesting that you provide consumption data. For more information, see Send Consumption Information.
+
+表示用户发起了一个消耗型内购商品的退款请求，并且App Store请求商家提供消费数据。
+
+作为新退款流程的一部分，引入了一个新的CONSUMPTION_REQUEST通知，该通知要求将响应发送回Apple服务器。
+
+触发条件：
+当客户针对消耗型 App 内购买项目发起退款请求时，App Store 会通过 App Store 服务器通知 V2 端点向你的服务器发送退款 CONSUMPTION_REQUEST notificationType 请求。如果客户同意，则通过调用此 API 并将 App Store 中的 ConsumptionRequest 消费数据发送到 App Store 进行响应。如果没有，请不要回复通知 CONSUMPTION_REQUEST 。
+
+### Server Notifications V2
+
+> Apple is adding both new events and a new field called substate.  The combination of a single server notification and its substate is now supposed to have a 1:1 mapping to an actual customer lifecycle event.
+
+苹果增加了新的事件和一个名为`substate`的新字段。这样通过单个通知类型结合`substate`字段，就可以完整的对应上客户购买流程中的每一个事件（在此之前为了表述购买过程中某个特定的生命周期事件，苹果必须要推送多个通知时间）
+
+> The notification payload will include the Signed Transaction so that a separate call to Apple is not needed to interpret the notification.
+
+通过在通知消息的有效载荷中包含`Signed Transaction`，从而不需要额外请求 Apple 服务器来解释通知。
+
+服务器通知类型
+
+![Alt text](/assets/img/cf85f679-c541-41fe-b49b-ad5fefc92e7c.jpeg)
+
+
 
 ## 内购监控
 
@@ -650,9 +682,9 @@ A new subscription (which is listed in clause 2) may differ from the subscriptio
 
 ## iOS StoreKit
 
-2021 年 WWDC，在 iOS 15 系统上推出了一个新的 StoreKit 2 库，该库采用了完全新的 API 来解决应用内购买问题。
+### StoreKit 1
 
-### StoreKit 1 存在的问题
+存在的问题：
 
 1. 苹果后台不能查看到退款的订单详情。只能苹果处理退款后发通知给我们的服务器，告知发生了一笔退款。
 2. 消耗性、非消耗性、非续期订阅、自动续订能不能在沙盒环境测试退款，系统没提供这种测试方式。
@@ -669,25 +701,82 @@ https://developer.apple.com/documentation/appstoreserverapi/data_types
 
 ### StoreKit 2
 
+2021 年 WWDC，在 iOS 15 系统上推出了一个新的 StoreKit 2 库，该库采用了完全新的 API 来解决应用内购买问题。
 StoreKit 2 主要的更新有这几个：
 
-#### 仅支持Swift语言
+> 仅支持Swift语言
 
 StoreKit 2 使用了 Swift 5.5 的新特性进行开发，因此支持Swift语言开发。
 
-#### 新增appAccountToken属性
+> 新增appAccountToken属性
 
 提供的新购买商品接口增加了可选参数 PurchaseOption 结构体，该结构体里有新增的 appAccountToken 字段， 类似 SKPayment.applicationUsername 字段，但是 appAccountToken 信息会永久保存在 Transaction 信息内。
 
 appAccountToken 字段是由开发者创建的；关联到 App 里的用户账号；使用 UUID 格式；永久存储在 Transaction 信息里。这里的 appAccountToken 字段苹果的意思是用来存储用户账号信息的，但是应该也可以用来存储 orderID 相关的信息，需要将 orderID 转成 UUID 格式塞到 Transaction 信息内，方便处理补单、退款等操作。
 
-#### Transaction History
+> Transaction History
 
 提供了三个新的交易（Transcation）相关的 API：
 
-> All transactions：全部的购买交易订单，在 transaction 里面获取
-> Latest transactions：最新的购买交易订单。
-> Current entitlements：所有当前订阅的交易，以及所有购买（且未退还）的非消耗品。
+* All transactions：全部的购买交易订单，在 transaction 里面获取
+* Latest transactions：最新的购买交易订单。
+* Current entitlements：所有当前订阅的交易，以及所有购买（且未退还）的非消耗品。
+
+> applicationUsername 和 appAccountToken
+
+`applicationUsername`是 Original StoreKit 创建苹果订单时，由开发者赋值的一个字段，原本这个字段是传入用户 UID 的 Hash 值，作用是给苹果验证应用购买以防止欺诈，比如代充和黑产恶意充值等。
+
+`appAccountToken`是 WWDC21 推出 StoreKit 2 的一个字段，用于开发者将苹果交易与自己服务上的用户关联的 UUID 格式的字段。
+
+当客户发起应用内购买时，你可以选择生成一个 appAccountToken 并将其发送到应用商店。
+如果你使用原始API进行应用内购买，你可以在applicationUsername属性中提供一个UUID。
+在客户完成购买后，App Store在交易信息中的 appAccountToken 中返回相同的UUID。
+
+ConsumptionRequest响应体要求将appAccountToken值设置为UUID或空字符串。
+
+![Alt text](/assets/img/52c15a45-ce69-49d6-8bf4-f3b15884a3b7.png)
+
+而现在，苹果打通了 applicationUsername 和 appAccountToken，当用 Original StoreKit 创建订单时，applicationUsername 字段赋值使用 UUID 格式内容时，则可以在服务端通知或者解析收据(Receipt) 时，可以获取这个 UUID 值，也就意味着通过收据的信息就能够关联订单。
+
+## Server-Side APIs
+
+苹果宣布了一系列新的服务器端API，以下是完整的清单:
+
+### Consumption
+
+> Consumption - provide data on consumable IAP usage to help Apple make a decision on a refund request
+
+![Alt text](/assets/img/a4b46523-87bd-4b56-8e3f-8096692ceb99.jpeg)
+
+### In-App Purchase History
+
+> In-App Purchase History - Get a list of Signed Transactions for all purchase the user has made
+
+![Alt text](/assets/img/91634626-b91b-4472-9b5f-6ab3b15279cb.jpeg)
+
+### Invoice Lookup
+
+> Invoice Lookup - takes the order ID from their emailed invoice and returns if the ID is valid and any associated Signed Transactions
+
+![Alt text](/assets/img/2d6ccaab-12ea-44dc-98e2-8fe773cdee12.jpeg)
+
+### Refunded Purchases
+
+> Refunded Purchases - takes the original transaction ID and returns a list of Signed Transactions for any purchases that have been refunded
+
+![Alt text](/assets/img/03514238-a208-46a8-8993-9f9f83cf5ca7.jpeg)
+
+### Renewal Extension
+
+> Renewal Extension - allows you to extend the current bill term of a subscription by up to 90 days. Used to issue refunds or credits on subscriptions
+
+![Alt text](/assets/img/868a4a3e-b6ed-4240-a891-501e91044a4d.jpeg)
+
+### Subscription Status
+
+> Subscription Status - Check the status of a subscription at any time with the original transaction ID
+
+![Alt text](/assets/img/de35ec70-93ce-4356-ac6c-40684750c8da.jpeg)
 
 [1]:https://developer.apple.com/cn/in-app-purchase/
 [2]:https://developer.apple.com/documentation/storekit/in-app_purchase/handling_refund_notifications
@@ -696,3 +785,5 @@ appAccountToken 字段是由开发者创建的；关联到 App 里的用户账�
 [5]:https://developer.apple.com/documentation/appstorereceipts/status
 [6]:https://developer.apple.com/documentation/storekit/in-app_purchase/subscriptions_and_offers/enabling_server-to-server_notifications
 [7]:https://developer.apple.com/documentation/appstoreservernotifications/notification_type
+[8]:https://help.apple.com/app-store-connect/#/dev0067a330b
+[9]:https://developer.apple.com/documentation/appstoreservernotifications/notification_type
