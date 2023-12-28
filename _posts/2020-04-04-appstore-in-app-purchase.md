@@ -154,7 +154,7 @@ sequenceDiagram
 	StoreKit-->>-App: 8.交易成功，返回付款收据
 	end
 	
-	App->>+Server: 9.验证订单状态（根据收据、订单号）
+	App->>+Server: 9.验证订单状态（付费收据、业务订单号）
 	Server->>AppStore: 10.验证收据有效性
 	AppStore-->>Server: 11.返回收据有效性
 	Server-->>-App: 12.返回处理结果
