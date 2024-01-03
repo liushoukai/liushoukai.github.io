@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  VirtualBox
+title:  VirtualBox使用
 categories: tool
 tags: virtualbox
 ---

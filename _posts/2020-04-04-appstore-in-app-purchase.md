@@ -756,6 +756,10 @@ ConsumptionRequest响应体要求将appAccountToken值设置为UUID或空字符�
 
 ![Alt text](/assets/img/2d6ccaab-12ea-44dc-98e2-8fe773cdee12.jpeg){:width="100%"}
 
+通过电子邮件收到的收据信息中，获取订单号（order_id），如果订单号有效（`status == 0`)，则会返回关联的签名交易信息。
+
+![Alt text](/assets/img/41089654-141c-4900-bfd3-1fbf45f04f49.png){:width="100%"}
+
 ### Refunded Purchases
 
 > Refunded Purchases - takes the original transaction ID and returns a list of Signed Transactions for any purchases that have been refunded

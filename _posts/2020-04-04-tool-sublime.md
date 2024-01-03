@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Sublime使用技巧
+title: Sublime使用
 categories: tool
 tags: sublime
 ---
