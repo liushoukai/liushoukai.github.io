@@ -6,4 +6,4 @@ tags: git-client
 ---
 
 - gitkraken
-![Alt text](../assets/img/1.png)
+![Alt text](images/1.png)
