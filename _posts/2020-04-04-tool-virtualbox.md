@@ -6,6 +6,7 @@ tags: virtualbox
 ---
 
 ## VirtualBox网络连接方式详解
+
 ---
 > 介绍VirtualBox中常见的几种网络连接方式:
 网络地址转换（NAT）
