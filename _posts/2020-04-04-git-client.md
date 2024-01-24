@@ -6,4 +6,3 @@ tags: git-client
 ---
 
 - gitkraken
-![Alt text](images/1.png)

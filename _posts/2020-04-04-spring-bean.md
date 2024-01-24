@@ -83,11 +83,7 @@ public class HelloService implements InitializingBean, DisposableBean {
 }
 ```
 
-
-
 ### @PostConstruct/@PreDestroy
-
-
 
 与上述两种方法相比，该方法最容易使用。您只需要在相应的方法上使用注释。
 
