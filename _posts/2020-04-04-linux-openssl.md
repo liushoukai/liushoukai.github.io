@@ -1,3 +1,10 @@
+---
+layout: post
+title: OPENSSL自签名证书
+categories: linux
+tags: openssl
+---
+
 ## 使用openssl生成sha256自签名证书
 
 ### 生成 RSA 密钥对
@@ -7,7 +14,7 @@ openssl genrsa -out ca.key 2048
 # 若想对私钥进行加密可以加上 -des3 参数
 ```
 
-## 生成 ca crt：
+## 生成 ca crt
 
 ```shell
 openssl req -new -x509 -days 365 -key ca.key -out ca.crt
@@ -27,7 +34,6 @@ Common Name (eg, your name or your server’s hostname) []:XX # 由此ca签的�
 Email Address []:xxx@xxx.com #使用者的邮箱
 ```
 
-
 ## 站点证书的生成
 
 ### 生成证书的RSA密钥
@@ -45,6 +51,7 @@ openssl req -new -key xxx.key -subj "/C=CN/ST=XX/L=XX/O=Tenpay.com/OU=Tenpay.com
 ### 检查 csr 的正确性：
 
 检查 Signature Algorithm 是不是 `Signature Algorithm: sha256WithRSAEncryption`。
+
 ```shell
 openssl req -in xxx.csr -text
 ```
@@ -56,6 +63,7 @@ openssl x509 -req -days 365 -in xxx.csr -CA ca.crt -CAkey ca.key -sha256 -out xx
 ```
 
 检查 Signature Algorithm 是不是 `Signature Algorithm: sha256WithRSAEncryption`。
+
 ```shell
 openssl x509 -in xxx.crt -text
 ```

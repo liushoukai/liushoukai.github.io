@@ -18,11 +18,11 @@ LDAP是一种通讯协议，LDAP连接服务器的连接字串格式为：`ldap:
 |ou（Organization Unit）         |组织单位，组织单位可以包含其他各种对象(包括其他组织单元)。理解成公司的组织和单位：ou=Tech |
 |uid（User Id）                  |用户ID Alex（一条记录的ID） |
 |dn （Distinguished Name）       |每一个条目都有一个唯一的标识名，dn在ldap中全局唯一，相当于该条目的唯一ID。“uid=Alex,ou=Tech,dc=localdomain,dc=com”|
-|cn （Common Name）              |名称，可用作分组的名字，或者用户的全名。如“Alex”（一条记录的名称）。简单理解用于描述UID的   |
+|cn （Common Name）              |名称，可用作分组的名字，或者用户的全名。如“Alex”（一条记录的名称）。简单理解用于描述UID的 |
 |sn （Surname）                  |姓氏 |
-|rdn（Relative dn）              |相对`DN`，一般指dn逗号最左边的部分，如`cn=group,dc=localdomain,dc=com`的`rdn`就是`cn=group`。｜
-|Base DN                        |LDAP目录树的最顶部就是根，比如上边示例中的`base dn`为`dc=localdomain,dc=net`。｜
-|description                    |在不同类别中，对应不同类别的说明信息，比如用户的说明信息，分组的说明信息。｜
+|rdn（Relative dn）              |相对`DN`，一般指dn逗号最左边的部分，如`cn=group,dc=localdomain,dc=com`的`rdn`就是`cn=group`。|
+|Base DN                        |LDAP目录树的最顶部就是根，比如上边示例中的`base dn`为`dc=localdomain,dc=net`。|
+|description                    |在不同类别中，对应不同类别的说明信息，比如用户的说明信息，分组的说明信息。|
 
 ## 安装 OpenLDAP
 

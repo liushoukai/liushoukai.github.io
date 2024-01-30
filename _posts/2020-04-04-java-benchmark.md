@@ -5,10 +5,11 @@ categories: java
 tags: benchmark
 ---
 
+## 编写基准测试
 
 编写基准测试用例比对 Thymeleaf 3.x 版本与 2.x 版本性能：
 
-https://github.com/mbosecke/template-benchmark
+[https://github.com/mbosecke/template-benchmark](https://github.com/mbosecke/template-benchmark){:target="_blank"}
 
 ### Run complete. Total time: 00:10:23
 
@@ -36,10 +37,10 @@ https://github.com/mbosecke/template-benchmark
 |Trimou.benchmark     | 1.8.2.Final    | thrpt |  50 | 18117.914 | ±  305.510 | ops/s |
 |Velocity.benchmark   | 1.7            | thrpt |  50 | 16610.908 | ±  214.678 | ops/s |
 
-
 使用 gunplot 画图工具，python下使用libsvm必须是用的吧，matlab下面可能不需要安装
 
-# 安装gnuplot
+## 安装gnuplot
+
 ```bash
 java -jar target/benchmarks.jar -rff results.csv -rf csv
 gnuplot benchmark.plot
@@ -47,8 +48,6 @@ gnuplot benchmark.plot
 
 1. 在ubuntu中安装gnuplot-x11包：`sudo apt -y install gnuplot-x11`，
 2. 检查是否安装：`dpkg -s gnuplot-x11`
-2. 安装后输入gnuplot进入Gnuplot命令界面
-3. 输入plot sin(x)结果如下图所示
-4. 退出 gnuplot 按q
-
-
+3. 安装后输入gnuplot进入Gnuplot命令界面
+4. 输入plot sin(x)结果如下图所示
+5. 退出 gnuplot 按q

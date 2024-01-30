@@ -56,11 +56,7 @@ VBoxManage modifyvm "ubuntu1404" --natpf1 delete "reportssh"
 
 2、通过图形界面配置端口转发
 
-![网络设置][2]
-![端口转发规则][1]
-
 测试配置的端口转发规则是否正确
-![测试][3]
 
 ### 桥接网卡（Bridged networking）
 
@@ -73,9 +69,6 @@ VBoxManage modifyvm "ubuntu1404" --natpf1 delete "reportssh"
 局域网中一台独立的机器。
 
 如图，宿主机与虚拟机在相同网段，宿主机IP为172.26.41.17，虚拟机IP为172.26.41.27。
-
-![网络设置][4]
-![端口转发规则][5]
 
 ### 内部网络（Internal networking)
 
@@ -96,14 +89,7 @@ VBoxManage dhcpserver add --netname testlab --ip 10.10.10.1 --netmask 255.255.25
 
 配置两台虚拟机ubuntu1404与Ubuntu1401的为内部网络
 
-![虚拟机1410][6]
-![虚拟机1404][7]
-
 验证两台机器的连通性
-
-![虚拟机1410][8]
-![虚拟机1404][9]
-
 
 ### 仅主机适配器（Host-only network）
 
@@ -127,3 +113,42 @@ ifconfig
 # 对新建网络开启VBox提供的DHCP服务
 vboxmanage dhcpserver add --netname <network_name>
 ```
+
+## 安装Extension Pack
+
+特性介绍
+
+- Support for a virtual USB 2.0/3.0 controller (EHCI/xHCI)
+- VirtualBox RDP: support for proprietary remote connection protocol developed by Microsoft and Citrix.
+- PXE boot for Intel cards
+- VM disk image encryption
+
+软件安装
+1.下载安装包
+VirtualBox 5.1.8 Oracle VM VirtualBox Extension Pack  All supported platforms
+
+2.安装扩展
+File->Preferences->Extensions
+
+## 安装Guest Additions
+
+Guest Additions包含可优化操作系统以实现更佳性能和可用性的设备驱动程序和系统应用程序。
+
+启动虚拟机->设备->安装增强功能
+
+### FAQ
+
+1.未能加载虚拟光盘C:\Program Files\Oracle\VirtualBox\VBoxGuestAdditions.iso到虚拟电脑CZ88.您是否要强制挂载该介质？
+
+安装增强功能需要使用光驱加载VBoxGuestAddtions.iso虚拟光盘，VirtualBox检测到光驱已加载了其他虚拟光盘，故提示用户是否强制挂载VBoxGuestAddtions.iso虚拟光盘。
+如果点击强制释放任然报错，应该将已加载的虚拟光盘右键弹出(Eject)后重试。
+
+## 扩展安装
+
+1. 更新apt-get，执行  apt-get update  &&  apt-get upgrade
+2. 安装依赖工具，apt-get install dkms  && apt-get install build-essential
+3. reboot
+4. 登陆后 选择设备->安装增强功能（报错不用管 叉掉）
+5. 挂载cdrom  输入 mount /dev/cdrom /mnt/  回车，如出现如下字样则表示挂载成功，挂载成功
+6. 执行安装命令   /mnt/VcBoxLinuxAdditions.run
+7. 执行完成后卸载   umount /mnt/

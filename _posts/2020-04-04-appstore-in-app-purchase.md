@@ -643,6 +643,8 @@ A new subscription (which is listed in clause 2) may differ from the subscriptio
 
 除了苹果官方30%的手续费抽成以外，每个国家都有其税费；
 
+[https://developer.apple.com/help/app-store-connect/reference/summary-sales-report](https://developer.apple.com/help/app-store-connect/reference/summary-sales-report){:target="_blank"}
+
 ```json
 [
   {
