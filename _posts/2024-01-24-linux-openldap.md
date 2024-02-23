@@ -42,7 +42,6 @@ sudo vim /etc/hosts
 
 10.211.56.3     ldap.localdomain.com ldap
 
-
 最后，运行以下命令来检查和验证 LDAP 服务器的 FQDN。在此演示中，您应该得到诸如 ldap.localdomain.com 之类的输出。此外，如果您尝试对主机名 ldap 执行 ping 操作，您应该从服务器 IP 地址 192.168.5.25 而不是 localhost 获得响应。
 
 sudo hostname -f

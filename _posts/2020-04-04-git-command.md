@@ -115,8 +115,8 @@ git push -f
 背景：将项目A的代码推送到项目B的仓库，并且需要保留项目A历史的提交记录；
 
 ```shell
-git remote rm 
-git remote add origin git@git.***.cn:*****/*****.git
+git remote remove origin
+ogit remote add origin git@git.***.cn:*****/*****.git
 git remote -av
 git push origin master -u -f
 ```
