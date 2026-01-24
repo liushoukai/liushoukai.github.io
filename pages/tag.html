@@ -1,31 +1,50 @@
 ---
-layout: page
+layout: default
 title: Tag
 permalink: /tags/
 icon: octicon-tag
-styles: [tagCloud.css, tags.css]
-scripts: [tagCloud.js, tags.js]
 navItemDisplay: true
 navItemOrder: 3
 ---
 
-<div>
-    <ul class="tag-box inline">
-        {% for tag in site.tags %}
-        <li><a href="#{{ tag | first }}">{{ tag | first }}<span>{{ tag | last | size }}</span></a></li>
-        {% endfor %}
-    </ul>
-</div>
+<div class="max-w-4xl mx-auto">
+  <div class="bg-[#f8f8fd] rounded-lg p-6 md:p-10 shadow-card opacity-95">
+    <h1 class="text-2xl font-bold text-gray-800 mb-6">{{ page.title }}</h1>
 
-<div>
-    {% for tag in site.tags %}
-    <h3 id="{{ tag | first }}">{{ tag | first }}</h3>
-    <ul>
-        {% for posts in tag  %}{% for post in posts %}{% if post.title != null %}
-        <li itemscope>
-            <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </li>
-        {% endif %}{% endfor %}{% endfor %}
-    </ul>
-    {% endfor %}
+    <!-- 标签云 -->
+    <div class="flex flex-wrap gap-2 mb-8 pb-6 border-b border-gray-200">
+      {% for tag in site.tags %}
+      <a href="#{{ tag | first }}"
+         class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-gray-100 text-gray-700 text-sm hover:bg-tiffany hover:text-white transition-colors">
+        {{ tag | first }}
+        <span class="bg-white/30 px-1.5 py-0.5 rounded-full text-xs">{{ tag | last | size }}</span>
+      </a>
+      {% endfor %}
+    </div>
+
+    <!-- 标签文章列表 -->
+    <div class="space-y-8">
+      {% for tag in site.tags %}
+      <div>
+        <h3 id="{{ tag | first }}" class="text-lg font-bold text-gray-800 mb-3 flex items-center gap-2">
+          <span class="octicon octicon-tag text-tiffany"></span>
+          {{ tag | first }}
+        </h3>
+        <ul class="space-y-2 pl-6">
+          {% for posts in tag %}
+          {% for post in posts %}
+          {% if post.title != null %}
+          <li class="list-disc text-gray-400">
+            <a href="{{ post.url | prepend: site.baseurl }}" class="text-gray-700 hover:text-tiffany transition-colors">
+              {{ post.title }}
+            </a>
+          </li>
+          {% endif %}
+          {% endfor %}
+          {% endfor %}
+        </ul>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
 </div>

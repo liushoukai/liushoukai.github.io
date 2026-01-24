@@ -1,99 +1,126 @@
 ---
 layout: default
-styles: [post.css]
-scripts: [toc.js,post.js]
 ---
-<!-- <link rel="stylesheet" type="text/css" href="/assets/css/post.css" /> -->
-<div class="row row-set">
 
-  <div class="content col-lg-9 col-xs-12">
-    <div class="sheet post">
-      <header>
-        <h1>{{ page.title }}</h1>
-        <p class="post-meta">
-          <span class="octicon octicon-clock"></span>
-          <span>{{ page.date | date: "%b %-d, %Y" }}</span>
-        </p>
-        <p>
-          <span>
-          {% for category in page.categories %}
-          <a class="word-keep" href="{{ '/category' | prepend: site.baseurl }}/#{{ category }}"><span class="octicon octicon-list-unordered"></span>&nbsp;{{ category }}</a>
-          {% endfor %}
-          {% for tag in page.tags %}
-          <a class="word-keep" href="{{ '/tags' | prepend: site.baseurl }}/#{{ tag }}"><span class="octicon octicon-tag"></span>&nbsp;{{ tag }}</a>
-          {% endfor %}
+<div class="lg:grid lg:grid-cols-[1fr_288px] lg:items-start gap-8 flex flex-col">
+  <!-- 主内容区 -->
+  <div class="flex-1 min-w-0">
+    <article class="bg-[#f8f8fd] rounded-xl shadow-card opacity-95 overflow-hidden">
+      <!-- 文章头部 -->
+      <header class="bg-gradient-to-r from-tiffany/10 to-transparent px-6 md:px-10 py-8 border-b border-gray-100">
+        <h1 class="text-2xl md:text-3xl font-bold text-gray-800 leading-tight">{{ page.title }}</h1>
+
+        <div class="flex flex-wrap items-center gap-4 mt-4 text-sm text-gray-500">
+          <!-- 日期 -->
+          <span class="inline-flex items-center gap-1.5">
+            <span class="octicon octicon-clock"></span>
+            {{ page.date | date: "%Y年%m月%d日" }}
           </span>
-        </p>
+
+          <!-- 分类 -->
+          {% for category in page.categories %}
+          <a href="{{ '/category' | prepend: site.baseurl }}/#{{ category }}"
+             class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-tiffany/10 text-tiffany text-xs hover:bg-tiffany hover:text-white transition-colors">
+            <span class="octicon octicon-list-unordered text-[10px]"></span>
+            {{ category }}
+          </a>
+          {% endfor %}
+        </div>
+
+        <!-- 标签 -->
+        {% if page.tags.size > 0 %}
+        <div class="flex flex-wrap gap-2 mt-3">
+          {% for tag in page.tags %}
+          <a href="{{ '/tags' | prepend: site.baseurl }}/#{{ tag }}"
+             class="inline-flex items-center gap-1 text-xs text-gray-400 hover:text-tiffany transition-colors">
+            <span class="octicon octicon-tag text-[10px]"></span>{{ tag }}
+          </a>
+          {% endfor %}
+        </div>
+        {% endif %}
       </header>
 
-      <hr class="boundary">
-      <article>
-        {{content}}
-      </article>
-      <hr class="boundary">
+      <!-- 文章内容 -->
+      <div class="px-6 md:px-10 py-8">
+        <div class="prose prose-gray max-w-none
+                    prose-headings:text-gray-800 prose-headings:font-bold prose-headings:scroll-mt-20
+                    prose-h2:text-xl prose-h2:mt-10 prose-h2:mb-4 prose-h2:pb-2 prose-h2:border-b prose-h2:border-gray-200
+                    prose-h3:text-lg prose-h3:mt-8 prose-h3:mb-3
+                    prose-h4:text-base prose-h4:mt-6 prose-h4:mb-2
+                    prose-p:text-gray-700 prose-p:leading-relaxed prose-p:my-4
+                    prose-a:text-tiffany prose-a:no-underline hover:prose-a:underline
+                    prose-blockquote:border-l-4 prose-blockquote:border-tiffany prose-blockquote:bg-gray-50 prose-blockquote:py-1 prose-blockquote:px-4 prose-blockquote:rounded-r-lg prose-blockquote:text-gray-600 prose-blockquote:italic
+                    prose-ul:my-4 prose-ol:my-4 prose-li:my-1
+                    prose-img:rounded-lg prose-img:shadow-md
+                    prose-table:text-sm prose-table:overflow-hidden prose-table:rounded-lg
+                    prose-th:bg-gray-100 prose-th:px-4 prose-th:py-2.5 prose-th:text-left prose-th:font-semibold
+                    prose-td:px-4 prose-td:py-2.5 prose-td:border-gray-200
+                    prose-hr:my-8 prose-hr:border-gray-200
+                    prose-strong:text-gray-800">
+          {{ content }}
+        </div>
+      </div>
 
+      <!-- 文章底部 -->
+      <footer class="px-6 md:px-10 py-6 bg-gray-50/50 border-t border-gray-100">
+        <!-- 分享按钮 -->
+        <div id="post-share" class="flex items-center gap-4 bdsharebuttonbox">
+          <span class="text-sm text-gray-500">分享文章：</span>
+          <a href="#" class="bds_evernotecn text-gray-400 hover:text-tiffany transition-colors" data-cmd="evernotecn"></a>
+          <a href="#" class="bds_copy text-gray-400 hover:text-tiffany transition-colors" data-cmd="copy" title="复制链接"></a>
+        </div>
+      </footer>
+    </article>
+
+    <!-- 评论区 -->
+    <div class="mt-6 bg-[#f8f8fd] rounded-xl p-6 md:p-10 shadow-card opacity-95">
+      <h3 class="text-lg font-bold text-gray-800 mb-6 flex items-center gap-2">
+        <span class="octicon octicon-comment"></span>
+        评论
+      </h3>
       <div id="disqus_thread"></div>
       <script>
-
-      /**
-      *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-      *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-      /*
-      var disqus_config = function () {
-      this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-      this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-      };
-      */
-      (function() { // DON'T EDIT BELOW THIS LINE
-      var d = document, s = d.createElement('script');
-      s.src = 'https://liushoukai.disqus.com/embed.js';
-      s.setAttribute('data-timestamp', +new Date());
-      (d.head || d.body).appendChild(s);
+      (function() {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://liushoukai.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
       })();
       </script>
-      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
-      <div id="post-share" class="bdsharebuttonbox">
-        <a href="#" class="bds_evernotecn" data-cmd="evernotecn"></a>
-        <a href="#" class="bds_copy" data-cmd="copy" title="分享到复制网址"></a>
-      </div>
-    </div>
-    <div class="pad-min"></div>
-    <!-- <div id="post-comment" class="sheet post">
-      <div id="disqus_thread"></div>
-      <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-    </div> -->
-  </div>
-
-  <div class="content-navigation col-lg-3 hidden-xs">
-    <div class="shadow-bottom-center" >
-      <div class="content-navigation-toc">
-          <div class="content-navigation-header">
-              <span class="octicon octicon-list-unordered"></span>&nbsp;Toc
-          </div>
-          <div id="toc" class="content-navigation-list toc"></div>
-      </div>
-    </div>
-    <div class="shadow-bottom-center" >
-      <div class="content-navigation-tag">
-          <div class="content-navigation-header">
-              <span class="octicon octicon-list-unordered"></span>&nbsp;Tags
-          </div>
-          {% if page.tags != null %}
-          <div class="content-navigation-list">
-              <ul class="tags-item">
-                  {% for tag in page.tags %}
-                  <li>
-                      <a href="{{ '/tags' | prepend: site.baseurl }}#{{ tag }}">
-                        <span class="octicon octicon-tag"></span>&nbsp;{{ tag }}
-                      </a>
-                  </li>
-                  {% endfor %}
-              </ul>
-          </div>
-          {% endif %}
-      </div>
+      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" class="text-tiffany">comments powered by Disqus.</a></noscript>
     </div>
   </div>
 
+  <!-- 侧边栏 -->
+  <aside class="hidden lg:block">
+    <div class="sticky top-20 space-y-4">
+      <!-- TOC -->
+      <div class="bg-[#f8f8fd] rounded-xl p-5 shadow-card opacity-95">
+        <div class="flex items-center gap-2 text-gray-700 font-bold mb-4 pb-3 border-b border-gray-200">
+          <span class="octicon octicon-list-unordered text-tiffany"></span>
+          <span>目录</span>
+        </div>
+        <nav id="toc" class="text-sm text-gray-600 overflow-y-auto max-h-[60vh] toc-nav"></nav>
+      </div>
+
+      <!-- Tags -->
+      {% if page.tags.size > 0 %}
+      <div class="bg-[#f8f8fd] rounded-xl p-5 shadow-card opacity-95">
+        <div class="flex items-center gap-2 text-gray-700 font-bold mb-4 pb-3 border-b border-gray-200">
+          <span class="octicon octicon-tag text-tiffany"></span>
+          <span>标签</span>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          {% for tag in page.tags %}
+          <a href="{{ '/tags' | prepend: site.baseurl }}#{{ tag }}"
+             class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-gray-100 text-xs text-gray-600 hover:bg-tiffany hover:text-white transition-colors">
+            <span class="octicon octicon-tag text-[10px]"></span>
+            {{ tag }}
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </aside>
 </div>

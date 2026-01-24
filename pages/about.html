@@ -8,14 +8,16 @@ navItemOrder: 4
 showResume: false
 ---
 
-<p>I LOVE OPEN SOURCE!</p>
+<p class="text-gray-700 mb-4">I LOVE OPEN SOURCE!</p>
 
 {% if page.showResume %}
-<p>
-    <a href="{{ '/resume/' | prepend: site.baseurl }}" target="_blank" rel="noopener noreferrer">个人简历</a>
+<p class="mb-4">
+    <a href="{{ '/resume/' | prepend: site.baseurl }}" target="_blank" rel="noopener noreferrer" class="text-tiffany hover:underline">个人简历</a>
 </p>
 {% endif %}
 
 <p>
-    <a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=1Obl5eHi7ebtlKWl_re7uQ" style="text-decoration:none;"><img src="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_21.png"/></a>
+    <a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=1Obl5eHi7ebtlKWl_re7uQ">
+        <img src="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_21.png" alt="Email me" class="inline-block"/>
+    </a>
 </p>

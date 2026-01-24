@@ -2,7 +2,7 @@
 layout: null
 ---
 <!DOCTYPE html>
-<html>
+<html class="h-full">
 <head>
     {% include page-analytics.html %}
     <meta charset="utf-8">
@@ -16,17 +16,18 @@ layout: null
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" media="screen">
     <link rel="canonical" href="{{ page.url | prepend: site.baseurl }}">
-    <link rel="alternate" hreflang="zh" href="https://liushoukai.gihub.io"/>
+    <link rel="alternate" hreflang="zh" href="https://liushoukai.github.io"/>
     <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | prepend: site.baseurl }}"/>
     {% include page-style.html %}
 </head>
-<body>
+<body class="min-h-full flex flex-col">
 {% include page-header.html %}
-<div class="main">
-    <div class="container">
+
+<main class="flex-1 pt-16 pb-8">
+    <div class="max-w-6xl mx-auto px-4">
         {{ content }}
     </div>
-</div>
+</main>
 
 {% include page-footer.html %}
 {% include page-script.html %}

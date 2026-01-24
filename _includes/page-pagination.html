@@ -1,24 +1,44 @@
 {% if paginator.total_pages > 1 %}
-<ul class="pagination">
+<ul class="flex items-center gap-1">
     {% if paginator.previous_page %}
-    <li><a href="{{ paginator.previous_page_path | prepend: site.baseurl }}" aria-label="Previous"><span
-            aria-hidden="true">&laquo;</span></a></li>
+    <li>
+        <a href="{{ paginator.previous_page_path | prepend: site.baseurl }}"
+           class="px-3 py-2 rounded bg-[#f8f8fd] text-gray-600 hover:bg-tiffany hover:text-white transition-colors"
+           aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+        </a>
+    </li>
     {% endif %}
 
     {% for page in (1..paginator.total_pages) %}
         {% if page == paginator.page %}
-        <li class="active"><span>{{ page }}</span></li>
+        <li>
+            <span class="px-3 py-2 rounded bg-tiffany text-white">{{ page }}</span>
+        </li>
         {% elsif page == 1 %}
-        <li><a href="{{ paginator.previous_page_path | prepend: site.baseurl }}">{{ page }}</a></li>
+        <li>
+            <a href="{{ paginator.previous_page_path | prepend: site.baseurl }}"
+               class="px-3 py-2 rounded bg-[#f8f8fd] text-gray-600 hover:bg-tiffany hover:text-white transition-colors">
+                {{ page }}
+            </a>
+        </li>
         {% else %}
-        <li><a href="{{ site.paginate_path | replace: ':num', page | prepend: site.baseurl }}">{{ page }}</a></li>
+        <li>
+            <a href="{{ site.paginate_path | replace: ':num', page | prepend: site.baseurl }}"
+               class="px-3 py-2 rounded bg-[#f8f8fd] text-gray-600 hover:bg-tiffany hover:text-white transition-colors">
+                {{ page }}
+            </a>
+        </li>
         {% endif %}
     {% endfor %}
 
     {% if paginator.next_page %}
     <li>
-        <a href="{{ paginator.next_page_path | prepend: site.baseurl }}" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span></a>
+        <a href="{{ paginator.next_page_path | prepend: site.baseurl }}"
+           class="px-3 py-2 rounded bg-[#f8f8fd] text-gray-600 hover:bg-tiffany hover:text-white transition-colors"
+           aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+        </a>
     </li>
     {% endif %}
 </ul>
