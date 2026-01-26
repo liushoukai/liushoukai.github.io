@@ -11,6 +11,7 @@
   /* 自定义字体 */
   --font-architects: 'ArchitectsDaughter', cursive;
   --font-pingfang: 'PingFang-SC', sans-serif;
+  --font-logo: 'Liu Jian Mao Cao', 'STKaiti', 'KaiTi', cursive;
 
   /* 自定义阴影 */
   --shadow-card: 0 1px 5px rgba(0,0,0,0.1), 0 0 2px rgba(0,0,0,0.1) inset;
