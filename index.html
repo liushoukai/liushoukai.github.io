@@ -3,59 +3,61 @@ layout: default
 ---
 
 <div class="max-w-5xl mx-auto">
+    <!-- 文章列表 -->
     {% for post in paginator.posts %}
-    <article class="bg-[#f8f8fd] rounded-2xl shadow-card mb-8 opacity-95 overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-        <!-- 文章头部 -->
-        <div class="bg-gradient-to-r from-tiffany/8 via-tiffany/3 to-transparent px-8 md:px-10 py-6">
-            <a href="{{ post.url | prepend: site.baseurl }}" class="text-2xl font-bold text-gray-800 hover:text-tiffany transition-colors break-words block leading-relaxed">
-                {{ post.title }}
-            </a>
-            <div class="flex flex-wrap items-center gap-4 mt-4 text-sm text-gray-400">
-                <span class="inline-flex items-center gap-2">
-                    <span class="octicon octicon-clock"></span>
-                    {{ post.date | date: "%Y年%m月%d日" }}
-                </span>
-                {% for category in post.categories %}
-                <a href="{{ site.baseurl }}/category/#{{ category }}"
-                   class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-tiffany/10 text-tiffany text-xs font-medium hover:bg-tiffany hover:text-white transition-all duration-200">
-                    <span class="octicon octicon-list-unordered text-[10px]"></span>
-                    {{ category }}
+        <article class="bg-[#f8f8fd] rounded-2xl shadow-card mb-8 opacity-95 overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+            <!-- 文章头部 -->
+            <div class="bg-gradient-to-r from-tiffany/8 via-tiffany/3 to-transparent px-8 md:px-10 py-6">
+                <a href="{{ post.url | prepend: site.baseurl }}" class="text-2xl font-bold text-gray-800 hover:text-tiffany transition-colors break-words block leading-relaxed">
+                    {{ post.title }}
                 </a>
-                {% endfor %}
+                <div class="flex flex-wrap items-center gap-4 mt-4 text-sm text-gray-400">
+                    <span class="inline-flex items-center gap-2">
+                        <span class="octicon octicon-clock"></span>
+                        {{ post.date | date: "%Y年%m月%d日" }}
+                    </span>
+                    {% for category in post.categories %}
+                    <a href="{{ site.baseurl }}/category/#{{ category }}"
+                       class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-tiffany/10 text-tiffany text-xs font-medium hover:bg-tiffany hover:text-white transition-all duration-200">
+                        <span class="octicon octicon-list-unordered text-[10px]"></span>
+                        {{ category }}
+                    </a>
+                    {% endfor %}
+                </div>
             </div>
-        </div>
 
-        <!-- 文章摘要 -->
-        <div class="px-8 md:px-10 py-7">
-            <p class="text-gray-600 leading-loose break-words text-base">
-                {% if post.excerpt.size > 250 %}
-                    {{ post.content | strip_html | strip_newlines | truncate: 250 }}
-                {% else %}
-                    {{ post.excerpt | strip_html }}
-                {% endif %}
-            </p>
-        </div>
-
-        <!-- 文章底部 -->
-        <div class="px-8 md:px-10 pt-2 pb-6 flex flex-wrap items-center justify-between gap-4">
-            <div class="flex flex-wrap gap-3">
-                {% for tag in post.tags %}
-                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white text-xs text-gray-500 shadow-sm">
-                    <span class="octicon octicon-tag text-[10px] text-gray-400"></span>{{ tag }}
-                </span>
-                {% endfor %}
+            <!-- 文章摘要 -->
+            <div class="px-8 md:px-10 py-7">
+                <p class="text-gray-600 leading-loose break-words text-base">
+                    {% if post.excerpt.size > 250 %}
+                        {{ post.content | strip_html | strip_newlines | truncate: 250 }}
+                    {% else %}
+                        {{ post.excerpt | strip_html }}
+                    {% endif %}
+                </p>
             </div>
-            <a href="{{ post.url | prepend: site.baseurl }}"
-               class="inline-flex items-center gap-2 px-4 py-2 bg-tiffany/10 text-tiffany rounded-lg text-sm font-medium hover:bg-tiffany hover:text-white transition-all duration-200">
-                阅读全文
-                <span class="octicon octicon-arrow-right text-xs"></span>
-            </a>
-        </div>
-    </article>
-    {% endfor %}
+
+            <!-- 文章底部 -->
+            <div class="px-8 md:px-10 pt-2 pb-6 flex flex-wrap items-center justify-between gap-4">
+                <div class="flex flex-wrap gap-3">
+                    {% for tag in post.tags %}
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white text-xs text-gray-500 shadow-sm">
+                        <span class="octicon octicon-tag text-[10px] text-gray-400"></span>{{ tag }}
+                    </span>
+                    {% endfor %}
+                </div>
+                <a href="{{ post.url | prepend: site.baseurl }}"
+                   class="inline-flex items-center gap-2 px-4 py-2 bg-tiffany/10 text-tiffany rounded-lg text-sm font-medium hover:bg-tiffany hover:text-white transition-all duration-200">
+                    阅读全文
+                    <span class="octicon octicon-arrow-right text-xs"></span>
+                </a>
+            </div>
+        </article>
+        {% endfor %}
 
     <!-- 分页导航 -->
     <nav class="flex justify-center mt-12 mb-4">
         {% include page-pagination.html %}
     </nav>
+
 </div>

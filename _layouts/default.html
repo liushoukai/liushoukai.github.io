@@ -31,5 +31,33 @@ layout: null
 
 {% include page-footer.html %}
 {% include page-script.html %}
+
+<!-- 回到顶部按钮 -->
+<button id="back-to-top"
+    class="fixed bottom-8 right-8 z-50 w-10 h-10 rounded-xl bg-white/90 backdrop-blur shadow-card text-gray-400
+           hover:bg-tiffany hover:text-white hover:shadow-lg
+           transition-all duration-300 opacity-0 pointer-events-none
+           flex items-center justify-center cursor-pointer"
+    aria-label="回到顶部"
+    onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transition-transform duration-300 group-hover:-translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+    </svg>
+</button>
+<script>
+(function() {
+    var btn = document.getElementById('back-to-top');
+    if (!btn) return;
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 400) {
+            btn.style.opacity = '1';
+            btn.style.pointerEvents = 'auto';
+        } else {
+            btn.style.opacity = '0';
+            btn.style.pointerEvents = 'none';
+        }
+    });
+})();
+</script>
 </body>
 </html>
