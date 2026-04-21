@@ -1,7 +1,7 @@
 GEM
   remote: https://gems.ruby-china.com/
   specs:
-    addressable (2.8.8)
+    addressable (2.9.0)
       public_suffix (>= 2.0.2, < 8.0)
     base64 (0.3.0)
     bigdecimal (4.0.1)
@@ -13,8 +13,12 @@ GEM
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0)
     eventmachine (1.2.7)
+    ffi (1.17.3)
     ffi (1.17.3-x86_64-linux-musl)
     forwardable-extended (2.6.0)
+    google-protobuf (4.33.4)
+      bigdecimal
+      rake (>= 13)
     google-protobuf (4.33.4-x86_64-linux-musl)
       bigdecimal
       rake (>= 13)
@@ -78,6 +82,7 @@ GEM
     webrick (1.9.2)
 
 PLATFORMS
+  ruby
   x86_64-linux-musl
 
 DEPENDENCIES
